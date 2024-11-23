@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TicketAudit extends Model
 {
-    protected $fillable = ['tickets_id', 'cafes_id', 'status'];
+    protected $fillable = ['tickets_id', 'cafes_id', 'status', 'user_id'];
 
     public function ticket()
     {
