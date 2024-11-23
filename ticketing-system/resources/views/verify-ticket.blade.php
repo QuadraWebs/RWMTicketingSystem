@@ -7,6 +7,15 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <style>
+            @keyframes blink {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.4; transform: scale(0.9); }
+            }
+            .blink-animation {
+                animation: blink 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div class="min-h-screen flex flex-col">
@@ -47,7 +56,7 @@
                             <div class="space-y-3 text-left bg-gray-50 rounded-lg p-4 sm:p-6 mb-6 text-sm sm:text-base">
                                 <div class="flex justify-between items-center">
                                     <span class="text-gray-600">Customer:</span>
-                                    <span class="font-medium text-gray-900">{{ $customer_name }}</span>
+                                    <span class="text-lg sm:text-xl font-medium text-gray-900 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">{{ $customer_name }}</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-gray-600">Cafe:</span>
@@ -59,12 +68,29 @@
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-gray-600">Status:</span>
-                                    <span class="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">Pending</span>
+                                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full" style="background-color: #FEF3C7; border: 1px solid #FCD34D;">
+                                        <span class="inline-flex items-center rounded-full bg-yellow-100 border-2 border-yellow-400">
+                                            <svg class="w-5 h-5 text-yellow-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span class="font-bold text-yellow-800">Pending</span>
+                                        </span>
+                                    </span>                            
                                 </div>
+                            </div>
+                            
+                            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+                                <p class="text-amber-700 text-center font-medium">
+                                    ⚠️ Please verify:
+                                </p>
+                                <ul class="text-amber-700 text-center font-medium mt-2">
+                                    <li>1. Customer's name by checking their NRIC/Business Card</li>
+                                    <li>2. Confirm you are at the correct cafe location: <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 font-bold">{{ $selected_cafe }}</span></li>
+                                </ul>
                             </div>
 
                             <div class="flex justify-center mt-6">
-                                <form action="{{ route('ticket.verify.reject', $ticket_id) }}" method="POST" class="w-full mr-4">
+                                <form action="{{ route('ticket.verify.reject', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST" class="w-full mr-4">
                                     @csrf
                                     <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
                                     <button type="submit" style="background-color: #ef4444;" class="w-full px-16 py-4 text-white font-semibold rounded-lg text-lg hover:bg-red-600 transition">
@@ -72,7 +98,7 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('ticket.verify.accept', $ticket_id) }}" method="POST" class="w-full ml-4">
+                                <form action="{{ route('ticket.verify.accept', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST" class="w-full ml-4">
                                     @csrf
                                     <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
                                     <button type="submit" style="background-color: #22c55e;" class="w-full px-16 py-4 text-white font-semibold rounded-lg text-lg hover:bg-green-600 transition">

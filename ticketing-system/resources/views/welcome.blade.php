@@ -55,9 +55,14 @@ use Illuminate\Support\Str;
                                 <p class="text-sm text-gray-600">
                                     Valid Until: {{ $ticket['valid_until'] }}
                                 </p>
+                                @if($ticket['is_in_used'] && strtotime($ticket['end_time']) > time())
+                                    <p class="text-sm font-medium text-green-600">
+                                        Active Session - Ends at: {{ $ticket['end_time'] }}
+                                    </p>
+                                @endif
                             </div>
                             <div class="mt-4 sm:mt-6">
-                                @if($ticket['status'] === 'active')
+                                @if(($ticket['status'] === 'active' && !$ticket['is_in_used']) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
                                     <form action="{{ route('ticket.checkin', ['uuid' => request()->segment(2)]) }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="ticket_id" value="{{ $ticket['package_id'] }}">
@@ -67,7 +72,7 @@ use Illuminate\Support\Str;
                                     </form>
                                 @else
                                     <button class="w-full bg-slate-200 text-slate-500 rounded-lg px-4 py-3 text-sm sm:text-base font-medium cursor-not-allowed">
-                                        Ticket Inactive
+                                        {{ $ticket['is_in_used'] ? 'Ticket In Use' : 'Ticket Inactive' }}
                                     </button>
                                 @endif
                             </div>
