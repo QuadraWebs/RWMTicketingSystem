@@ -51,7 +51,7 @@
                             </div>
                            
                             <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Pending Verification</h2>
-                            <p class="text-gray-600 mb-6 text-sm sm:text-base">Ticket ID: {{ $ticket_id }}</p>
+                            <p class="hidden text-gray-600 mb-6 text-sm sm:text-base">Ticket ID: {{ $ticket_id }}</p>
                            
                             <div class="space-y-3 text-left bg-gray-50 rounded-lg p-4 sm:p-6 mb-6 text-sm sm:text-base">
                                 <div class="flex justify-between items-center">
@@ -69,7 +69,7 @@
                                 <div class="flex justify-between items-center">
                                     <span class="text-gray-600">Status:</span>
                                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full" style="background-color: #FEF3C7; border: 1px solid #FCD34D;">
-                                        <span class="inline-flex items-center rounded-full bg-yellow-100 border-2 border-yellow-400">
+                                        <span class="inline-flex items-center bg-yellow-100 border-yellow-400">
                                             <svg class="w-5 h-5 text-yellow-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
@@ -85,24 +85,34 @@
                                 </p>
                                 <ul class="text-amber-700 text-center font-medium mt-2">
                                     <li>1. Customer's name by checking their NRIC/Business Card</li>
-                                    <li>2. Confirm you are at the correct cafe location: <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 font-bold">{{ $selected_cafe }}</span></li>
+                                    <li>2. Confirm you are the correct cafe location: <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 font-bold">{{ $selected_cafe }}</span></li>
                                 </ul>
                             </div>
 
-                            <div class="flex justify-center mt-6">
-                                <form action="{{ route('ticket.verify.reject', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST" class="w-full mr-4">
+                            <div class="flex justify-center gap-6 mt-8">
+                                <form action="{{ route('ticket.verify.reject', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST" class="w-full">
                                     @csrf
                                     <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
-                                    <button type="submit" style="background-color: #ef4444;" class="w-full px-16 py-4 text-white font-semibold rounded-lg text-lg hover:bg-red-600 transition">
-                                        Reject
+                                    <button type="submit" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg px-6 py-4 text-lg font-medium hover:from-red-600 hover:to-red-700 transform hover:scale-[1.02] transition duration-200 shadow-lg hover:shadow-xl">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                            <span>Reject</span>
+                                        </div>
                                     </button>
                                 </form>
 
-                                <form action="{{ route('ticket.verify.accept', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST" class="w-full ml-4">
+                                <form action="{{ route('ticket.verify.accept', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST" class="w-full">
                                     @csrf
                                     <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
-                                    <button type="submit" style="background-color: #22c55e;" class="w-full px-16 py-4 text-white font-semibold rounded-lg text-lg hover:bg-green-600 transition">
-                                        Accept
+                                    <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg px-6 py-4 text-lg font-medium hover:from-green-600 hover:to-green-700 transform hover:scale-[1.02] transition duration-200 shadow-lg hover:shadow-xl">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                            </svg>
+                                            <span>Accept</span>
+                                        </div>
                                     </button>
                                 </form>
                             </div>

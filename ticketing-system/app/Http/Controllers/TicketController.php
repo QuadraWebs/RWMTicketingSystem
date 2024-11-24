@@ -9,6 +9,8 @@ use App\Models\Cafe;
 use App\Models\TicketAudit;
 use App\Models\Package;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class TicketController extends Controller
 {
@@ -94,7 +96,7 @@ class TicketController extends Controller
             'ticket_id' => $ticketId,
             'uuid' => $validated['uuid'],
             'cafe_id' => $validated['cafe_id'] 
-        ]);
+        ], now()->addMinutes(2));
 
         // Get cafes data again for the view
         $cafes = Cafe::whereNull('deleted_at')
@@ -117,25 +119,33 @@ class TicketController extends Controller
 
     public function verifyTicket(Request $request, $uuid)
     {
-        if (!$request->hasValidSignature()) {
-            abort(401, 'Invalid signature');
+        try {
+            if (!URL::hasValidSignature($request)) {
+                return view('expired-ticket', [
+                    'message' => 'This QR code has expired',
+                    'action' => 'Please return to the check-in page to generate a new QR code'
+                ]);
+            }
+
+            $cafeId = $request->query('cafe_id');
+            $ticketId = $request->query('ticket_id');
+
+            $cafe = Cafe::findOrFail($cafeId);
+            $user = User::where('uuid', $uuid)->first();
+            $customerName = $user ? $user->name : 'Guest';
+
+            return view('verify-ticket', [
+                'ticket_id' => $ticketId,
+                'selected_cafe' => $cafe->name,
+                'customer_name' => $customerName
+            ]);
+
+        } catch (HttpException $e) {
+            return view('expired-ticket', [
+                'message' => 'This QR code has expired',
+                'action' => 'Please return to the check-in page to generate a new QR code'
+            ]);
         }
-
-        $cafeId = $request->query('cafe_id');
-        $ticketId = $request->query('ticket_id');
-
-        // Get cafe details
-        $cafe = Cafe::findOrFail($cafeId);
-        
-        // Get user details
-        $user = User::where('uuid', $uuid)->first();
-        $customerName = $user ? $user->name : 'Guest';
-
-        return view('verify-ticket', [
-            'ticket_id' => $ticketId,
-            'selected_cafe' => $cafe->name,
-            'customer_name' => $customerName
-        ]);
     }
 
     public function acceptTicket($ticket_id, $uuid, Request $request) {

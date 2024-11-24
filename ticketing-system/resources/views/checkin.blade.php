@@ -33,10 +33,10 @@
                                 </svg>
                             </div>
                             <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Ticket Check-In</h2>
-                            <p class="text-gray-500 mt-2 text-sm sm:text-base">Ticket ID: {{ $ticket_id ?? 'TICKET-' . rand(1000, 9999) }}</p>
+                            <p class="hidden text-gray-500 mt-2 text-sm sm:text-base">Ticket ID: {{ $ticket_id ?? 'TICKET-' . rand(1000, 9999) }}</p>
                         </div>
 
-                        <form action="{{ route('ticket.confirm-checkin') }}" method="POST" class="space-y-6" 
+                        <form action="{{ route('ticket.confirm-checkin') }}" method="POST" class="space-y-2" 
                             x-data="{ open: false, search: '', selectedCafe: '', selectedCafeId: '' }"
                             @submit.prevent="
                                 if (!selectedCafe.trim()) {
@@ -84,15 +84,15 @@
 
                             <div class="mt-8"></div>
 
-                            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg px-4 py-3 sm:py-4 text-sm sm:text-base font-medium hover:from-blue-700 hover:to-purple-700 transition transform hover:scale-[1.02] duration-200">
+                            <button type="submit" class="inline-block w-full sm:w-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg px-4 py-2 text-lg font-medium hover:from-blue-600 hover:to-purple-700 transform hover:scale-[1.02] transition duration-200 shadow-lg hover:shadow-xl">
                                 Confirm Check In
                             </button>
                         </form>
                         @if(isset($selected_cafe_name))
-                            <div class="bg-blue-50 p-4 rounded-lg mb-4">
-                                <p class="text-blue-700">Your selected cafe is: {{ $selected_cafe_name }}</p>
+                            <div class="bg-blue-50 p-3 rounded mb-3">
+                                <p class="text-blue-700 text-sm">{{ $selected_cafe_name }}</p>
                                 @if(isset($selectedCafe))
-                                    <p class="text-blue-600">Address: {{ $selectedCafe->address }}</p>
+                                    <p class="text-blue-600 text-xs">{{ $selectedCafe->address }}</p>
                                 @endif
                             </div>
                         @endif
@@ -101,14 +101,20 @@
                                 <div class="qr-code bg-white p-3 sm:p-4 inline-block rounded-lg shadow-sm flex flex-col items-center">
                                     {!! QrCode::size(150)->format('svg')->errorCorrection('H')->generate($verificationUrl) !!}
                                     <p class="mt-3 text-sm sm:text-base font-semibold text-blue-600 bg-blue-50 py-2 px-4 rounded-lg inline-block">Please show this QR code to the cashier</p>
+                                    <div class="mt-2 text-sm text-red-600">
+                                        <p>This QR code will expire in 2 minutes</p>
+                                        <p>Expires at: {{ now()->addMinutes(2)->format('h:i:s A') }}</p>
+                                    </div>
                                 </div>
-                                <a href="{{ $verificationUrl }}" 
-                                   class="mt-2 inline-block text-blue-600 hover:text-blue-800 hover:underline break-all text-xs sm:text-sm"
-                                   target="_blank"
-                                   rel="noopener">
+
+                                <a href="{{ $verificationUrl }}"
+                                class="hidden mt-2 inline-block text-blue-600 hover:text-blue-800 hover:underline break-all text-xs sm:text-sm"
+                                target="_blank"
+                                rel="noopener">
                                     {{ $verificationUrl }}
                                 </a>
-                                <span class="mt-2 inline-block text-gray-500 break-all text-xs sm:text-sm" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;" oncontextmenu="return false;">
+
+                                <span class="hidden mt-2 inline-block text-gray-500 break-all text-xs sm:text-sm" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;" oncontextmenu="return false;">
                                     {{ $verificationUrl }}
                                 </span>
                             </div>
