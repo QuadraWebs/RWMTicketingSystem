@@ -51,7 +51,6 @@
                             </div>
                            
                             <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Pending Verification</h2>
-                            <p class="hidden text-gray-600 mb-6 text-sm sm:text-base">Ticket ID: {{ $ticket_id }}</p>
                            
                             <div class="space-y-3 text-left bg-gray-50 rounded-lg p-4 sm:p-6 mb-6 text-sm sm:text-base">
                                 <div class="flex justify-between items-center">
