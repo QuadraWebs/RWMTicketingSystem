@@ -35,7 +35,7 @@ use Illuminate\Support\Str;
                         <div class="bg-white rounded-lg shadow-sm border p-4 sm:p-6 mb-8">
                             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                                 <h2 class="text-lg sm:text-xl font-semibold text-gray-800">
-                                    Package ID: {{ $ticket['package_id'] }}
+                                    {{ $ticket['package_name'] }}
                                 </h2>
                                 <span class="inline-block px-3 py-1 rounded-full text-sm {{ $ticket['status'] === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                     {{ ucfirst($ticket['status']) }}
@@ -65,7 +65,7 @@ use Illuminate\Support\Str;
                                 @endif
                             </div>
                             <div class="mt-4 sm:mt-6">
-                                @if(($ticket['status'] === 'active' && !$ticket['is_in_used']) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
+                                @if(($ticket['status'] === 'active' && !$ticket['is_in_used'] && ($ticket['is_unlimited'] || $ticket['available_pass'] > 0)) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
                                     <form action="{{ route('ticket.checkin', ['uuid' => request()->segment(2)]) }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="ticket_id" value="{{ $ticket['id'] }}">
@@ -75,7 +75,7 @@ use Illuminate\Support\Str;
                                     </form>
                                 @else
                                     <button class="w-full bg-slate-200 text-slate-500 rounded-lg px-4 py-3 text-sm sm:text-base font-medium cursor-not-allowed">
-                                        {{ $ticket['is_in_used'] ? 'Ticket In Use' : 'Ticket Inactive' }}
+                                        {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'No Passes Available' : 'Ticket Inactive') }}
                                     </button>
                                 @endif
                             </div>
