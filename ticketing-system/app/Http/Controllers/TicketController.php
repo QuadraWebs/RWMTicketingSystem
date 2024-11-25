@@ -10,7 +10,8 @@ use App\Models\TicketAudit;
 use App\Models\Package;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CheckedIn;
 
 class TicketController extends Controller
 {
@@ -44,6 +45,7 @@ class TicketController extends Controller
 
         $tickets = Ticket::with('package')
             ->where('user_uuid', $uuid)
+            ->where('status', "active")
             ->latest()
             ->get()
             ->map(function ($ticket) {
@@ -187,7 +189,18 @@ class TicketController extends Controller
 
             
             DB::commit();
-            return redirect()->back()->with('success', 'Ticket accepted successfully');
+
+            $retrieveTicket = Ticket::find($ticket_id);
+            $users = User::where('uuid', $ticket->user_uuid)->first();
+            $cafe = User::where('id', $cafe_id)->first();
+
+            Mail::to($user->email)->send(new CheckedIn($retrieveTicket, $users, $cafe));
+
+
+            return view('accept-ticket', [
+                'message' => 'Ticket Accepted Successfully',
+                'action' => 'You can now proceed to enter the cafe'
+            ]);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Failed to process ticket');
@@ -207,7 +220,10 @@ class TicketController extends Controller
             ]);
             
             DB::commit();
-            return redirect()->back()->with('error', 'Ticket rejected');
+            return view('reject-ticket', [
+                'message' => 'Ticket Rejected',
+                'action' => 'This ticket has been rejected for entry'
+            ]);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Failed to process ticket');

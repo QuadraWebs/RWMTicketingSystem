@@ -8,15 +8,17 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        Commands\UpdateExpiredTickets::class
+        Commands\UpdateExpiredTickets::class,
+        Commands\CheckEndingTickets::class,
+        Commands\CheckEndedTickets::class 
     ];
 
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('tickets:update-expired')->everyMinute();
         $schedule->command('tickets:update-expired')->daily();
-
-        
+        $schedule->command('tickets:check-ending')->everyMinute();
+        $schedule->command('tickets:check-ended')->everyMinute();
     }
     
 

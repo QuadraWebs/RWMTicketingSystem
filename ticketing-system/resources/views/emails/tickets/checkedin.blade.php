@@ -27,6 +27,11 @@
             text-align: center;
             margin-bottom: 20px;
         }
+        .receipt-number {
+            color: #4b5563;
+            font-size: 14px;
+            margin-top: 5px;
+        }
         .check-icon {
             width: 48px;
             height: 48px;
@@ -139,50 +144,43 @@
 <body>
     <div class="card">
         <div class="receipt-header">
-            <div class="check-icon">🎉</div>
-            <h1 class="header">Welcome, {{ $user->name }}!</h1>
+            <div class="check-icon">✓</div>
+            <h1 class="header">Check-in Successful!</h1>
         </div>
         
         <div class="ticket-container">
-            <div class="welcome-text">Thank you for choosing</div>
-            <div class="package-name">{{ $ticket->package->name }}</div>
-            <div class="welcome-text">from Remote Work Malaysia</div>
+            <div class="welcome-text">Welcome to </div>
+            <div class="package-name">{{ $cafe->name }}</div>
             
             <div class="validity-box">
-                <div class="validity-label">Valid Until</div>
-                <div class="validity-date">{{ $ticket->valid_until->format('d M Y') }}</div>
+                <div class="mt-2">
+                    <div class="validity-label">Session Ends At</div>
+                    <div class="validity-date">{{ $endTime->format('h:i A') }}</div>
+                </div>
             </div>
             
-            <div class="welcome-text">Your workspace transformation journey begins here! Our partner cafes are ready to welcome you.</div>
+            <div class="welcome-text">Enjoy your productive workspace experience!</div>
         </div>
 
         <div class="steps-container">
-            <div class="steps-title">How to Check-in:</div>
+            <div class="steps-title">Workspace Guidelines:</div>
             <div class="step">
                 <span class="step-number">1</span>
-                <span>Click the "View Ticket" button below</span>
+                <span>Please keep your workspace clean</span>
             </div>
             <div class="step">
                 <span class="step-number">2</span>
-                <span>Select your desired ticket</span>
+                <span>Respect other coworkers' space</span>
             </div>
             <div class="step">
                 <span class="step-number">3</span>
-                <span>Choose your preferred cafe</span>
+                <span>Use headphones for calls/media</span>
             </div>
             <div class="step">
                 <span class="step-number">4</span>
-                <span>Click "Check-in" button</span>
-            </div>
-            <div class="step">
-                <span class="step-number">5</span>
-                <span>Present the QR code to cafe staff within 2 minutes</span>
+                <span>Follow cafe house rules</span>
             </div>
         </div>
-
-        <a href="{{ url('/viewticket/' . $user->uuid) }}" class="btn">View Ticket</a>
-        
-        <div class="notice">* All tickets are non-refundable</div>
         
         <div class="footer">
             {{ config('app.name') }}<br>

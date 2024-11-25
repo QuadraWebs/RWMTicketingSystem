@@ -56,7 +56,6 @@
                             <div class="relative">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Select Cafe</label>
                                 <input
-                                <input
                                     type="text"
                                     x-model="search"
                                     @click="open = true"
@@ -84,7 +83,7 @@
 
                             <div class="mt-8"></div>
 
-                            <button type="submit" class="inline-block w-full sm:w-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg px-4 py-2 text-lg font-medium hover:from-blue-600 hover:to-purple-700 transform hover:scale-[1.02] transition duration-200 shadow-lg hover:shadow-xl">
+                            <button type="submit" class="inline-block w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg px-8 py-3 text-lg font-medium hover:from-blue-600 hover:to-purple-700 transform hover:scale-[1.02] transition duration-200 shadow-lg hover:shadow-xl">
                                 Confirm Check In
                             </button>
                         </form>
@@ -108,7 +107,7 @@
                                 </div>
 
                                 <a href="{{ $verificationUrl }}"
-                                class="hidden mt-2 inline-block text-blue-600 hover:text-blue-800 hover:underline break-all text-xs sm:text-sm"
+                                class="mt-2 inline-block text-blue-600 hover:text-blue-800 hover:underline break-all text-xs sm:text-sm"
                                 target="_blank"
                                 rel="noopener">
                                     {{ $verificationUrl }}

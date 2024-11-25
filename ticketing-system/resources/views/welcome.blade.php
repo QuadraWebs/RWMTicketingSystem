@@ -43,21 +43,24 @@ use Illuminate\Support\Str;
                             </div>
                             <div class="mt-4 space-y-2">
                                 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
-                                    <p class="text-sm text-gray-600">
-                                        Type: {{ $ticket['is_unlimited'] ? 'Unlimited' : 'Limited' }}
+                                    <p class="text-sm">
+                                        Available Passes: 
+                                        <span class="font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                                            {{ $ticket['is_unlimited'] ? 'Unlimited' : $ticket['available_pass'] }}
+                                        </span>
                                     </p>
-                                    @if(!$ticket['is_unlimited'])
-                                    <p class="text-sm text-gray-600">
-                                        Available Passes: {{ $ticket['available_pass'] }}
-                                    </p>
-                                    @endif
                                 </div>
+
                                 <p class="text-sm text-gray-600">
                                     Valid Until: {{ $ticket['valid_until'] }}
                                 </p>
+
                                 @if($ticket['is_in_used'] && strtotime($ticket['end_time']) > time())
-                                    <p class="text-sm font-medium text-green-600">
-                                        Active Session - Ends at: {{ $ticket['end_time'] }}
+                                    <p class="text-sm font-medium bg-green-50 text-green-600 px-3 py-2 rounded-lg inline-block">
+                                        <span class="flex items-center">
+                                            <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                            Active Session - Ends at: {{ $ticket['end_time'] }}
+                                        </span>
                                     </p>
                                 @endif
                             </div>

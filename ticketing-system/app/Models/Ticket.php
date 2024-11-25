@@ -17,7 +17,8 @@ class Ticket extends Model
         'start_time',
         'end_time',
         'status',
-        'valid_until'
+        'valid_until',
+        'ending_notification_sent'
     ];
 
     protected $casts = [
@@ -25,7 +26,8 @@ class Ticket extends Model
         'end_time' => 'datetime',
         'valid_until' => 'datetime',
         'is_unlimited' => 'boolean',
-        'is_in_used' => 'boolean'
+        'is_in_used' => 'boolean',
+        'ending_notification_sent' => 'boolean'
     ];
 
     public function user()
@@ -42,4 +44,5 @@ class Ticket extends Model
     {
         return $this->hasMany(TicketAudit::class, 'tickets_id');
     }
+    
 }

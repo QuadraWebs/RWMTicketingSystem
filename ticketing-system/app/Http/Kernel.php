@@ -49,4 +49,10 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('tickets:check-ending')
+            ->everyMinute();
+    }
 }
