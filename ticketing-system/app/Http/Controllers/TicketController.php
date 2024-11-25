@@ -46,12 +46,14 @@ class TicketController extends Controller
         $tickets = Ticket::with('package')
             ->where('user_uuid', $uuid)
             ->where('status', "active")
+            ->where('valid_until', '>', now())
             ->latest()
             ->get()
             ->map(function ($ticket) {
                 return [
                     'user_uuid' => $ticket->user_uuid,
                     'package_id' => $ticket->package_id,
+                    'package_name' => $ticket->package->name,
                     'stripe_subscription_id' => $ticket->stripe_subscription_id,
                     'is_unlimited' => $ticket->is_unlimited,
                     'available_pass' => $ticket->available_pass,
@@ -192,7 +194,7 @@ class TicketController extends Controller
 
             $retrieveTicket = Ticket::find($ticket_id);
             $users = User::where('uuid', $ticket->user_uuid)->first();
-            $cafe = User::where('id', $cafe_id)->first();
+            $cafe = Cafe::where('id', $cafe_id)->first();
 
             Mail::to($user->email)->send(new CheckedIn($retrieveTicket, $users, $cafe));
 
