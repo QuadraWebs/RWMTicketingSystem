@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Str;
+use App\Mail\TicketCreated;
 
 class StripeWebhookController extends Controller
 {
@@ -64,7 +65,12 @@ class StripeWebhookController extends Controller
                 'status' => TicketStatus::Active,
                 'is_unlimited' => (int)($package->pass_type === 0),
                 'available_pass' => $package->pass_type ?: 0,
+                'valid_until' => now()->addDays(30),
             ]);
+
+            if($ticket){
+                Mail::to($user->email)->send(new TicketCreated($ticket, $user));
+            }
     
             Log::info(message: 'Ticket created', context: $ticket->toArray());
     
