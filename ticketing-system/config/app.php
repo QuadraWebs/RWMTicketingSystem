@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Remote Work Malaysia'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,8 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => env('APP_TIMEZONE', 'Asia/Kuala_Lumpur'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -105,6 +106,8 @@ return [
         ),
     ],
 
+    
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
@@ -117,6 +120,7 @@ return [
     | Supported drivers: "file", "cache"
     |
     */
+    
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
@@ -124,3 +128,4 @@ return [
     ],
 
 ];
+
