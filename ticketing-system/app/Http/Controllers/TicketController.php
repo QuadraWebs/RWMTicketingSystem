@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CheckedIn;
+use App\Enums\TicketStatus;
+
 
 class TicketController extends Controller
 {
@@ -46,11 +48,10 @@ class TicketController extends Controller
         $tickets = Ticket::with('package')
             ->where('user_uuid', $uuid)
             ->where('status', "active")
-            ->where('valid_until', '>', now())
-            ->latest()
             ->get()
             ->map(function ($ticket) {
                 return [
+                    'id' => $ticket->id,
                     'user_uuid' => $ticket->user_uuid,
                     'package_id' => $ticket->package_id,
                     'package_name' => $ticket->package->name,
@@ -161,10 +162,10 @@ class TicketController extends Controller
             
             $ticket = Ticket::where('id', $ticket_id)
                 ->where('user_uuid', $uuid)
-                ->where('status', 'active')
+                ->where('status', TicketStatus::Active)
                 ->first();
 
-            $package = Package::where('id', $ticket_id)
+            $package = Package::where('id', $ticket->package_id)
                 ->first();
             
 
@@ -194,7 +195,7 @@ class TicketController extends Controller
 
             $retrieveTicket = Ticket::find($ticket_id);
             $users = User::where('uuid', $ticket->user_uuid)->first();
-            $cafe = Cafe::where('id', $cafe_id)->first();
+            $cafe = Cafe::find($cafe_id); // Changed from User to Cafe model
 
             Mail::to($user->email)->send(new CheckedIn($retrieveTicket, $users, $cafe));
 
@@ -205,7 +206,7 @@ class TicketController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'Failed to process ticket');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

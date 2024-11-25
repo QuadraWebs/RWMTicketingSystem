@@ -68,7 +68,7 @@ use Illuminate\Support\Str;
                                 @if(($ticket['status'] === 'active' && !$ticket['is_in_used'] && ($ticket['is_unlimited'] || $ticket['available_pass'] > 0)) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
                                     <form action="{{ route('ticket.checkin', ['uuid' => request()->segment(2)]) }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="ticket_id" value="{{ $ticket['package_id'] }}">
+                                        <input type="hidden" name="ticket_id" value="{{ $ticket['id'] }}">
                                         <button type="submit" class="w-full bg-blue-600 text-white rounded-lg px-4 py-3 text-sm sm:text-base font-medium hover:bg-blue-700 transition duration-200 ease-in-out">
                                             Use Ticket
                                         </button>
