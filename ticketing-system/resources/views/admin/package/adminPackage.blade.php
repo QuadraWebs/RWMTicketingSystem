@@ -1,114 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 animate-fade-in">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-slide-up">
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-6">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900">Packages</h1>
-                <p class="text-sm text-gray-600 mt-1">Total Packages: {{ $packages->total() }}</p>
-            </div>
-            <a href="{{ route('admin.package.add') }}"
-                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
-                Add New Package
-            </a>
-        </div>
-        <div class="relative mb-6">
-            <form action="{{ route('admin.package') }}" method="GET" class="flex gap-0">
-                <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search packages..."
-                        class="block w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
-                    @if(request('search'))
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                            <a href="{{ route('admin.package') }}" class="text-gray-400 hover:text-gray-600">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </a>
-                        </div>
-                    @endif
-                </div>
-                <button type="submit"
-                    class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 rounded-r-lg hover:opacity-90 transition-opacity duration-150">
-                    Search
-                </button>
-            </form>
-        </div>
-
-        <!-- Packages Table -->
-        <div class="overflow-x-auto hide-scrollbar">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr><th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
-                    </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Description</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price (RM)
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Duration</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($packages as $package)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <button class="text-blue-600 hover:text-blue-900 mr-3">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-600 hover:text-red-900">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $package->title }}</div>
-                                <div class="text-sm text-gray-500">{{ $package->name }}</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-900">{{ $package->description }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right">
-                                <div class="text-sm text-gray-900">{{ number_format($package->price, 2) }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $package->duration }} minutes</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $package->is_recurring ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
-                                    {{ $package->is_recurring ? 'Monthly' : 'One-time' }}
-                                </span>
-                                <div class="hidden text-xs text-gray-500">{{ $package->pass_type }}</div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="mt-6">
-            {{ $packages->links() }}
-        </div>
-    </div>
-</div>
-@endsection
-
 <style>
+    /* Animation Keyframes */
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -125,41 +19,331 @@
         }
     }
 
-    .animate-fade-in {
+    /* Base Styles */
+    .container {
+        max-width: 90rem;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
         animation: fadeIn 0.5s ease-out;
     }
 
-    .animate-slide-up {
+    .content-card {
+        background: white;
+        border-radius: 0.75rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        padding: 1.5rem;
         animation: slideUp 0.6s ease-out;
     }
 
-    tbody tr {
+    /* Header Section */
+    .header-page {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .header-subtitle {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 0.25rem;
+    }
+
+    .add-button {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+    .add-button:hover {
+        opacity: 0.9;
+    }
+
+    /* Search Section */
+    .search-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .search-input-wrapper {
+        position: relative;
+        flex: 1;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.625rem 2.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem 0 0 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+
+    .clear-search {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        cursor: pointer;
+    }
+
+    .search-button {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        padding: 0.625rem 1.5rem;
+        border: none;
+        border-radius: 0 0.5rem 0.5rem 0;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .search-button:hover {
+        opacity: 0.9;
+    }
+
+    /* Table Styles */
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    .table-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .table th {
+        background: #f9fafb;
+        padding: 0.75rem 1.5rem;
+        text-align: left;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table td {
+        padding: 1rem 1.5rem;
+        font-size: 0.875rem;
+        color: #111827;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table tr:hover td {
+        background: #f9fafb;
+    }
+
+    /* Package Type Badge */
+    .package-type {
+        display: inline-flex;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .package-type.recurring {
+        background: #f3e8ff;
+        color: #7c3aed;
+    }
+
+    .package-type.onetime {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .action-button {
+        color: #6b7280;
+        transition: color 0.2s;
+        cursor: pointer;
+        font-size: 1rem;
+        background: none;
+        border: none;
+        padding: 0;
+    }
+
+
+    .edit-button {
+        color: #2563eb;
+    }
+
+    .delete-button {
+        color: #dc2626;
+    }
+
+    .edit-button:hover {
+        color: #1d4ed8;
+    }
+
+    .delete-button:hover {
+        color: #b91c1c;
+    }
+
+    /* Animation Delays for Table Rows */
+    .table tr {
         opacity: 0;
         animation: slideUp 0.4s ease-out forwards;
     }
 
-    tbody tr:nth-child(1) { animation-delay: 0.1s; }
-    tbody tr:nth-child(2) { animation-delay: 0.2s; }
-    tbody tr:nth-child(3) { animation-delay: 0.3s; }
-    tbody tr:nth-child(4) { animation-delay: 0.4s; }
-    tbody tr:nth-child(5) { animation-delay: 0.5s; }
-    tbody tr:nth-child(6) { animation-delay: 0.6s; }
-    tbody tr:nth-child(7) { animation-delay: 0.7s; }
-    tbody tr:nth-child(8) { animation-delay: 0.8s; }
-    tbody tr:nth-child(9) { animation-delay: 0.9s; }
-    tbody tr:nth-child(10) { animation-delay: 1s; }
+    .table tr:nth-child(1) { animation-delay: 0.1s; }
+    .table tr:nth-child(2) { animation-delay: 0.2s; }
+    .table tr:nth-child(3) { animation-delay: 0.3s; }
+    .table tr:nth-child(4) { animation-delay: 0.4s; }
+    .table tr:nth-child(5) { animation-delay: 0.5s; }
+    .table tr:nth-child(6) { animation-delay: 0.6s; }
+    .table tr:nth-child(7) { animation-delay: 0.7s; }
+    .table tr:nth-child(8) { animation-delay: 0.8s; }
+    .table tr:nth-child(9) { animation-delay: 0.9s; }
+    .table tr:nth-child(10) { animation-delay: 1s; }
 
-    .hide-scrollbar {
-        overflow: hidden;
+    .table th:last-child,
+    .table td:last-child {
+        width: 180px;
+        min-width: 180px;
+    }
+    
+    .table th:nth-child(5),
+    .table td:nth-child(5) {
+        width: 150px;
+        min-width: 150px;
     }
 
-    @keyframes showScrollbar {
-        to {
-            overflow: auto;
-        }
+    .package-type {
+        display: inline-flex;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        width: 100%;
+        justify-content: center;
     }
 
-    .overflow-x-auto {
-        animation: showScrollbar 0s 1s forwards;
+    /* Pagination */
+    .pagination {
+        margin-top: 1.5rem;
     }
 </style>
+
+<div class="container">
+    <div class="content-card">
+        <!-- Header -->
+        <div class="header-page">
+            <div>
+                <h1 class="header-title">Packages</h1>
+                <p class="header-subtitle">Total Packages: {{ $packages->total() }}</p>
+            </div>
+            <a href="{{ route('admin.package.add') }}" class="add-button">
+                Add New Package
+            </a>
+        </div>
+
+        <!-- Search -->
+        <div class="search-container">
+            <form action="{{ route('admin.package') }}" method="GET" class="search-form">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Search packages..."
+                        class="search-input">
+                    @if(request('search'))
+                        <a href="{{ route('admin.package') }}" class="clear-search">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    @endif
+                </div>
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price (RM)</th>
+                        <th>Duration</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($packages as $package)
+                        <tr>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-button edit-button">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-button delete-button">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <div>{{ $package->title }}</div>
+                                <div class="text-sm text-gray-500">{{ $package->name }}</div>
+                            </td>
+                            <td>{{ $package->description }}</td>
+                            <td style="text-align: right;">{{ number_format($package->price, 2) }}</td>
+                            <td>{{ $package->duration }} minutes</td>
+                            <td>
+                                <span class="package-type {{ $package->is_recurring ? 'recurring' : 'onetime' }}">
+                                    {{ $package->is_recurring ? 'Monthly' : 'One-time' }}
+                                </span>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            {{ $packages->links() }}
+        </div>
+    </div>
+</div>
+@endsection

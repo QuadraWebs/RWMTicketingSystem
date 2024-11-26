@@ -1,75 +1,183 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <div class="mb-6">
-            <h1 class="text-2xl font-bold text-gray-900">Add New Package</h1>
+<style>
+    /* Base Styles */
+    .container {
+        max-width: 90rem;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+    }
+
+    .content-card {
+        background: white;
+        border-radius: 0.75rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+
+    .header {
+        margin-bottom: 1.5rem;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    /* Form Styles */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .form-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .form-field {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-field.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.625rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        transition: all 0.2s;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+
+    .form-textarea {
+        min-height: 6rem;
+        resize: vertical;
+    }
+
+    .duration-summary {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 0.5rem;
+    }
+
+    /* Button Group */
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        margin-top: 2rem;
+    }
+
+    .button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .button-cancel {
+        border: 1px solid #d1d5db;
+        background: white;
+        color: #374151;
+    }
+
+    .button-cancel:hover {
+        background: #f3f4f6;
+    }
+
+    .button-submit {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        border: none;
+    }
+
+    .button-submit:hover {
+        opacity: 0.9;
+    }
+</style>
+
+<div class="container">
+    <div class="content-card">
+        <div class="header">
+            <h1 class="header-title">Add New Package</h1>
         </div>
 
-        <form action="{{ route('admin.package.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.package.store') }}" method="POST">
             @csrf
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Title</label>
-                    <input type="text" name="title" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+            <div class="form-grid">
+                <div class="form-field">
+                    <label class="form-label">Title</label>
+                    <input type="text" name="title" class="form-input" required>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" name="name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                <div class="form-field">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name" class="form-input" required>
                 </div>
 
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700">Description</label>
-                    <textarea name="description" rows="4" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                <div class="form-field full-width">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-input form-textarea" required></textarea>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Price (RM)</label>
-                    <input type="number" step="0.01" name="price" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                <div class="form-field">
+                    <label class="form-label">Price (RM)</label>
+                    <input type="number" step="0.01" name="price" class="form-input" required>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Duration (minutes)</label>
-                    <input type="number" name="duration" id="duration"
-                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        required oninput="updateDurationSummary(this.value)">
-                    <p id="durationSummary" class="mt-1 text-sm text-gray-500"></p>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Duration (minutes)</label>
+                <div class="form-field">
+                    <label class="form-label">Duration (minutes)</label>
                     <input type="number" 
                         name="duration" 
                         id="duration"
-                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                        class="form-input"
                         required
                         onkeypress="return (event.charCode !== 46 && event.charCode >= 48 && event.charCode <= 57)"
                         oninput="this.value = this.value.replace(/[^0-9]/g, ''); updateDurationSummary(this.value)"
                         step="1"
                         min="1"
                         pattern="\d*">
-                    <p id="durationSummary" class="mt-1 text-sm text-gray-500"></p>
+                    <p id="durationSummary" class="duration-summary"></p>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Pass Type</label>
-                    <input type="text" name="pass_type" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                <div class="form-field">
+                    <label class="form-label">Pass Type</label>
+                    <input type="text" name="pass_type" class="form-input" required>
                 </div>
             </div>
 
-            <div class="flex justify-end space-x-3">
-                <a href="{{ route('admin.package') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancel</a>
-                <button type="submit" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:opacity-90">
-                    Create Package
-                </button>
+            <div class="button-group">
+                <a href="{{ route('admin.package') }}" class="button button-cancel">Cancel</a>
+                <button type="submit" class="button button-submit">Create Package</button>
             </div>
         </form>
     </div>
 </div>
-@endsection
 
 <script>
 function updateDurationSummary(minutes) {
@@ -94,5 +202,5 @@ function updateDurationSummary(minutes) {
     
     document.getElementById('durationSummary').textContent = summary;
 }
-
 </script>
+@endsection

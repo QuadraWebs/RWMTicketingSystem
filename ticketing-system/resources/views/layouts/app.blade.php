@@ -14,6 +14,14 @@
             font-style: normal;
         }
 
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eff6ff 0%, #FFFFFF 50%, #f5f3ff 100%);
+            overflow-x: hidden;
+        }
+
         * {
             font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
             margin: 0;
@@ -26,6 +34,9 @@
             display: flex;
             flex-direction: column;
             background: linear-gradient(135deg, #eff6ff 0%, #FFFFFF 50%, #f5f3ff 100%);
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
 
         .header {
@@ -38,12 +49,14 @@
         }
 
         .nav-container {
-            max-width: 90rem;
-            margin: 0 auto;
-            padding: 0 1rem;
+            width: 100%;
+            margin: 0;
+            padding: 0 2rem;
         }
 
         .nav-content {
+            max-width: 90rem;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             height: 4rem;
@@ -172,21 +185,41 @@
         }
 
         .footer {
-            background: white;
-            border-top: 1px solid #e5e7eb;
-            padding: 1rem;
-            text-align: center;
+            padding: 1.5rem 0;
             margin-top: auto;
         }
 
-        .copyright {
-            font-size: 0.75rem;
-            color: #4b5563;
-            margin-bottom: 0.25rem;
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .powered-by {
-            font-size: 0.75rem;
+        .footer-logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #2563eb, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-content {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .footer-powered {
+            font-size: 0.875rem;
             font-weight: 500;
             background: linear-gradient(90deg, #2563eb, #9333ea);
             -webkit-background-clip: text;
@@ -270,13 +303,17 @@
         </main>
 
         <footer class="footer">
-            <div class="copyright">
-                Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
-            </div>
-            <div class="powered-by">
-                Powered by QuadraWebs
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="footer-logo">Wanderworks Lab</span>
+                    <span class="footer-copyright">© 2024 (SA0610699-K) ALL RIGHTS RESERVED</span>
+                </div>
+                <div class="footer-powered">
+                    Powered by QuadraWebs
+                </div>
             </div>
         </footer>
+
     </div>
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

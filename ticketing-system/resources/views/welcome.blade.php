@@ -70,9 +70,9 @@ use Illuminate\Support\Str;
 
             .main-content {
                 flex: 1;
-                max-width: 100rem;
+                max-width: 120rem; /* Increased from 100rem */
                 margin: 0 auto;
-                padding: 0.5rem;
+                padding: 2rem;
             }
 
             .ticket-card {
@@ -80,8 +80,8 @@ use Illuminate\Support\Str;
                 border-radius: 0.5rem;
                 box-shadow: 0 1px 2px rgba(0,0,0,0.05);
                 border: 1px solid #e5e7eb;
-                padding: 1rem;
-                margin-bottom: 1rem;
+                padding: 2rem; /* Increased from 1rem */
+                margin-bottom: 1.5rem; /* Increased from 1rem */
                 width: 100%;
             }
 
@@ -210,13 +210,14 @@ use Illuminate\Support\Str;
                 .welcome-text {
                     font-size: 2.25rem;
                 }
+                            
                 .main-content {
-                    padding: 0.25rem;
+                    padding: 2rem; /* Increased from 0.25rem */
                 }
                 
                 .ticket-card {
-                    margin: 0.5rem 0;
-                    padding: 0.75rem;
+                    margin: 1rem 0; /* Increased from 0.5rem */
+                    padding: 2rem; 
                 }
             }
         </style>

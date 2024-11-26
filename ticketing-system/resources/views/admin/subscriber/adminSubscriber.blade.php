@@ -1,103 +1,403 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 animate-fade-in">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-slide-up">
+<style>
+    /* Animation Keyframes */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from { 
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Base Styles */
+    .container {
+        max-width: 90rem;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .content-card {
+        background: white;
+        border-radius: 0.75rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        padding: 1.5rem;
+        animation: slideUp 0.6s ease-out;
+    }
+
+    /* Header Section */
+    .header-page {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .header-subtitle {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 0.25rem;
+    }
+
+    .add-button {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+    .add-button:hover {
+        opacity: 0.9;
+    }
+
+    /* Search Section */
+    .search-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .search-input-wrapper {
+        position: relative;
+        flex: 1;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.625rem 2.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem 0 0 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+
+    .clear-search {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        cursor: pointer;
+    }
+
+    .search-button {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        padding: 0.625rem 1.5rem;
+        border: none;
+        border-radius: 0 0.5rem 0.5rem 0;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .search-button:hover {
+        opacity: 0.9;
+    }
+
+    /* Table Styles */
+    .table-container {
+        overflow-x: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+    
+    .table-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .table th {
+        background: #f9fafb;
+        padding: 0.75rem 1.5rem;
+        text-align: left;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table td {
+        padding: 1rem 1.5rem;
+        font-size: 0.875rem;
+        color: #111827;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table tr:hover td {
+        background: #f9fafb;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .action-button {
+        color: #6b7280;
+        transition: color 0.2s;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .view-button {
+        color: #059669;
+    }
+
+    .edit-button {
+        color: #2563eb;
+    }
+
+    .delete-button {
+        color: #dc2626;
+        border: none;
+    }
+
+    .view-button:hover {
+        color: #047857;
+    }
+
+    .edit-button:hover {
+        color: #1d4ed8;
+    }
+
+    .delete-button:hover {
+        color: #b91c1c;
+    }
+
+    /* Copy Link Button */
+    .copy-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+        border: 1px solid #2563eb;
+        color: #2563eb;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .copy-button:hover {
+        background: #eff6ff;
+    }
+
+    .copy-button svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* Delete Modal */
+    .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+    }
+
+    .modal {
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        max-width: 24rem;
+        width: 90%;
+    }
+
+    .modal-title {
+        font-size: 1.125rem;
+        font-weight: bold;
+        color: #111827;
+        margin-bottom: 1rem;
+    }
+
+    .modal-text {
+        color: #6b7280;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+
+    .modal-button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+    }
+
+    .cancel-button {
+        background: white;
+        border: 1px solid #e5e7eb;
+        color: #6b7280;
+    }
+
+    .cancel-button:hover {
+        background: #f9fafb;
+    }
+
+    .delete-confirm-button {
+        background: #dc2626;
+        color: white;
+        border: none;
+    }
+
+    .delete-confirm-button:hover {
+        background: #b91c1c;
+    }
+
+    /* Pagination */
+    .pagination {
+        margin-top: 1.5rem;
+    }
+
+    /* Animation Delays for Table Rows */
+    .table tr {
+        opacity: 0;
+        animation: slideUp 0.4s ease-out forwards;
+    }
+
+    .table tr:nth-child(1) { animation-delay: 0.1s; }
+    .table tr:nth-child(2) { animation-delay: 0.2s; }
+    .table tr:nth-child(3) { animation-delay: 0.3s; }
+    .table tr:nth-child(4) { animation-delay: 0.4s; }
+    .table tr:nth-child(5) { animation-delay: 0.5s; }
+    .table tr:nth-child(6) { animation-delay: 0.6s; }
+    .table tr:nth-child(7) { animation-delay: 0.7s; }
+    .table tr:nth-child(8) { animation-delay: 0.8s; }
+    .table tr:nth-child(9) { animation-delay: 0.9s; }
+    .table tr:nth-child(10) { animation-delay: 1s; }
+</style>
+
+<div class="container">
+    <div class="content-card">
         <!-- Header -->
-         <div class="flex justify-between items-center mb-6">
+        <div class="header-page">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">Subscribers</h1>
-                <p class="text-sm text-gray-600 mt-1">Total Subscribers: {{ $subscribers->total() }}</p>
+                <h1 class="header-title">Subscribers</h1>
+                <p class="header-subtitle">Total Subscribers: {{ $subscribers->total() }}</p>
             </div>
-            <a href="{{ route('admin.subscribers.create') }}"
-                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
+            <a href="{{ route('admin.subscribers.create') }}" class="add-button">
                 Add New Subscriber
             </a>
         </div>
 
-        <div class="relative mb-6">
-            <form action="{{ route('admin.subscribers') }}" method="GET" class="flex">
-                <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
+        <!-- Search -->
+        <div class="search-container">
+            <form action="{{ route('admin.subscribers') }}" method="GET" class="search-form">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
                     <input type="text" name="search" value="{{ request('search') }}"
                         placeholder="Search subscribers by name or email..."
-                        class="block w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                        class="search-input">
                     @if(request('search'))
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                            <a href="{{ route('admin.subscribers') }}" class="text-gray-400 hover:text-gray-600">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </a>
-                        </div>
+                        <a href="{{ route('admin.subscribers') }}" class="clear-search">
+                            <i class="fas fa-times"></i>
+                        </a>
                     @endif
                 </div>
-                <button type="submit"
-                    class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 rounded-r-lg hover:opacity-90 transition-opacity duration-150">
-                    Search
-                </button>
+                <button type="submit" class="search-button">Search</button>
             </form>
         </div>
 
-        <div class="overflow-x-auto hide-scrollbar">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+        <!-- Table -->
+        <div class="table-container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subscription Date</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
+                        <th>Actions</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subscription Date</th>
+                        <th>Link</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody>
                     @foreach($subscribers->sortByDesc('is_admin') as $subscriber)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('subscriber.view', $subscriber->uuid) }}" class="text-green-600 hover:text-green-900 mr-3">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="{{ route('admin.subscribers.edit', $subscriber->id) }}" 
-                                class="text-blue-600 hover:text-blue-900 mr-3">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                @if(!$subscriber->is_admin)
-                                    <button onclick="showDeleteModal('{{ route('admin.subscribers.destroy', $subscriber->id) }}')"
-                                        class="text-red-600 hover:text-red-900">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $subscriber->name }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $subscriber->email }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $subscriber->created_at->format('M d, Y') }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{{ route('admin.subscribers.edit', $subscriber->id) }}" class="action-button edit-button">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                     @if(!$subscriber->is_admin)
-                                        <button onclick="copyToClipboard(this, '{{ url('/viewticket/' . $subscriber->uuid) }}')"
-                                            class="inline-flex items-center px-3 py-1.5 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                            </svg>
-                                            Copy Link
+                                        <a href="{{ route('subscriber.view', $subscriber->uuid) }}" class="action-button view-button">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    @endif
+                                    @if(!$subscriber->is_admin)
+                                        <button onclick="showDeleteModal('{{ route('admin.subscribers.destroy', $subscriber->id) }}')"
+                                            class="action-button delete-button">
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     @endif
                                 </div>
                             </td>
-
+                            <td>{{ $subscriber->name }}</td>
+                            <td>{{ $subscriber->email }}</td>
+                            <td>{{ $subscriber->created_at->format('M d, Y') }}</td>
+                            <td>
+                                @if(!$subscriber->is_admin)
+                                    <button onclick="copyToClipboard(this, '{{ url('/viewticket/' . $subscriber->uuid) }}')"
+                                        class="copy-button">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                        </svg>
+                                        Copy Link
+                                    </button>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -105,163 +405,70 @@
         </div>
 
         <!-- Pagination -->
-        <div class="mt-6">
+        <div class="pagination">
             {{ $subscribers->links() }}
         </div>
     </div>
-    <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-6 max-w-sm mx-auto">
-            <h3 class="text-lg font-bold text-gray-900 mb-4">Confirm Deletion</h3>
-            <p class="text-gray-600 mb-6">Are you sure you want to delete this subscriber? This action cannot be undone.</p>
-            <div class="flex justify-end gap-4">
-                <button onclick="closeDeleteModal()"
-                    class="w-24 h-10 px-4 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">
-                    Cancel
-                </button>
-                <form id="deleteForm" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="w-24 h-10 px-4 bg-red-600 text-white rounded-md hover:bg-red-700">
-                        Delete
-                    </button>
-                </form>
-            </div>
+</div>
+
+<!-- Delete Modal -->
+<div id="deleteModal" class="modal-backdrop">
+    <div class="modal">
+        <h3 class="modal-title">Confirm Deletion</h3>
+        <p class="modal-text">Are you sure you want to delete this subscriber? This action cannot be undone.</p>
+        <div class="modal-buttons">
+            <button onclick="closeDeleteModal()" class="modal-button cancel-button">Cancel</button>
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="modal-button delete-confirm-button">Delete</button>
+            </form>
         </div>
     </div>
 </div>
-@endsection
+
 <script>
 let isAnimating = false;
 
-    function copyToClipboard(button, text) {
-        if (isAnimating) return;
-        
-        isAnimating = true;
-        navigator.clipboard.writeText(text);
-        const originalText = button.innerHTML;
-        
-        button.classList.add('transition-all', 'duration-150', 'ease-in-out');
-        button.style.opacity = '0';
+function copyToClipboard(button, text) {
+    if (isAnimating) return;
+    
+    isAnimating = true;
+    navigator.clipboard.writeText(text);
+    const originalText = button.innerHTML;
+    
+    button.style.opacity = '0';
+    
+    setTimeout(() => {
+        button.innerHTML = `
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            Copied
+        `;
+        button.style.opacity = '1';
         
         setTimeout(() => {
-            button.innerHTML = `
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Copied
-            `;
-            button.style.opacity = '1';
+            button.style.opacity = '0';
             
             setTimeout(() => {
-                button.style.opacity = '0';
-                
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                    button.style.opacity = '1';
-                    isAnimating = false;
-                }, 150);
-                
-            }, 2700);
-        }, 150);
-    } 
-    function showDeleteModal(deleteUrl) {
-        document.getElementById('deleteModal').classList.remove('hidden');
-        document.getElementById('deleteModal').classList.add('flex');
-        document.getElementById('deleteForm').action = deleteUrl;
-    }
+                button.innerHTML = originalText;
+                button.style.opacity = '1';
+                isAnimating = false;
+            }, 150);
+            
+        }, 2700);
+    }, 150);
+}
 
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-        document.getElementById('deleteModal').classList.remove('flex');
-    }
-</script>
-
-<style>
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
+function showDeleteModal(deleteUrl) {
+            document.getElementById('deleteModal').style.display = 'flex';
+            document.getElementById('deleteForm').action = deleteUrl;
         }
 
-        to {
-            opacity: 1;
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
         }
-    }
+    </script>
+@endsection
 
-    @keyframes slideUp {
-        from {
-            transform: translateY(20px);
-            opacity: 0;
-        }
-
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    .animate-fade-in {
-        animation: fadeIn 0.5s ease-out;
-    }
-
-    .animate-slide-up {
-        animation: slideUp 0.6s ease-out;
-    }
-
-    tbody tr {
-        opacity: 0;
-        animation: slideUp 0.4s ease-out forwards;
-    }
-
-    tbody tr:nth-child(1) {
-        animation-delay: 0.1s;
-    }
-
-    tbody tr:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-
-    tbody tr:nth-child(3) {
-        animation-delay: 0.3s;
-    }
-
-    tbody tr:nth-child(4) {
-        animation-delay: 0.4s;
-    }
-
-    tbody tr:nth-child(5) {
-        animation-delay: 0.5s;
-    }
-
-    tbody tr:nth-child(6) {
-        animation-delay: 0.6s;
-    }
-
-    tbody tr:nth-child(7) {
-        animation-delay: 0.7s;
-    }
-
-    tbody tr:nth-child(8) {
-        animation-delay: 0.8s;
-    }
-
-    tbody tr:nth-child(9) {
-        animation-delay: 0.9s;
-    }
-
-    tbody tr:nth-child(10) {
-        animation-delay: 1s;
-    }
-    .hide-scrollbar {
-        overflow: hidden;
-    }
-
-    @keyframes showScrollbar {
-        to {
-            overflow: auto;
-        }
-    }
-
-    .overflow-x-auto {
-        animation: showScrollbar 0s 1s forwards;
-    }
-</style>

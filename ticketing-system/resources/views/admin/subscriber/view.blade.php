@@ -1,136 +1,336 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+<style>
+    /* Animation Keyframes */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Base Styles */
+    .container {
+        max-width: 90rem;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .content-card {
+        background: white;
+        border-radius: 0.75rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        animation: slideUp 0.6s ease-out;
+    }
+
+    /* Header */
+    .header-page {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .back-button {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+    .back-button:hover {
+        opacity: 0.9;
+    }
+
+    /* Section Styles */
+    .section {
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 1rem;
+    }
+
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+        background: #f9fafb;
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .profile-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .profile-item label {
+        display: block;
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 0.25rem;
+    }
+
+    .profile-item span {
+        font-weight: 500;
+        color: #111827;
+    }
+
+    /* Table Styles */
+    .table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .table th {
+        background: #f9fafb;
+        padding: 0.75rem 1.5rem;
+        text-align: left;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table td {
+        padding: 1rem 1.5rem;
+        font-size: 0.875rem;
+        color: #111827;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* Status Badge */
+    .status-badge {
+        display: inline-flex;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .status-active {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .status-in-use {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+
+    /* Activity List */
+    .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .activity-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background: #f9fafb;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s;
+    }
+
+    .activity-item:hover {
+        background: #f3f4f6;
+    }
+
+    .activity-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .activity-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: #dbeafe;
+        border-radius: 9999px;
+        color: #2563eb;
+    }
+
+    .activity-details h4 {
+        font-weight: 500;
+        color: #111827;
+        margin-bottom: 0.25rem;
+    }
+
+    .activity-details p {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+
+    .activity-status {
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .status-checked-in {
+        color: #059669;
+    }
+
+    .status-checked-out {
+        color: #dc2626;
+    }
+</style>
+
+<div class="container">
+    <div class="content-card">
         <!-- Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-900">Subscriber Infomation</h1>
-            <a href="{{ route('admin.subscribers') }}"
-                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
+        <div class="header-page">
+            <h1 class="header-title">Subscriber Details</h1>
+            <a href="{{ route('admin.subscribers') }}" class="back-button">
                 Back to Subscribers
             </a>
         </div>
 
-        <!-- User Profile Section -->
-        <div class="mb-8">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Profile</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-4 rounded-lg">
-                <div>
-                    <p class="text-sm text-gray-600">Name</p>
-                    <p class="font-medium">John Doe</p>
+        <!-- Profile Information -->
+        <div class="section">
+            <h2 class="section-title">Profile Information</h2>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <label>Name</label>
+                    <span>John Doe</span>
                 </div>
-                <div>
-                    <p class="text-sm text-gray-600">Email</p>
-                    <p class="font-medium">john.doe@example.com</p>
+                <div class="profile-item">
+                    <label>Email</label>
+                    <span>john.doe@example.com</span>
                 </div>
-                <div>
-                    <p class="text-sm text-gray-600">Phone</p>
-                    <p class="font-medium">+60 12-345 6789</p>
+                <div class="profile-item">
+                    <label>Phone</label>
+                    <span>+60 12-345 6789</span>
                 </div>
-                <div>
-                    <p class="text-sm text-gray-600">Member Since</p>
-                    <p class="font-medium">15 Jan 2024</p>
+                <div class="profile-item">
+                    <label>Joined Date</label>
+                    <span>Jan 15, 2024</span>
                 </div>
             </div>
         </div>
 
-        <!-- Active Tickets Section -->
-        <div class="mb-8">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Active Tickets</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Package</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Available Passes
-                            </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Valid Until</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4">Premium Monthly</td>
-                            <td class="px-6 py-4">15</td>
-                            <td class="px-6 py-4">15 Feb 2024</td>
-                            <td class="px-6 py-4">
-                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
-                                    Active
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4">Unlimited Pass</td>
-                            <td class="px-6 py-4">Unlimited</td>
-                            <td class="px-6 py-4">28 Feb 2024</td>
-                            <td class="px-6 py-4">
-                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                    In Use
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <!-- Active Tickets -->
+        <div class="section">
+            <h2 class="section-title">Active Tickets</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Status</th>
+                        <th>Valid Until</th>
+                        <th>Available Passes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Premium Monthly Pass</td>
+                        <td>
+                            <span class="status-badge status-in-use">In Use</span>
+                        </td>
+                        <td>Feb 15, 2024</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Day Pass Bundle</td>
+                        <td>
+                            <span class="status-badge status-active">Active</span>
+                        </td>
+                        <td>Mar 01, 2024</td>
+                        <td>5 passes</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- Recent Activity Section -->
-        <div>
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h2>
-            <div class="space-y-4">
-                @php
-                    $dummyActivities = [
-                        [
-                            'cafe' => 'Coffee Bean KLCC',
-                            'date' => '20 Jan 2024, 09:30 AM',
-                            'status' => 'checked_in'
-                        ],
-                        [
-                            'cafe' => 'Starbucks Pavilion',
-                            'date' => '18 Jan 2024, 02:15 PM',
-                            'status' => 'checked_out'
-                        ],
-                        [
-                            'cafe' => 'San Francisco Coffee Mid Valley',
-                            'date' => '15 Jan 2024, 10:45 AM',
-                            'status' => 'checked_in'
-                        ],
-                        [
-                            'cafe' => 'Coffee Bean Sunway Pyramid',
-                            'date' => '12 Jan 2024, 11:20 AM',
-                            'status' => 'checked_out'
-                        ],
-                        [
-                            'cafe' => 'Starbucks Nu Sentral',
-                            'date' => '10 Jan 2024, 03:40 PM',
-                            'status' => 'checked_in'
-                        ]
-                    ];
-                @endphp
-
-                @foreach($dummyActivities as $activity)
-                    <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex-shrink-0">
-                                <span class="p-2 bg-blue-100 rounded-full">
-                                    <i class="fas fa-coffee text-blue-600"></i>
-                                </span>
-                            </div>
-                            <div>
-                                <p class="font-medium">{{ $activity['cafe'] }}</p>
-                                <p class="text-sm text-gray-600">{{ $activity['date'] }}</p>
-                            </div>
+        <!-- Recent Activity -->
+        <div class="section">
+            <h2 class="section-title">Recent Activity</h2>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-icon">
+                            <i class="fas fa-sign-in-alt"></i>
                         </div>
-                        <span
-                            class="px-3 py-1 text-sm font-medium rounded-full 
-                            {{ $activity['status'] === 'checked_in' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ ucfirst(str_replace('_', ' ', $activity['status'])) }}
-                        </span>
+                        <div class="activity-details">
+                            <h4>Coffee House Downtown</h4>
+                            <p>Jan 20, 2024 09:30 AM</p>
+                        </div>
                     </div>
-                @endforeach
+                    <span class="activity-status status-checked-in">Check-in</span>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>Coffee House Downtown</h4>
+                            <p>Jan 20, 2024 11:30 AM</p>
+                        </div>
+                    </div>
+                    <span class="activity-status status-checked-out">Check-out</span>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-icon">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h4>Workspace Hub Central</h4>
+                            <p>Jan 19, 2024 02:00 PM</p>
+                        </div>
+                    </div>
+                    <span class="activity-status status-checked-in">Check-in</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
