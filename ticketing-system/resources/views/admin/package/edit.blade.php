@@ -1,107 +1,262 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-900">Packages</h1>
-            <button
-                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
-                Add New Package
-            </button>
+<style>
+    /* Animation Keyframes */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .container {
+        max-width: 90rem;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .duration-summary {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        background: #f3f4f6;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+    }
+
+    .content-card {
+        background: white;
+        border-radius: 0.75rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        animation: slideUp 0.6s ease-out;
+    }
+
+    .header-page {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .form-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.625rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        transition: border-color 0.2s;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+
+    .form-textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .button-cancel {
+        border: 1px solid #d1d5db;
+        background: white;
+        color: #374151;
+    }
+
+    .button-cancel:hover {
+        background: #f3f4f6;
+        border-color: #9ca3af;
+    }
+
+    .button-submit {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        border: none;
+        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+    }
+
+    .button-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+    }
+    .back-button {
+        background: linear-gradient(90deg, #2563eb, #9333ea);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+    .back-button:hover {
+        opacity: 0.9;
+    }
+</style>
+
+<div class="container">
+    <div class="content-card">
+        <div class="header-page">
+            <h1 class="header-title">Edit Package</h1>
+            <a href="{{ route(name: 'admin.package') }}" class="back-button">
+                Back to My Packages
+            </a>
         </div>
 
-        <div class="relative mb-6">
-            <form action="{{ route('admin.package') }}" method="GET" class="flex gap-0">
-                <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search packages..."
-                        class="block w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
-                    @if(request('search'))
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                            <a href="{{ route('admin.package') }}" class="text-gray-400 hover:text-gray-600">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </a>
-                        </div>
-                    @endif
+        <form action="{{ route('admin.package.update', $package->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+        
+            <div class="form-grid">
+                <div class="form-field">
+                    <label class="form-label">Title</label>
+                    <input type="text" name="title" value="{{ $package->title }}" class="form-input" required>
                 </div>
-                <button type="submit"
-                    class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 rounded-r-lg hover:opacity-90 transition-opacity duration-150">
-                    Search
-                </button>
-            </form>
-        </div>
-
-        <!-- Packages Table -->
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr><th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
-                    </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Description</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Duration</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($packages as $package)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <button class="text-blue-600 hover:text-blue-900 mr-3">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-600 hover:text-red-900">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $package->title }}</div>
-                                <div class="text-sm text-gray-500">{{ $package->name }}</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-900">{{ $package->description }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">RM{{ number_format($package->price, 2) }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $package->duration }} minutes</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $package->is_recurring ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
-                                    {{ $package->is_recurring ? 'Recurring' : 'One-time' }}
-                                </span>
-                                <div class="hidden text-xs text-gray-500">{{ $package->pass_type }}</div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="mt-6">
-            {{ $packages->links() }}
-        </div>
+        
+                <div class="form-field">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name" value="{{ $package->name }}" class="form-input" required>
+                </div>
+        
+                <div class="form-field">
+                    <label class="form-label">Price (RM)</label>
+                    <input type="number" name="price" value="{{ $package->price }}" step="0.01" class="form-input" required>
+                </div>
+        
+                <div class="form-field">
+                    <label class="form-label">Pass Type</label>
+                    <select name="pass_type" class="form-input form-select" required>
+                        <option value="1" {{ $package->pass_type === 1 ? 'selected' : '' }}>One-time</option>
+                        <option value="3" {{ $package->pass_type === 3 ? 'selected' : '' }}>Monthly</option>
+                    </select>
+                </div>
+        
+                <div class="form-field">
+                    <label class="form-label">Duration (minutes)</label>
+                    <input type="number" name="duration" id="duration" value="{{ $package->duration }}" class="form-input"
+                        required>
+                    <p id="durationSummary" class="duration-summary"></p>
+                </div>
+        
+                <div class="form-field full-width">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-input form-textarea"
+                        required>{{ $package->description }}</textarea>
+                </div>
+            </div>
+        
+            <div class="button-group">
+                <a href="{{ route('admin.package') }}" class="button button-cancel">Cancel</a>
+                <button type="submit" class="button button-submit">Update Package</button>
+            </div>
+        </form>
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        function updateDurationSummary(minutes) {
+            if (!minutes) {
+                document.getElementById('durationSummary').textContent = '0 min';
+                return;
+            }
+
+            const days = Math.floor(minutes / (24 * 60));
+            const hours = Math.floor((minutes % (24 * 60)) / 60);
+            const remainingMinutes = minutes % 60;
+            let summary = '';
+
+            if (days > 0) {
+                summary += `${days} day${days > 1 ? 's' : ''}`;
+            }
+
+            if (hours > 0) {
+                if (days > 0) summary += ' ';
+                summary += `${hours} hr${hours > 1 ? 's' : ''}`;
+            }
+
+            if (remainingMinutes > 0) {
+                if (hours > 0 || days > 0) summary += ' ';
+                summary += `${remainingMinutes} min${remainingMinutes > 1 ? 's' : ''}`;
+            }
+
+            document.getElementById('durationSummary').textContent = summary;
+        }
+
+        updateDurationSummary(document.getElementById('duration').value);
+    });
+
+</script>

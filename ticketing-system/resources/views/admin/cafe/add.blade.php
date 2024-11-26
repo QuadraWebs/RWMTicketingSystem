@@ -189,95 +189,31 @@
 <div class="container">
     <div class="content-card">
         <div class="header-page">
-            <h1 class="header-title">Add New Subscriber</h1>
-            <a href="{{ route('admin.package') }}" class="back-button">
-                Back to My Packages
+            <h1 class="header-title">Add New Cafe</h1>
+            <a href="{{ route('admin.cafe') }}" class="back-button">
+                Back to Cafes
             </a>
         </div>
 
-        <form action="{{ route('admin.package.store') }}" method="POST">
+        <form action="{{ route('admin.cafe.store') }}" method="POST">
             @csrf
 
             <div class="form-grid">
-                <div class="form-field">
-                    <label class="form-label">Title</label>
-                    <input type="text" name="title" class="form-input" required>
-                </div>
-
                 <div class="form-field">
                     <label class="form-label">Name</label>
                     <input type="text" name="name" class="form-input" required>
                 </div>
 
                 <div class="form-field">
-                    <label class="form-label">Price (RM)</label>
-                    <input type="number" step="0.01" name="price" class="form-input" required>
-                </div>
-
-                <div class="form-field">
-                    <label class="form-label">Pass Type</label>
-                    <select name="pass_type" class="form-input form-select" required>
-                        <option value="1">One-time</option>
-                        <option value="3">Monthly</option>
-                    </select>
-                </div>
-                
-                <div class="form-field">
-                    <label class="form-label">Duration (minutes)</label>
-                    <input type="number" name="duration" id="duration" class="form-input" required
-                        onkeypress="return (event.charCode !== 46 && event.charCode >= 48 && event.charCode <= 57)"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, ''); updateDurationSummary(this.value)" step="1" min="1"
-                        pattern="\d*">
-                    <p id="durationSummary" class="duration-summary"></p>
-                </div>
-                
-                <div class="form-field full-width">
-                    <label class="form-label">Description</label>
-                    <textarea name="description" class="form-input form-textarea" required></textarea>
+                    <label class="form-label">Address</label>
+                    <textarea name="address" class="form-input form-textarea" required></textarea>
                 </div>
             </div>
 
             <div class="button-group">
-                <button type="submit" class="button button-submit">Create Package</button>
+                <button type="submit" class="button button-submit">Create Cafe</button>
             </div>
         </form>
     </div>
 </div>
 @endsection
-
-@section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        function updateDurationSummary(minutes) {
-            if (!minutes) {
-                document.getElementById('durationSummary').textContent = '0 min';
-                return;
-            }
-
-            const days = Math.floor(minutes / (24 * 60));
-            const hours = Math.floor((minutes % (24 * 60)) / 60);
-            const remainingMinutes = minutes % 60;
-            let summary = '';
-
-            if (days > 0) {
-                summary += `${days} day${days > 1 ? 's' : ''}`;
-            }
-
-            if (hours > 0) {
-                if (days > 0) summary += ' ';
-                summary += `${hours} hr${hours > 1 ? 's' : ''}`;
-            }
-
-            if (remainingMinutes > 0) {
-                if (hours > 0 || days > 0) summary += ' ';
-                summary += `${remainingMinutes} min${remainingMinutes > 1 ? 's' : ''}`;
-            }
-
-            document.getElementById('durationSummary').textContent = summary;
-        }
-
-        updateDurationSummary(document.getElementById('duration').value);
-    });
-
-</script>

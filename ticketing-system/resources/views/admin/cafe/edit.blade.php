@@ -19,7 +19,6 @@
         }
     }
 
-    /* Base Styles */
     .container {
         max-width: 90rem;
         margin: 0 auto;
@@ -31,7 +30,7 @@
         background: white;
         border-radius: 0.75rem;
         border: 1px solid #e5e7eb;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
         animation: slideUp 0.6s ease-out;
     }
@@ -52,7 +51,17 @@
         background-clip: text;
         color: transparent;
     }
-    
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-field {
+        margin-bottom: 1.5rem;
+    }
+
     .form-label {
         display: block;
         font-size: 0.875rem;
@@ -76,39 +85,11 @@
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
 
-    .form-select {
-        width: 100%;
-        padding: 0.625rem;
-        border: 1px solid #e5e7eb;
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-        background-color: white;
+    .form-textarea {
+        min-height: 100px;
+        resize: vertical;
     }
 
-    /* Form Styles */
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-        .form-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    .duration-summary {
-        font-size: 0.875rem;
-        color: #6b7280;
-        margin-top: 0.5rem;
-        padding: 0.5rem;
-        background: #f3f4f6;
-        border-radius: 0.375rem;
-        transition: all 0.2s;
-    }
-
-    /* Button Group */
     .button-group {
         display: flex;
         justify-content: flex-end;
@@ -150,20 +131,6 @@
         box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
     }
 
-    .button-submit:active {
-        transform: translateY(0);
-    }
-
-    /* Number Input Styles */
-    input[type="number"] {
-        -moz-appearance: textfield;
-    }
-
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
     .back-button {
         background: linear-gradient(90deg, #2563eb, #9333ea);
         color: white;
@@ -183,42 +150,31 @@
 <div class="container">
     <div class="content-card">
         <div class="header-page">
-            <h1 class="header-title">Add New Subscriber</h1>
-            <a href="{{ route('admin.subscribers') }}" class="back-button">
-                Back to Subscribers
+            <h1 class="header-title">Edit Cafe</h1>
+            <a href="{{ route('admin.cafe') }}" class="back-button">
+                Back to Cafes
             </a>
         </div>
 
-        <form method="POST" action="{{ route('admin.subscribers.store_new') }}">
+        <form action="{{ route('admin.cafe.update', parameters: $cafe->id) }}" method="POST">
             @csrf
-
+            @method('PUT')
+        
             <div class="form-grid">
                 <div class="form-field">
                     <label class="form-label">Name</label>
-                    <input type="text" name="name" class="form-input" required>
+                    <input type="text" name="name" value="{{ $cafe->name }}" class="form-input" required>
                 </div>
-
+        
                 <div class="form-field">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-input" required>
-                </div>
-
-                <div class="form-field">
-                    <label class="form-label">Phone</label>
-                    <input type="tel" name="phone" class="form-input" required>
-                </div>
-
-                <div class="form-field">
-                    <label class="form-label">Role</label>
-                    <select name="is_admin" class="form-select">
-                        <option value="0">Subscriber</option>
-                        <option value="1">Admin</option>
-                    </select>
+                    <label class="form-label">Address</label>
+                    <textarea name="address" class="form-input form-textarea" required>{{ $cafe->address }}</textarea>
                 </div>
             </div>
-
+        
             <div class="button-group">
-                <button type="submit" class="button button-submit">Create Subscriber</button>
+                <a href="{{ route('admin.cafe') }}" class="button button-cancel">Cancel</a>
+                <button type="submit" class="button button-submit">Update Cafe</button>
             </div>
         </form>
     </div>

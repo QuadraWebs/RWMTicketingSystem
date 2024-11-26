@@ -49,7 +49,6 @@
         align-items: center;
         margin-bottom: 1.5rem;
         padding-bottom: 1.5rem;
-        border-bottom: 1px solid #e5e7eb;
     }
 
     .header-title {
@@ -218,6 +217,45 @@
     .status-checked-out {
         color: #dc2626;
     }
+    
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .action-button {
+        color: #6b7280;
+        transition: color 0.2s;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .view-button {
+        color: #059669;
+    }
+
+    .edit-button {
+        color: #2563eb;
+    }
+
+    .delete-button {
+        color: #dc2626;
+        border: none;
+    }
+
+    .view-button:hover {
+        color: #047857;
+    }
+
+    .edit-button:hover {
+        color: #1d4ed8;
+    }
+
+    .delete-button:hover {
+        color: #b91c1c;
+    }
+
 </style>
 
 <div class="container">
@@ -236,98 +274,111 @@
             <div class="profile-grid">
                 <div class="profile-item">
                     <label>Name</label>
-                    <span>John Doe</span>
+                    <span>{{ $subscriber->name }}</span>
                 </div>
                 <div class="profile-item">
                     <label>Email</label>
-                    <span>john.doe@example.com</span>
+                    <span>{{ $subscriber->email }}</span>
                 </div>
                 <div class="profile-item">
                     <label>Phone</label>
-                    <span>+60 12-345 6789</span>
+                    <span>{{ $subscriber->phone ?? 'Not provided' }}</span>
                 </div>
                 <div class="profile-item">
                     <label>Joined Date</label>
-                    <span>Jan 15, 2024</span>
+                    <span>{{ $subscriber->created_at->format('M d, Y') }}</span>
                 </div>
             </div>
         </div>
 
         <!-- Active Tickets -->
         <div class="section">
-            <h2 class="section-title">Active Tickets</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Package</th>
-                        <th>Status</th>
-                        <th>Valid Until</th>
-                        <th>Available Passes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Premium Monthly Pass</td>
-                        <td>
-                            <span class="status-badge status-in-use">In Use</span>
-                        </td>
-                        <td>Feb 15, 2024</td>
-                        <td>Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td>Day Pass Bundle</td>
-                        <td>
-                            <span class="status-badge status-active">Active</span>
-                        </td>
-                        <td>Mar 01, 2024</td>
-                        <td>5 passes</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2 class="section-title">Tickets</h2>
+            @if($tickets->count() > 0)
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Actions</th>
+                            <th>Package</th>
+                            <th>Status</th>
+                            <th>Valid Until</th>
+                            <th>Available Passes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($tickets as $ticket)
+                            <tr>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="{{ route('admin.subscribers.edit_user_ticket', ['uuid' => $subscriber->uuid, 'ticket' => $ticket->id]) }}" 
+                                            class="action-button edit-button">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button onclick="showDeleteTicketModal('{{ route('admin.subscribers.destroy_user_ticket', ['uuid' => $subscriber->uuid, 'ticket' => $ticket->id]) }}')"
+                                            class="action-button delete-button">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>{{ $ticket->package->title }}</td>
+                                <td>
+                                    <span class="status-badge {{ $ticket->status == 'active' ? 'status-active' : 'status-in-use' }}">
+                                        {{ ucfirst($ticket->status) }}
+                                    </span>
+                                </td>
+                                <td>{{ $ticket->valid_until->format('M d, Y') }}</td>
+                                <td>{{ $ticket->remaining_passes ?? 'Unlimited' }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            @else
+                <div style="text-align: center; padding: 2rem; background: #f9fafb; border-radius: 0.5rem;">
+                    <i class="fas fa-ticket-alt" style="font-size: 2rem; color: #9ca3af; margin-bottom: 1rem;"></i>
+                    <p style="color: #6b7280; font-size: 0.875rem;">No tickets found for this subscriber</p>
+                </div>
+            @endif
         </div>
+
 
         <!-- Recent Activity -->
         <div class="section">
             <h2 class="section-title">Recent Activity</h2>
             <div class="activity-list">
-                <div class="activity-item">
-                    <div class="activity-info">
-                        <div class="activity-icon">
-                            <i class="fas fa-sign-in-alt"></i>
+                @if($activities->count() > 0)
+                    @foreach($activities as $activity)
+                        <div class="activity-item">
+                            <div class="activity-info">
+                                <div class="activity-icon">
+                                    @if($activity->status == 'accepted')
+                                        <i class="fas fa-check-circle" style="color: #059669;"></i>
+                                    @elseif($activity->status == 'rejected')
+                                        <i class="fas fa-times-circle" style="color: #dc2626;"></i>
+                                    @else
+                                        <i class="fas fa-clock" style="color: #111827;"></i>
+                                    @endif
+                                </div>
+                                <div class="activity-details">
+                                    <h4>{{ $activity->cafe->name }}</h4>
+                                    <p>{{ $activity->created_at->format('M d, Y h:i A') }}</p>
+                                </div>
+                            </div>
+                            <span class="activity-status" style="color: 
+                                @if($activity->status == 'Accepted') #059669 
+                                @elseif($activity->status == 'Rejected') #dc2626
+                                @else #111827 
+                                @endif">
+                                {{ $activity->status }}
+                            </span>
                         </div>
-                        <div class="activity-details">
-                            <h4>Coffee House Downtown</h4>
-                            <p>Jan 20, 2024 09:30 AM</p>
-                        </div>
+                    @endforeach
+                @else
+                    <div style="text-align: center; padding: 2rem; background: #f9fafb; border-radius: 0.5rem;">
+                        <i class="fas fa-history" style="font-size: 2rem; color: #9ca3af; margin-bottom: 1rem;"></i>
+                        <p style="color: #6b7280; font-size: 0.875rem;">No recent activities found</p>
                     </div>
-                    <span class="activity-status status-checked-in">Check-in</span>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-info">
-                        <div class="activity-icon">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </div>
-                        <div class="activity-details">
-                            <h4>Coffee House Downtown</h4>
-                            <p>Jan 20, 2024 11:30 AM</p>
-                        </div>
-                    </div>
-                    <span class="activity-status status-checked-out">Check-out</span>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-info">
-                        <div class="activity-icon">
-                            <i class="fas fa-sign-in-alt"></i>
-                        </div>
-                        <div class="activity-details">
-                            <h4>Workspace Hub Central</h4>
-                            <p>Jan 19, 2024 02:00 PM</p>
-                        </div>
-                    </div>
-                    <span class="activity-status status-checked-in">Check-in</span>
-                </div>
+                @endif
             </div>
         </div>
     </div>

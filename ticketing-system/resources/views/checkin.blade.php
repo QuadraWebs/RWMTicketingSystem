@@ -299,8 +299,30 @@
 
                         <div x-show="open" class="search-results">
                             <template
-                                x-for="cafe in {{ json_encode($cafes) }}.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))"
-                                :key="cafe . id">
+                                x-for="cafe in {{ json_encode($cafes) }}.filter(c => {
+                                    const searchTerms = search.toLowerCase().split(' ');
+                                    const combinedText = (c.name + ' ' + c.address).toLowerCase();
+                                    const words = combinedText.split(' ');
+                                    
+                                    return searchTerms.every(term => 
+                                        words.some(word => {
+                                            // For shorter search terms (3 chars or less), use contains
+                                            if (term.length <= 3) {
+                                                return word.includes(term) || 
+                                                    (word.includes('starbucks') && 'starbucks'.includes(term));
+                                            }
+                                            
+                                            // For longer terms, use similarity matching
+                                            const maxLength = Math.max(term.length, word.length);
+                                            const distance = levenshteinDistance(word, term);
+                                            const similarity = (maxLength - distance) / maxLength;
+                                            
+                                            return similarity >= 0.65 || 
+                                                (word.includes('starbucks') && 'starbucks'.includes(term));
+                                        })
+                                    );
+                                })"
+                                :key="cafe . id">                
                                 <div @click="selectedCafe = cafe.name; selectedCafeId = cafe.id; open = false"
                                     class="result-item">
                                     <div x-text="cafe.name" class="result-name"></div>
@@ -356,3 +378,36 @@
 </body>
 
 </html>
+
+<script>
+    function levenshteinDistance(a, b) {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+
+        const matrix = [];
+
+        for (let i = 0; i <= b.length; i++) {
+            matrix[i] = [i];
+        }
+
+        for (let j = 0; j <= a.length; j++) {
+            matrix[0][j] = j;
+        }
+
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j] + 1
+                    );
+                }
+            }
+        }
+
+        return matrix[b.length][a.length];
+    }
+</script>

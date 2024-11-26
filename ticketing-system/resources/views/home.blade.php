@@ -261,9 +261,9 @@
                         <i class="fas fa-ticket-alt" style="color: #2563eb;"></i>
                     </span>
                 </div>
-                <div class="stat-value">5</div>
+                <div class="stat-value">{{ $stats['active_tickets']['value'] }}</div>
                 <div class="stat-trend">
-                    <span class="trend-up">↑ 12%</span>
+                    <span class="trend-up">↑ {{ $stats['active_tickets']['trend'] }}%</span>
                     <span class="trend-text">from last month</span>
                 </div>
             </div>
@@ -275,9 +275,9 @@
                         <i class="fas fa-ticket-alt" style="color: #ea580c;"></i>
                     </span>
                 </div>
-                <div class="stat-value">243</div>
+                <div class="stat-value">{{ $stats['tickets_used']['value'] }}</div>
                 <div class="stat-trend">
-                    <span class="trend-up">↑ 10%</span>
+                    <span class="trend-up">↑ {{ $stats['tickets_used']['trend'] }}%</span>
                     <span class="trend-text">from last month</span>
                 </div>
             </div>
@@ -289,9 +289,9 @@
                         <i class="fas fa-users" style="color: #7c3aed;"></i>
                     </span>
                 </div>
-                <div class="stat-value">{{ \App\Models\User::count() }}</div>
+                <div class="stat-value">{{ $stats['total_users']['value'] }}</div>
                 <div class="stat-trend">
-                    <span class="trend-up">↑ 8%</span>
+                    <span class="trend-up">↑ {{ $stats['total_users']['trend'] }}%</span>
                     <span class="trend-text">from last month</span>
                 </div>
             </div>
@@ -303,14 +303,13 @@
                         <i class="fas fa-box" style="color: #059669;"></i>
                     </span>
                 </div>
-                <div class="stat-value">128</div>
+                <div class="stat-value">{{ $stats['packages_bought']['value'] }}</div>
                 <div class="stat-trend">
-                    <span class="trend-up">↑ 15%</span>
+                    <span class="trend-up">↑ {{ $stats['packages_bought']['trend'] }}%</span>
                     <span class="trend-text">from last month</span>
                 </div>
             </div>
         </div>
-
         <!-- Charts Grid -->
         <div class="charts-grid">
             <div class="chart-card">
@@ -329,18 +328,18 @@
                 <h3 class="activity-title">Recent Activity</h3>
             </div>
             <div class="activity-list">
-                @foreach(range(1, 5) as $index)
+                @foreach($recent_activities as $activity)
                 <div class="activity-item">
                     <div class="activity-info">
                         <span class="activity-icon">
                             <i class="fas fa-coffee"></i>
                         </span>
                         <div class="activity-details">
-                            <h4>Cafe Visit - Coffee House {{ $index }}</h4>
-                            <p>{{ $index }} hours ago</p>
+                            <h4>{{ $activity['title'] }}</h4>
+                            <p>{{ $activity['time'] }}</p>
                         </div>
                     </div>
-                    <span class="activity-status">Completed</span>
+                    <span class="activity-status">{{ $activity['status'] }}</span>
                 </div>
                 @endforeach
             </div>
@@ -359,10 +358,10 @@
             },
             series: [{
                 name: 'Tickets Used',
-                data: [30, 40, 45, 50, 49, 60, 70]
+                data: @json($charts['ticket_usage']['data'])
             }],
             xaxis: {
-                categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                categories: @json($charts['ticket_usage']['categories'])
             },
             colors: ['#4F46E5'],
             stroke: { curve: 'smooth' }
@@ -376,10 +375,10 @@
             },
             series: [{
                 name: 'Visits',
-                data: [25, 35, 45, 55, 45, 35, 25]
+                data: @json($charts['visit_times']['data'])
             }],
             xaxis: {
-                categories: ['9AM', '11AM', '1PM', '3PM', '5PM', '7PM', '9PM']
+                categories: @json($charts['visit_times']['categories'])
             },
             colors: ['#8B5CF6']
         });
