@@ -4,8 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>RWM Ticketing System - Accepted Ticket</title>
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <style>
+            @font-face {
+                font-family: 'Sofia Pro';
+                src: url('/fonts/Sofia Pro Regular Az.otf') format('opentype');
+                font-weight: 900;
+                font-style: normal;
+            }
+
+            * {
+                font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
+            }
+        </style>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-gradient-to-br from-green-50 via-white to-emerald-50">
@@ -42,10 +52,13 @@
                 </div>
             </main>
 
-            <!-- Footer -->
             <footer class="bg-white shadow-sm border-t mt-auto">
                 <div class="max-w-7xl mx-auto py-3 sm:py-4 px-4 text-center">
-                    <span class="text-xs sm:text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+                    <div class="text-xs sm:text-sm text-gray-600 mb-1">
+                        Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                    </div>
+                    <span
+                        class="text-xs sm:text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                         Powered by QuadraWebs
                     </span>
                 </div>

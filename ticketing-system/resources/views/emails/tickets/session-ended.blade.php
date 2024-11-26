@@ -2,8 +2,20 @@
 <html>
 <head>
     <style>
+        @font-face {
+            font-family: 'Sofia Pro';
+            src: url('/fonts/Sofia Pro Black Az.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         :root { --gradient: linear-gradient(135deg, #2563eb, #9333ea); }
-        body { margin: 0; padding: 30px; font-family: 'Segoe UI', Arial, sans-serif; background: #f9fafb; }
+        body { 
+            margin: 0; 
+            padding: 30px; 
+            font-family: 'Sofia Pro', 'Segoe UI', Arial, sans-serif; 
+            background: #f9fafb; 
+        }
         .card { 
             background: #fff;
             border-radius: 16px;
@@ -12,6 +24,7 @@
             max-width: 480px;
             margin: 0 auto;
             box-sizing: border-box;
+            font-family: 'Sofia Pro', 'Segoe UI', Arial, sans-serif;
         }
         .header { 
             font-size: 24px;
