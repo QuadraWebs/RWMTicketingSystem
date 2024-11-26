@@ -4,8 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>RWM Ticketing System - Check In</title>
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <style>
+            @font-face {
+                font-family: 'Sofia Pro';
+                src: url('/fonts/Sofia Pro Regular Az.otf') format('opentype');
+                font-weight: 900;
+                font-style: normal;
+            }
+
+            * {
+                font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
+            }
+        </style>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -65,7 +75,7 @@
                                     class="w-full p-3 sm:p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 text-sm sm:text-base"
                                 >
                                 <div x-show="open" class="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-50 max-h-48 sm:max-h-60 overflow-y-auto">
-                                    <template x-for="cafe in {{ json_encode($cafes) }}.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))" :key="cafe.id">
+                                    <template x-for="cafe in {{ json_encode($cafes) }}.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))" :key="cafe . id">
                                         <div
                                             @click="selectedCafe = cafe.name; selectedCafeId = cafe.id; open = false"
                                             class="p-3 sm:p-4 hover:bg-blue-50 cursor-pointer border-b last:border-0"
@@ -107,15 +117,21 @@
                                 </div>
 
                                 <a href="{{ $verificationUrl }}"
-                                class="mt-2 inline-block text-blue-600 hover:text-blue-800 hover:underline break-all text-xs sm:text-sm"
+                                class="hidden mt-2 inline-block text-blue-600 hover:text-blue-800 hover:underline break-all text-xs sm:text-sm"
                                 target="_blank"
                                 rel="noopener">
                                     {{ $verificationUrl }}
                                 </a>
 
-                                <span class="hidden mt-2 inline-block text-gray-500 break-all text-xs sm:text-sm" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;" oncontextmenu="return false;">
-                                    {{ $verificationUrl }}
-                                </span>
+                                <button type="button" onclick="window.location.reload()"
+                                    class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition duration-200">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Regenerate QR
+                                </button>
+
                             </div>
                         @endif
                     </div>
@@ -124,11 +140,16 @@
 
             <footer class="bg-white shadow-sm border-t mt-auto">
                 <div class="max-w-7xl mx-auto py-3 sm:py-4 px-4 text-center">
-                    <span class="text-xs sm:text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    <div class="text-xs sm:text-sm text-gray-600 mb-1">
+                        Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                    </div>
+                    <span
+                        class="text-xs sm:text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                         Powered by QuadraWebs
                     </span>
                 </div>
             </footer>
+
         </div>
     </body>
 </html>

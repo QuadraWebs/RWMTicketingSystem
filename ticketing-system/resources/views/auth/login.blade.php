@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
+<div class="min-h-[75vh] flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 py-4 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-4 bg-white p-5 rounded-xl shadow-sm border">
         <div>
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 class="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                 {{ __('Welcome back') }}
             </h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
+            <p class="mt-1 text-center text-sm text-gray-600">
                 {{ __('Sign in to your account') }}
             </p>
         </div>

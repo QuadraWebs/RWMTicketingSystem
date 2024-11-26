@@ -65,7 +65,6 @@ class TicketController extends Controller
                     'valid_until' => $ticket->valid_until
                 ];
             });
-
         return view('welcome', compact('tickets', 'userName'));
     }
     
@@ -135,14 +134,23 @@ class TicketController extends Controller
             $cafeId = $request->query('cafe_id');
             $ticketId = $request->query('ticket_id');
 
+            $ticket = Ticket::where('id', $request->query('ticket_id'))->firstOrFail();
+            
+            $package = Package::findOrFail($ticket->package_id);
+
+            $endTime = now()->addMinutes($package->duration);
+
             $cafe = Cafe::findOrFail($cafeId);
             $user = User::where('uuid', $uuid)->first();
             $customerName = $user ? $user->name : 'Guest';
 
             return view('verify-ticket', [
                 'ticket_id' => $ticketId,
+                'ticket' => $ticket,
+                'package' => $package,
                 'selected_cafe' => $cafe->name,
-                'customer_name' => $customerName
+                'customer_name' => $customerName,
+                'end_time' => $endTime
             ]);
 
         } catch (HttpException $e) {

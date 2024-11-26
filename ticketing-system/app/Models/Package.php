@@ -14,7 +14,8 @@ class Package extends Model
         'price',
         'duration',
         'is_recurring',
-        'pass_type'
+        'pass_type',
+        'title'
     ];
 
     public function tickets()
