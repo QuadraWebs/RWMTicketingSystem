@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Wanderworks Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @font-face {
             font-family: 'Sofia Pro';
@@ -15,98 +16,265 @@
 
         * {
             font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #eff6ff 0%, #FFFFFF 50%, #f5f3ff 100%);
+        }
+
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-container {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            height: 4rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            color: #2563eb;
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .brand-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #2563eb, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: none;
+            margin-left: 2.5rem;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4b5563;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .nav-link.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            color: #4b5563;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .user-button:hover {
+            color: #1f2937;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            width: 12rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            padding: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .dropdown-link:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 0.375rem;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid #e5e7eb;
+            margin: 0.25rem 0;
+        }
+
+        .dropdown-link.danger {
+            color: #dc2626;
+        }
+
+        .dropdown-link.danger:hover {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        .footer {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 1rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            color: #4b5563;
+            margin-bottom: 0.25rem;
+        }
+
+        .powered-by {
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: linear-gradient(90deg, #2563eb, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @media (min-width: 640px) {
+            .nav-links {
+                display: flex;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gradient-to-br from-blue-50 via-white to-purple-50">
-    <div class="min-h-screen flex flex-col relative">
-        <!-- Mobile-Optimized Header -->
-        <header class="bg-white shadow-sm border-b sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center">
-                        <a href="{{ url('/home') }}" class="flex items-center">
-                            <i class="fas fa-ticket-alt text-blue-600 text-2xl mr-2"></i>
-                            <span class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                                Wanderworks Lab
-                            </span>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="nav-container">
+                <div class="nav-content">
+                    <div class="nav-left">
+                        <a href="{{ url('/home') }}" class="brand-link">
+                            <i class="fas fa-ticket-alt brand-icon"></i>
+                            <span class="brand-text">Wanderworks Lab</span>
                         </a>
                         
-                        <div class="hidden space-x-8 sm:flex sm:ml-10">
+                        <div class="nav-links">
                             @auth
-                                <a href="{{ route('home') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-transparent hover:border-blue-600">
+                                <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                                     Dashboard
                                 </a>
-                                <a href="{{ route('admin.subscribers') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('admin.subscribers') ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 border-b-2 border-transparent hover:border-blue-600' }}">
+                                <a href="{{ route('admin.subscribers') }}" class="nav-link {{ request()->routeIs('admin.subscribers') ? 'active' : '' }}">
                                     Subscribers
                                 </a>
-                                <a href="{{ route('admin.package') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('admin.package') ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 border-b-2 border-transparent hover:border-blue-600' }}">
+                                <a href="{{ route('admin.package') }}" class="nav-link {{ request()->routeIs('admin.package') ? 'active' : '' }}">
                                     My Package
                                 </a>
-                                <a href="{{ route('admin.history') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('admin.history') ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 border-b-2 border-transparent hover:border-blue-600' }}">
+                                <a href="{{ route('admin.history') }}" class="nav-link {{ request()->routeIs('admin.history') ? 'active' : '' }}">
                                     History
                                 </a>
                             @endauth
                         </div>
                     </div>
 
-                    <div class="flex items-center">
+                    <div class="nav-right">
                         @guest
                             @if (Route::has('login'))
-                                <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-blue-600 mr-4">
+                                <a href="{{ route('login') }}" class="nav-link">
                                     {{ __('Login') }}
                                 </a>
                             @endif
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
-                                    {{ __('Register') }}
-                                </a>
-                            @endif
                         @else
-                            <div class="relative" x-data="{ open: false }">
-                                <button @click="open = !open" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
-                                    <span class="text-sm font-medium">{{ Auth::user()->name }}</span>
-                                    <i class="fas fa-chevron-down text-xs"></i>
+                            <div class="user-menu" x-data="{ open: false }">
+                                <button @click="open = !open" class="user-button">
+                                    <span>{{ Auth::user()->name }}</span>
+                                    <i class="fas fa-chevron-down"></i>
                                 </button>
 
-                                <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1">
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Profile</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Settings</a>
-                                    <div class="border-t border-gray-100"></div>
+                                <div x-show="open" @click.away="open = false" class="dropdown-menu">
+                                    <a href="#" class="dropdown-link">Profile</a>
+                                    <a href="#" class="dropdown-link">Settings</a>
+                                    <div class="dropdown-divider"></div>
                                     <a href="{{ route('login') }}" 
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                        class="dropdown-link danger">
                                         {{ __('Logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                        @csrf
-                                        <input type="hidden" name="redirect" value="{{ route('login') }}">
-                                    </form>
                                 </div>
                             </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                                <input type="hidden" name="redirect" value="{{ route('login') }}">
+                            </form>
                         @endguest
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="flex-1">
+        <main class="main-content">
             @yield('content')
         </main>
 
-        <footer class="bg-white shadow-sm border-t mt-auto">
-            <div class="max-w-7xl mx-auto py-3 sm:py-4 px-4 text-center">
-                <div class="text-xs sm:text-sm text-gray-600 mb-1">
-                    Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
-                </div>
-                <span
-                    class="text-xs sm:text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    Powered by QuadraWebs
-                </span>
+        <footer class="footer">
+            <div class="copyright">
+                Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+            </div>
+            <div class="powered-by">
+                Powered by QuadraWebs
             </div>
         </footer>
     </div>

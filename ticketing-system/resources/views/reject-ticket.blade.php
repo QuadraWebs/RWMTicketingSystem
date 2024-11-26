@@ -14,53 +14,161 @@
 
             * {
                 font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .container {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                background: linear-gradient(135deg, #fef2f2 0%, #FFFFFF 50%, #fff1f2 100%);
+            }
+
+            .header {
+                background: white;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .header-content {
+                max-width: 90rem;
+                margin: 0 auto;
+                padding: 1rem;
+            }
+
+            .header-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+                background: linear-gradient(90deg, #dc2626, #ef4444);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                text-align: center;
+            }
+
+            .main-content {
+                flex: 1;
+                padding: 1rem;
+            }
+
+            .reject-card {
+                max-width: 48rem;
+                margin: 1rem auto;
+                background: white;
+                border-radius: 0.75rem;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                border: 1px solid #fee2e2;
+                padding: 1.5rem;
+            }
+
+            .card-content {
+                text-align: center;
+            }
+
+            .icon-container {
+                display: inline-block;
+                padding: 1rem;
+                background: #fef2f2;
+                border-radius: 9999px;
+                margin-bottom: 1rem;
+            }
+
+            .reject-icon {
+                width: 3rem;
+                height: 3rem;
+                color: #dc2626;
+            }
+
+            .reject-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #dc2626;
+                margin-bottom: 0.75rem;
+            }
+
+            .reject-message {
+                background: #fef2f2;
+                border: 1px solid #fecaca;
+                border-radius: 0.5rem;
+                padding: 1rem;
+                color: #991b1b;
+                font-weight: 500;
+                text-align: center;
+            }
+
+            .footer {
+                background: white;
+                border-top: 1px solid #e5e7eb;
+                padding: 1rem;
+                text-align: center;
+                margin-top: auto;
+            }
+
+            .copyright {
+                font-size: 0.75rem;
+                color: #4b5563;
+                margin-bottom: 0.25rem;
+            }
+
+            .powered-by {
+                font-size: 0.75rem;
+                font-weight: 500;
+                background: linear-gradient(90deg, #2563eb, #9333ea);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            @media (max-width: 640px) {
+                .reject-card {
+                    margin: 0.5rem;
+                    padding: 1rem;
+                }
+
+                .header-title {
+                    font-size: 1.25rem;
+                }
+
+                .reject-title {
+                    font-size: 1.25rem;
+                }
             }
         </style>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-gradient-to-br from-red-50 via-white to-pink-50">
-        <div class="min-h-screen flex flex-col">
-            <!-- Header -->
-            <header class="bg-white shadow-sm border-b">
-                <div class="max-w-7xl mx-auto py-4 px-4 sm:py-6">
-                    <h1 class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-pink-600 text-center sm:text-left">
-                        Ticket Rejected
-                    </h1>
+    <body>
+        <div class="container">
+            <header class="header">
+                <div class="header-content">
+                    <h1 class="header-title">Ticket Rejected</h1>
                 </div>
             </header>
 
-            <!-- Main Content -->
-            <main class="flex-1 px-4 sm:px-8 md:px-12">
-                <div class="max-w-3xl mx-auto py-6 sm:py-12">
-                    <div class="bg-white rounded-xl shadow-sm border border-red-200 p-6 sm:p-10">
-                        <div class="text-center">
-                            <div class="inline-block p-3 sm:p-4 rounded-full bg-red-100 mb-4 sm:mb-6">
-                                <svg class="w-8 h-8 sm:w-12 sm:h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </div>
-                            
-                            <h2 class="text-xl sm:text-2xl font-bold text-red-600 mb-3">{{ $message }}</h2>
-                            
-                            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                                <p class="text-red-700 text-center font-medium">
-                                    {{ $action }}
-                                </p>
-                            </div>
+            <main class="main-content">
+                <div class="reject-card">
+                    <div class="card-content">
+                        <div class="icon-container">
+                            <svg class="reject-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        
+                        <h2 class="reject-title">{{ $message }}</h2>
+                        
+                        <div class="reject-message">
+                            <p>{{ $action }}</p>
                         </div>
                     </div>
                 </div>
             </main>
-            
-            <footer class="bg-white shadow-sm border-t mt-auto">
-                <div class="max-w-7xl mx-auto py-3 sm:py-4 px-4 text-center">
-                    <div class="text-xs sm:text-sm text-gray-600 mb-1">
-                        Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
-                    </div>
-                    <span
-                        class="text-xs sm:text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                        Powered by QuadraWebs
-                    </span>
+
+            <footer class="footer">
+                <div class="copyright">
+                    Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                </div>
+                <div class="powered-by">
+                    Powered by QuadraWebs
                 </div>
             </footer>
         </div>

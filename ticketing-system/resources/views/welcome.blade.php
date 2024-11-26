@@ -17,93 +17,263 @@ use Illuminate\Support\Str;
 
             * {
                 font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .container {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 50%, #FAF5FF 100%);
+            }
+
+            .header {
+                background: white;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                border-bottom: 1px solid #e5e7eb;
+                position: sticky;
+                top: 0;
+                z-index: 50;
+            }
+
+            .header-content {
+                max-width: 80rem;
+                margin: 0 auto;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .system-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+                background: linear-gradient(90deg, #2563eb, #9333ea);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .welcome-text {
+                font-size: 2rem;
+                font-weight: 800;
+                color: #1f2937;
+                margin-top: 0.5rem;
+            }
+
+            .welcome-name {
+                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .main-content {
+                flex: 1;
+                max-width: 100rem;
+                margin: 0 auto;
+                padding: 0.5rem;
+            }
+
+            .ticket-card {
+                background: white;
+                border-radius: 0.5rem;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+                border: 1px solid #e5e7eb;
+                padding: 1rem;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+
+            .ticket-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1rem;
+            }
+
+            .package-name {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #1f2937;
+            }
+
+            .status-badge {
+                padding: 0.25rem 0.75rem;
+                border-radius: 9999px;
+                font-size: 0.875rem;
+            }
+
+            .status-active {
+                background: #dcfce7;
+                color: #166534;
+            }
+
+            .status-inactive {
+                background: #fee2e2;
+                color: #991b1b;
+            }
+
+            .passes-count {
+                font-size: 0.875rem;
+                color: #2563eb;
+                background: #eff6ff;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                display: inline-block;
+            }
+
+            .valid-until {
+                font-size: 0.875rem;
+                color: #4b5563;
+                margin-top: 0.5rem;
+            }
+
+            .active-session {
+                font-size: 0.875rem;
+                background: #ecfdf5;
+                color: #059669;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                margin-top: 0.5rem;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .session-dot {
+                width: 0.5rem;
+                height: 0.5rem;
+                background: #10b981;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+            }
+
+            .action-button {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                border-radius: 0.5rem;
+                font-weight: 500;
+                border: none;
+                margin-top: 1rem;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+
+            .button-primary {
+                background: #2563eb;
+                color: white;
+            }
+
+            .button-primary:hover {
+                background: #1d4ed8;
+            }
+
+            .button-disabled {
+                background: #e2e8f0;
+                color: #64748b;
+                cursor: not-allowed;
+            }
+
+            .footer {
+                background: white;
+                border-top: 1px solid #e5e7eb;
+                padding: 1rem;
+                text-align: center;
+                margin-top: auto;
+            }
+
+            .copyright {
+                font-size: 0.75rem;
+                color: #4b5563;
+                margin-bottom: 0.25rem;
+            }
+
+            .powered-by {
+                font-size: 0.75rem;
+                font-weight: 500;
+                background: linear-gradient(90deg, #2563eb, #9333ea);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            @media (min-width: 640px) {
+                .header-content {
+                    text-align: left;
+                    padding: 1.5rem 1rem;
+                }
+
+                .system-title {
+                    font-size: 1.75rem;
+                }
+
+                .welcome-text {
+                    font-size: 2.25rem;
+                }
+                .main-content {
+                    padding: 0.25rem;
+                }
+                
+                .ticket-card {
+                    margin: 0.5rem 0;
+                    padding: 0.75rem;
+                }
             }
         </style>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        <div class="min-h-screen flex flex-col relative">
-            <!-- Mobile-Optimized Header -->
-            <header class="bg-white shadow-sm border-b sticky top-0 z-50">
-                <div class="max-w-7xl mx-auto py-4 px-4 sm:py-6">
-                    <div class="space-y-2 text-center sm:text-left">
-                        <h1 class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                            RWM Ticketing System
-                        </h1>
-                        <p class="text-2xl sm:text-3xl font-extrabold text-gray-800">
-                            Welcome, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">{{ $userName }}</span>
-                        </p>
-                    </div>
+    <body>
+        <div class="container">
+            <header class="header">
+                <div class="header-content">
+                    <h1 class="system-title">RWM Ticketing System</h1>
+                    <p class="welcome-text">Welcome, <span class="welcome-name">{{ $userName }}</span></p>
                 </div>
             </header>
 
-            <!-- Responsive Main Content -->
-            <main class="flex-1 pt-[header-height] pb-[footer-height]">
-                <div class="max-w-7xl mx-auto py-4 sm:py-6 px-4">
-                    <div class="grid grid-cols-1 gap-8 sm:gap-10">
-                        @foreach($tickets as $ticket)
-                        <div class="bg-white rounded-lg shadow-sm border p-4 sm:p-6 mb-8">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                                <h2 class="text-lg sm:text-xl font-semibold text-gray-800">
-                                    {{ $ticket['package_name'] }}
-                                </h2>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm {{ $ticket['status'] === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ ucfirst($ticket['status']) }}
-                                </span>
-                            </div>
-                            <div class="mt-4 space-y-2">
-                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
-                                    <p class="text-sm">
-                                        Available Passes: 
-                                        <span class="font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                                            {{ $ticket['is_unlimited'] ? 'Unlimited' : $ticket['available_pass'] }}
-                                        </span>
-                                    </p>
-                                </div>
-
-                                <p class="text-sm text-gray-600">
-                                    Valid Until: {{ $ticket['valid_until'] }}
-                                </p>
-
-                                @if($ticket['is_in_used'] && strtotime($ticket['end_time']) > time())
-                                    <p class="text-sm font-medium bg-green-50 text-green-600 px-3 py-2 rounded-lg inline-block">
-                                        <span class="flex items-center">
-                                            <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                                            Active Session - Ends at: {{ $ticket['end_time'] }}
-                                        </span>
-                                    </p>
-                                @endif
-                            </div>
-                            <div class="mt-4 sm:mt-6">
-                                @if(($ticket['status'] === 'active' && !$ticket['is_in_used'] && ($ticket['is_unlimited'] || $ticket['available_pass'] > 0)) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
-                                    <form action="{{ route('ticket.checkin', ['uuid' => request()->segment(2)]) }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="ticket_id" value="{{ $ticket['id'] }}">
-                                        <button type="submit" class="w-full bg-blue-600 text-white rounded-lg px-4 py-3 text-sm sm:text-base font-medium hover:bg-blue-700 transition duration-200 ease-in-out">
-                                            Use Ticket
-                                        </button>
-                                    </form>
-                                @else
-                                    <button class="w-full bg-slate-200 text-slate-500 rounded-lg px-4 py-3 text-sm sm:text-base font-medium cursor-not-allowed">
-                                        {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'No Passes Available' : 'Ticket Inactive') }}
-                                    </button>
-                                @endif
-                            </div>
-                        </div>
-                        @endforeach
+            <main class="main-content">
+                @foreach($tickets as $ticket)
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <h2 class="package-name">{{ $ticket['package_name'] }}</h2>
+                        <span class="status-badge {{ $ticket['status'] === 'active' ? 'status-active' : 'status-inactive' }}">
+                            {{ ucfirst($ticket['status']) }}
+                        </span>
                     </div>
+                    
+                    <p class="passes-count">
+                        Available Passes: {{ $ticket['is_unlimited'] ? 'Unlimited' : $ticket['available_pass'] }}
+                    </p>
+                    
+                    <p class="valid-until">Valid Until: {{ $ticket['valid_until'] }}</p>
+
+                    @if($ticket['is_in_used'] && strtotime($ticket['end_time']) > time())
+                    <div class="active-session">
+                        <span class="session-dot"></span>
+                        Active Session - Ends at: {{ $ticket['end_time'] }}
+                    </div>
+                    @endif
+
+                    @if(($ticket['status'] === 'active' && !$ticket['is_in_used'] && ($ticket['is_unlimited'] || $ticket['available_pass'] > 0)) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
+                        <form action="{{ route('ticket.checkin', ['uuid' => request()->segment(2)]) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="ticket_id" value="{{ $ticket['id'] }}">
+                            <button type="submit" class="action-button button-primary">Use Ticket</button>
+                        </form>
+                    @else
+                        <button class="action-button button-disabled">
+                            {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'No Passes Available' : 'Ticket Inactive') }}
+                        </button>
+                    @endif
                 </div>
+                @endforeach
             </main>
 
-            <footer class="bg-white shadow-sm border-t mt-auto">
-                <div class="max-w-7xl mx-auto py-3 sm:py-4 px-4 text-center">
-                    <div class="text-xs sm:text-sm text-gray-600 mb-1">
-                        Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
-                    </div>
-                    <span
-                        class="text-xs sm:text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                        Powered by QuadraWebs
-                    </span>
+            <footer class="footer">
+                <div class="copyright">
+                    Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                </div>
+                <div class="powered-by">
+                    Powered by QuadraWebs
                 </div>
             </footer>
         </div>
