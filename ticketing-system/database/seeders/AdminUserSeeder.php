@@ -23,19 +23,21 @@ class AdminUserSeeder extends Seeder
         User::create([
             'name' => 'Liong Sooook Yik',
             'email' => 'liongsy020601@gmail.com',
-            'password' => Hash::make('qweqweqwe'),
+            'password' => bcrypt('qweqweqwe'),
             'uuid' => Str::uuid(),
-            'phone' => '0123456789',
             'is_admin' => false,
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
         ]);
 
         User::create([
             'name' => 'Simon Chock',
             'email' => 'user@wanderworks.my',
-            'password' => Hash::make('qweqweqwe'),
+            'password' => bcrypt(value: 'qweqweqwe'),
             'uuid' => Str::uuid(),
-            'phone' => '01234567892',
             'is_admin' => false,
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
         ]);
     }
 }
