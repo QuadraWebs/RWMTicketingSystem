@@ -53,7 +53,7 @@ class PackageSeeder extends Seeder
                 'price' => 80.00,
                 'duration' => 240,
                 'is_recurring' => false,
-                'pass_type' => 0
+                'pass_type' => 5
             ],
             [
                 'stripe_package_id' => 'prod_RGq0oV8wgnw5nA',
@@ -62,7 +62,7 @@ class PackageSeeder extends Seeder
                 'price' => 20.00,
                 'duration' => 240,
                 'is_recurring' => false,
-                'pass_type' => 0
+                'pass_type' => 1
             ],
         ];
 
