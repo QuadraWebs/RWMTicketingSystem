@@ -3,15 +3,21 @@
 <style>
     /* Animation Keyframes */
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
 
     @keyframes slideUp {
-        from { 
+        from {
             transform: translateY(20px);
             opacity: 0;
         }
+
         to {
             transform: translateY(0);
             opacity: 1;
@@ -30,7 +36,7 @@
         background: white;
         border-radius: 0.75rem;
         border: 1px solid #e5e7eb;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
         animation: slideUp 0.6s ease-out;
     }
@@ -133,10 +139,15 @@
     /* Table Styles */
     .table-container {
         overflow-x: auto;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
     }
-    
+
     .table-container::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
+        display: none;
+        /* Chrome, Safari, Opera */
     }
 
     .table {
@@ -168,25 +179,7 @@
         background: #f9fafb;
     }
 
-    /* Package Type Badge */
-    .package-type {
-        display: inline-flex;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-
-    .package-type.recurring {
-        background: #f3e8ff;
-        color: #7c3aed;
-    }
-
-    .package-type.onetime {
-        background: #dbeafe;
-        color: #2563eb;
-    }
-
+    /* Action Buttons */
     .action-buttons {
         display: flex;
         gap: 0.75rem;
@@ -197,11 +190,11 @@
         transition: color 0.2s;
         cursor: pointer;
         font-size: 1rem;
-        background: none;
-        border: none;
-        padding: 0;
     }
 
+    .view-button {
+        color: #059669;
+    }
 
     .edit-button {
         color: #2563eb;
@@ -209,6 +202,11 @@
 
     .delete-button {
         color: #dc2626;
+        border: none;
+    }
+
+    .view-button:hover {
+        color: #047857;
     }
 
     .edit-button:hover {
@@ -219,51 +217,31 @@
         color: #b91c1c;
     }
 
-    /* Animation Delays for Table Rows */
-    .table tr {
-        opacity: 0;
-        animation: slideUp 0.4s ease-out forwards;
-    }
-
-    .table tr:nth-child(1) { animation-delay: 0.1s; }
-    .table tr:nth-child(2) { animation-delay: 0.2s; }
-    .table tr:nth-child(3) { animation-delay: 0.3s; }
-    .table tr:nth-child(4) { animation-delay: 0.4s; }
-    .table tr:nth-child(5) { animation-delay: 0.5s; }
-    .table tr:nth-child(6) { animation-delay: 0.6s; }
-    .table tr:nth-child(7) { animation-delay: 0.7s; }
-    .table tr:nth-child(8) { animation-delay: 0.8s; }
-    .table tr:nth-child(9) { animation-delay: 0.9s; }
-    .table tr:nth-child(10) { animation-delay: 1s; }
-
-    .table th:last-child,
-    .table td:last-child {
-        width: 180px;
-        min-width: 180px;
-    }
-    
-    .table th:nth-child(5),
-    .table td:nth-child(5) {
-        width: 150px;
-        min-width: 150px;
-    }
-
-    .package-type {
+    /* Copy Link Button */
+    .copy-button {
         display: inline-flex;
-        padding: 0.5rem 1rem;
-        border-radius: 9999px;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+        border: 1px solid #2563eb;
+        color: #2563eb;
+        border-radius: 0.375rem;
         font-size: 0.875rem;
-        font-weight: 600;
-        width: 100%;
-        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
     }
 
-    /* Pagination */
-    .pagination {
-        margin-top: 1.5rem;
+    .copy-button:hover {
+        background: #eff6ff;
     }
 
-        .modal-backdrop {
+    .copy-button svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* Delete Modal */
+    .modal-backdrop {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.5);
@@ -325,31 +303,81 @@
     .delete-confirm-button:hover {
         background: #b91c1c;
     }
-</style>
 
+    /* Pagination */
+    .pagination {
+        margin-top: 1.5rem;
+    }
+
+    /* Animation Delays for Table Rows */
+    .table tr {
+        opacity: 0;
+        animation: slideUp 0.4s ease-out forwards;
+    }
+
+    .table tr:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .table tr:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .table tr:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .table tr:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .table tr:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    .table tr:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+
+    .table tr:nth-child(7) {
+        animation-delay: 0.7s;
+    }
+
+    .table tr:nth-child(8) {
+        animation-delay: 0.8s;
+    }
+
+    .table tr:nth-child(9) {
+        animation-delay: 0.9s;
+    }
+
+    .table tr:nth-child(10) {
+        animation-delay: 1s;
+    }
+</style>
 <div class="container">
     <div class="content-card">
         <!-- Header -->
         <div class="header-page">
             <div>
-                <h1 class="header-title">Packages</h1>
-                <p class="header-subtitle">Total Packages: {{ $packages->total() }}</p>
+                <h1 class="header-title">Cafes</h1>
+                <p class="header-subtitle">Total Cafes: {{ $cafes->total() }}</p>
             </div>
-            <a href="{{ route('admin.package.add') }}" class="add-button">
-                Add New Package
+            <a href="{{ route('admin.cafe.add') }}" class="add-button">
+                Add New Cafe
             </a>
         </div>
 
         <!-- Search -->
         <div class="search-container">
-            <form action="{{ route('admin.package') }}" method="GET" class="search-form">
+            <form action="{{ route('admin.cafe') }}" method="GET" class="search-form">
                 <div class="search-input-wrapper">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="Search packages..."
+                        placeholder="Search cafes..."
                         class="search-input">
                     @if(request('search'))
-                        <a href="{{ route('admin.package') }}" class="clear-search">
+                        <a href="{{ route('admin.cafe') }}" class="clear-search">
                             <i class="fas fa-times"></i>
                         </a>
                     @endif
@@ -364,40 +392,26 @@
                 <thead>
                     <tr>
                         <th>Actions</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Price (RM)</th>
-                        <th>Duration</th>
-                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($packages as $package)
-                        <tr data-package-id="{{ $package->id }}">
+                    @foreach($cafes as $cafe)
+                        <tr data-cafe-id="{{ $cafe->id }}">
                             <td>
                                 <div class="action-buttons">
-                                    <a href="{{ route('admin.package.edit', $package->id) }}" class="action-button edit-button">
+                                    <a href="{{ route('admin.cafe.edit', $cafe->id) }}" class="action-button edit-button">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button onclick="showDeleteModal('{{ route('admin.package.destroy', $package->id) }}', '{{ $package->id }}')"
+                                    <button onclick="showDeleteModal('{{ route('admin.cafe.destroy', $cafe->id) }}', '{{ $cafe->id }}')"
                                         class="action-button delete-button">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>
                             </td>
-
-                            <td>
-                                <div>{{ $package->title }}</div>
-                                <div class="text-sm text-gray-500">{{ $package->name }}</div>
-                            </td>
-                            <td>{{ $package->description }}</td>
-                            <td style="text-align: right;">{{ number_format($package->price, 2) }}</td>
-                            <td>{{ $package->duration }} minutes</td>
-                            <td>
-                                <span class="package-type {{ $package->is_recurring ? 'recurring' : 'onetime' }}">
-                                    {{ $package->is_recurring ? 'Monthly' : 'One-time' }}
-                                </span>
-                            </td>
+                            <td>{{ $cafe->name }}</td>
+                            <td>{{ $cafe->address }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -405,14 +419,16 @@
         </div>
         <!-- Pagination -->
         <div class="pagination">
-            {{ $packages->links() }}
+            {{ $cafes->links() }}
         </div>
     </div>
 </div>
+
+<!-- Delete Modal -->
 <div id="deleteModal" class="modal-backdrop">
     <div class="modal">
         <h3 class="modal-title">Confirm Deletion</h3>
-        <p class="modal-text">Are you sure you want to delete this package? This action cannot be undone.</p>
+        <p class="modal-text">Are you sure you want to delete this cafe? This action cannot be undone.</p>
         <div class="modal-buttons">
             <button onclick="closeDeleteModal()" class="modal-button cancel-button">Cancel</button>
             <form id="deleteForm" method="POST">
@@ -423,12 +439,13 @@
         </div>
     </div>
 </div>
+
 <script>
-    function showDeleteModal(deleteUrl, packageId) {
+    function showDeleteModal(deleteUrl, cafeId) {
         const modal = document.getElementById('deleteModal');
         modal.style.display = 'flex';
 
-        document.getElementById('deleteForm').onsubmit = function (e) {
+        document.getElementById('deleteForm').onsubmit = function(e) {
             e.preventDefault();
 
             fetch(deleteUrl, {
@@ -439,25 +456,25 @@
                     'Accept': 'application/json'
                 }
             })
-                .then(response => response.json())
-                .then(data => {
-                    modal.style.display = 'none';
-                    const packageRow = document.querySelector(`tr[data-package-id="${packageId}"]`);
-                    if (packageRow) {
-                        packageRow.remove();
-                    }
-                    const totalElement = document.querySelector('.header-subtitle');
-                    const currentTotal = parseInt(totalElement.textContent.match(/\d+/)[0]);
-                    totalElement.textContent = `Total Package: ${currentTotal - 1}`;
+            .then(response => response.json())
+            .then(data => {
+                modal.style.display = 'none';
+                const cafeRow = document.querySelector(`tr[data-cafe-id="${cafeId}"]`);
+                if (cafeRow) {
+                    cafeRow.remove();
+                }
+                const totalElement = document.querySelector('.header-subtitle');
+                const currentTotal = parseInt(totalElement.textContent.match(/\d+/)[0]);
+                totalElement.textContent = `Total Cafes: ${currentTotal - 1}`;
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: 'Package deleted successfully',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Cafe deleted successfully',
+                    showConfirmButton: false,
+                    timer: 1500
                 });
+            });
         };
     }
 

@@ -256,8 +256,8 @@
                                 <a href="{{ route('admin.package') }}" class="nav-link {{ request()->routeIs('admin.package') ? 'active' : '' }}">
                                     My Package
                                 </a>
-                                <a href="{{ route('admin.history') }}" class="nav-link {{ request()->routeIs('admin.history') ? 'active' : '' }}">
-                                    History
+                                <a href="{{ route('admin.cafe') }}" class="nav-link {{ request()->routeIs('admin.cafe') ? 'active' : '' }}">
+                                    Cafes
                                 </a>
                             @endauth
                         </div>

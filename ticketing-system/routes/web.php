@@ -7,7 +7,7 @@ use App\Http\Controllers\CheckInController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\CafeController;
 use App\Http\Controllers\Auth\LoginController;
 Auth::routes();
 
@@ -16,18 +16,71 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/subscribers', [SubscriberController::class, 'index'])->name('admin.subscribers');
     Route::get('/subscribers/create', [SubscriberController::class, 'create'])->name('admin.subscribers.create');
-    Route::post('/subscribers', [SubscriberController::class, 'store'])->name('admin.subscribers.store');
+
     Route::get('/subscriber/{uuid}', [SubscriberController::class, 'show'])->name('subscriber.view');
     Route::get('/subscribers/{user}/edit', [SubscriberController::class, 'edit'])->name('admin.subscribers.edit');
-    Route::put('/subscribers/{user}', [SubscriberController::class, 'update'])->name('admin.subscribers.update');
+    Route::post('/subscribers', [SubscriberController::class, 'create'])->name('admin.subscribers.store');
+    Route::post('/admin/subscribers/store', [SubscriberController::class, 'store_new'])
+        ->name('admin.subscribers.store_new');
+    Route::get('/admin/subscribers/add/successful', function () {
+        return view('admin.subscriber.add_successful');
+    })->name('admin.subscribers.add.successful');
+    Route::get('/admin/subscribers/add/failed', function () {
+        return view('admin.subscriber.add_failed');
+    })->name('admin.subscribers.add.failed');
+    Route::get('/subscribers/{uuid}/tickets/{ticket}/edit', [SubscriberController::class, 'edit_user_ticket'])
+        ->name('admin.subscribers.edit_user_ticket');
+    Route::put('/subscriber/{uuid}/tickets/{ticket}', [SubscriberController::class, 'updateUserTicket'])
+        ->name('admin.subscribers.update_user_ticket');
     Route::delete('/subscribers/{user}', [SubscriberController::class, 'destroy'])->name('admin.subscribers.destroy');
+    Route::delete('/admin/subscribers/{uuid}/tickets/{ticket}', [App\Http\Controllers\SubscriberController::class, 'destroyUserTicket'])
+        ->name('admin.subscribers.destroy_user_ticket');
+    Route::delete('/subscribers/{user}', [SubscriberController::class, 'destroy'])
+        ->name('admin.subscribers.destroy');
 
 
     Route::get('/admin/package', [PackageController::class, 'index'])->name('admin.package');
     Route::get('/admin/package/add', [PackageController::class, 'create'])->name('admin.package.add');
     Route::post('/admin/package/store', [PackageController::class, 'store'])->name('admin.package.store');
+    Route::get('/admin/package/{id}/edit', [PackageController::class, 'edit'])->name('admin.package.edit');
+    Route::delete('/admin/package/{id}', [PackageController::class, 'destroy'])->name('admin.package.destroy');
+    Route::put('/admin/package/{id}', [PackageController::class, 'update'])->name('admin.package.update');
+    Route::get('/admin/package/update/successful', function () {
+        return view('admin.package.update_successful');
+    })->name('admin.package.update.successful');
+    Route::get('/admin/package/update/failed', function () {
+        return view('admin.package.update_failed');
+    })->name('admin.package.update.failed');
+    Route::get('/admin/package/add/successful', function () {
+        return view('admin.package.add_successful');
+    })->name('admin.package.add.successful');
+    Route::get('/admin/package/add/failed', function () {
+        return view('admin.package.add_failed');
+    })->name('admin.package.add.failed');
 
-    Route::get('/admin/history', [HistoryController::class, 'index'])->name('admin.history');
+
+
+
+    Route::get('/admin/cafe', [CafeController::class, 'index'])->name('admin.cafe');
+    Route::get('/admin/cafe/add', [CafeController::class, 'create'])->name('admin.cafe.add');
+    Route::post('/admin/cafe', [CafeController::class, 'store'])->name('admin.cafe.store');
+    Route::get('/admin/cafe/{id}/edit', [CafeController::class, 'edit'])->name('admin.cafe.edit');
+    Route::put('/admin/cafe/{id}', [CafeController::class, 'update'])->name('admin.cafe.update');
+    Route::delete('/admin/cafe/{id}', [CafeController::class, 'destroy'])->name('admin.cafe.destroy');
+    Route::get('/admin/cafe/update/successful', function () {
+        return view('admin.cafe.update_successful');
+    })->name('admin.cafe.update.successful');
+    Route::get('/admin/cafe/update/failed', function () {
+        return view('admin.cafe.update_failed');
+    })->name('admin.cafe.update.failed');
+    Route::get('/admin/cafe/add/successful', function () {
+        return view('admin.cafe.add_successful');
+    })->name('admin.cafe.add.successful');
+    Route::get('/admin/cafe/add/failed', function () {
+        return view('admin.cafe.add_failed');
+    })->name('admin.cafe.add.failed');
+
+
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

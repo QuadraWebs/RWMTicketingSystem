@@ -196,6 +196,24 @@ use Illuminate\Support\Str;
                 background-clip: text;
                 color: transparent;
             }
+            
+            .package-description {
+                font-size: 0.875rem;
+                color: #6b7280;
+                line-height: 0.75;
+            }
+
+            .entitlement-section {
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .entitlement-title {
+                font-size: 1rem;
+                font-weight: 600;
+                color: #374151;
+                margin-bottom: 0.5rem;
+            }
 
             @media (min-width: 640px) {
                 .header-content {
@@ -233,39 +251,44 @@ use Illuminate\Support\Str;
 
             <main class="main-content">
                 @foreach($tickets as $ticket)
-                <div class="ticket-card">
-                    <div class="ticket-header">
-                        <h2 class="package-name">{{ $ticket['package_name'] }}</h2>
-                        <span class="status-badge {{ $ticket['status'] === 'active' ? 'status-active' : 'status-inactive' }}">
-                            {{ ucfirst($ticket['status']) }}
-                        </span>
-                    </div>
-                    
-                    <p class="passes-count">
-                        Available Passes: {{ $ticket['is_unlimited'] ? 'Unlimited' : $ticket['available_pass'] }}
-                    </p>
-                    
-                    <p class="valid-until">Valid Until: {{ $ticket['valid_until'] }}</p>
+                    <div class="ticket-card">
+                        <div class="ticket-header">
+                            <h2 class="package-name">{{ $ticket['package_name'] }}</h2>
+                            <span class="status-badge {{ $ticket['status'] === 'active' ? 'status-active' : 'status-inactive' }}">
+                                {{ ucfirst($ticket['status']) }}
+                            </span>
+                        </div>
 
-                    @if($ticket['is_in_used'] && strtotime($ticket['end_time']) > time())
-                    <div class="active-session">
-                        <span class="session-dot"></span>
-                        Active Session - Ends at: {{ $ticket['end_time'] }}
-                    </div>
-                    @endif
+                        <div class="entitlement-section">
+                            <h3 class="entitlement-title">Entitlement</h3>
+                            <p class="package-description">{!! nl2br(str_replace(search: '- ', replace: "<br>-", subject: $ticket['package_description'])) !!}</p>
+                        </div>
 
-                    @if(($ticket['status'] === 'active' && !$ticket['is_in_used'] && ($ticket['is_unlimited'] || $ticket['available_pass'] > 0)) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
-                        <form action="{{ route('ticket.checkin', ['uuid' => request()->segment(2)]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="ticket_id" value="{{ $ticket['id'] }}">
-                            <button type="submit" class="action-button button-primary">Use Ticket</button>
-                        </form>
-                    @else
-                        <button class="action-button button-disabled">
-                            {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'No Passes Available' : 'Ticket Inactive') }}
-                        </button>
-                    @endif
-                </div>
+                        <p class="passes-count">
+                            Available Passes: {{ $ticket['is_unlimited'] ? 'Unlimited' : $ticket['available_pass'] }}
+                        </p>
+
+                        <p class="valid-until">Valid Until: {{ $ticket['valid_until'] }}</p>
+
+                        @if($ticket['is_in_used'] && strtotime($ticket['end_time']) > time())
+                        <div class="active-session">
+                            <span class="session-dot"></span>
+                            Active Session - Ends at: {{ $ticket['end_time'] }}
+                        </div>
+                        @endif
+
+                        @if(($ticket['status'] === 'active' && !$ticket['is_in_used'] && ($ticket['is_unlimited'] || $ticket['available_pass'] > 0)) || ($ticket['is_in_used'] && strtotime($ticket['end_time']) < time()))
+                            <form action="{{ route('ticket.checkin', ['uuid' => request()->segment(2)]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="ticket_id" value="{{ $ticket['id'] }}">
+                                <button type="submit" class="action-button button-primary">Use Ticket</button>
+                            </form>
+                        @else
+                            <button class="action-button button-disabled">
+                                {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'No Passes Available' : 'Ticket Inactive') }}
+                            </button>
+                        @endif
+                    </div>
                 @endforeach
             </main>
 

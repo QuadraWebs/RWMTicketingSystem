@@ -364,19 +364,15 @@
                 </thead>
                 <tbody>
                     @foreach($subscribers->sortByDesc('is_admin') as $subscriber)
-                        <tr>
+                        <tr data-subscriber-id="{{ $subscriber->id }}">
                             <td>
                                 <div class="action-buttons">
-                                    <a href="{{ route('admin.subscribers.edit', $subscriber->id) }}" class="action-button edit-button">
+                                    <a href="{{ route('subscriber.view', $subscriber->uuid) }}" class="action-button view-button">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     @if(!$subscriber->is_admin)
-                                        <a href="{{ route('subscriber.view', $subscriber->uuid) }}" class="action-button view-button">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    @endif
-                                    @if(!$subscriber->is_admin)
-                                        <button onclick="showDeleteModal('{{ route('admin.subscribers.destroy', $subscriber->id) }}')"
+                                        <button
+                                            onclick="showDeleteModal('{{ route('admin.subscribers.destroy', $subscriber->id) }}', '{{ $subscriber->id }}')"
                                             class="action-button delete-button">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
@@ -428,47 +424,116 @@
 </div>
 
 <script>
-let isAnimating = false;
+    let isAnimating = false;
 
-function copyToClipboard(button, text) {
-    if (isAnimating) return;
-    
-    isAnimating = true;
-    navigator.clipboard.writeText(text);
-    const originalText = button.innerHTML;
-    
-    button.style.opacity = '0';
-    
-    setTimeout(() => {
-        button.innerHTML = `
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            Copied
-        `;
-        button.style.opacity = '1';
-        
+    function copyToClipboard(button, text) {
+        if (isAnimating) return;
+
+        isAnimating = true;
+
+        // Use the newer Clipboard API with fallback
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                updateButtonUI(button);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    updateButtonUI(button);
+                } catch (err) {
+                    console.error('Failed to copy text:', err);
+                }
+                document.body.removeChild(textArea);
+            });
+        } else {
+            // Fallback for non-secure contexts
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                updateButtonUI(button);
+            } catch (err) {
+                console.error('Failed to copy text:', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    }
+
+    function updateButtonUI(button) {
+        const originalText = button.innerHTML;
+        button.style.opacity = '0';
+
         setTimeout(() => {
-            button.style.opacity = '0';
-            
+            button.innerHTML = `
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        Copied
+    `;
+            button.style.opacity = '1';
+
             setTimeout(() => {
-                button.innerHTML = originalText;
-                button.style.opacity = '1';
-                isAnimating = false;
-            }, 150);
-            
-        }, 2700);
-    }, 150);
-}
+                button.style.opacity = '0';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.opacity = '1';
+                    isAnimating = false;
+                }, 150);
+            }, 2700);
+        }, 150);
+    }
 
-function showDeleteModal(deleteUrl) {
-            document.getElementById('deleteModal').style.display = 'flex';
-            document.getElementById('deleteForm').action = deleteUrl;
-        }
+    function showDeleteModal(deleteUrl, subscriberId) {
+        const modal = document.getElementById('deleteModal');
+        modal.style.display = 'flex';
 
-        function closeDeleteModal() {
-            document.getElementById('deleteModal').style.display = 'none';
-        }
-    </script>
+        document.getElementById('deleteForm').onsubmit = function (e) {
+            e.preventDefault();
+
+            fetch(deleteUrl, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide modal immediately
+                    modal.style.display = 'none';
+
+                    // Remove the subscriber row
+                    const subscriberRow = document.querySelector(`tr[data-subscriber-id="${subscriberId}"]`);
+                    if (subscriberRow) {
+                        subscriberRow.remove();
+                    }
+
+                    // Update total count
+                    const totalElement = document.querySelector('.header-subtitle');
+                    const currentTotal = parseInt(totalElement.textContent.match(/\d+/)[0]);
+                    totalElement.textContent = `Total Subscribers: ${currentTotal - 1}`;
+
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Subscriber deleted successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                });
+        };
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').style.display = 'none';
+    }
+</script>
 @endsection
-
