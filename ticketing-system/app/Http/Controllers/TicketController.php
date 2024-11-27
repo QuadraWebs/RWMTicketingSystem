@@ -72,6 +72,12 @@ class TicketController extends Controller
     
     public function checkin(Request $request, $uuid)
     {
+        // Check if ticket is in use
+        $ticket = Ticket::find($request->ticket_id);
+        if ($ticket->is_in_used) {
+            return redirect()->route('ticket.view', ['uuid' => $uuid])->with('error', 'This ticket is currently in use. Please wait until the current session ends.');
+        }
+
         $cafes = Cafe::whereNull('deleted_at')
             ->select('id', 'name', 'address')
             ->get()
@@ -86,6 +92,13 @@ class TicketController extends Controller
 
     public function confirmCheckin(Request $request)
     {
+        // Check if ticket is in use
+        $ticket = Ticket::find($request->ticket_id);
+        if ($ticket->is_in_used) {
+            return redirect()->route('ticket.view', ['uuid' => $request->uuid])->with('error', 'This ticket is currently in use. Please wait until the current session ends.');
+        }
+
+
         // Validate the request
         $validated = $request->validate([
             'selected_cafe' => 'required|string',
@@ -101,8 +114,8 @@ class TicketController extends Controller
         $verificationUrl = URL::signedRoute('ticket.verify', [
             'ticket_id' => $ticketId,
             'uuid' => $validated['uuid'],
-            'cafe_id' => $validated['cafe_id'] 
-        ], now()->addHours(24));
+            'cafe_id' => $validated['cafe_id']
+        ]);
 
         // Get cafes data again for the view
         $cafes = Cafe::whereNull('deleted_at')
@@ -111,6 +124,10 @@ class TicketController extends Controller
             ->toArray();
 
         $selectedCafe = Cafe::find($validated['cafe_id']);
+
+        $ticket = Ticket::find($ticketId);
+        $ticket->verification_timestamp = now()->addMinutes(2);
+        $ticket->save();
 
         // Return view with verification data and cafes
         return view('checkin', [
@@ -126,18 +143,18 @@ class TicketController extends Controller
     public function verifyTicket(Request $request, $uuid)
     {
         try {
-            if (!URL::hasValidSignature($request)) {
+            $cafeId = $request->query('cafe_id');
+            $ticketId = $request->query('ticket_id');
+
+            $ticket = Ticket::where('id', $request->query('ticket_id'))->firstOrFail();
+
+            if (now()->isAfter($ticket->verification_timestamp)) {
                 return view('expired-ticket', [
                     'message' => 'This QR code has expired',
                     'action' => 'Please return to the check-in page to generate a new QR code'
                 ]);
             }
 
-            $cafeId = $request->query('cafe_id');
-            $ticketId = $request->query('ticket_id');
-
-            $ticket = Ticket::where('id', $request->query('ticket_id'))->firstOrFail();
-            
             $package = Package::findOrFail($ticket->package_id);
 
             $endTime = now()->addMinutes($package->duration);

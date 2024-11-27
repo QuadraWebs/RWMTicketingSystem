@@ -115,8 +115,7 @@ Route::post('/ticket/checkin/{uuid}', [TicketController::class, 'checkin'])->nam
 
 Route::post('/ticket/confirm-checkin', [TicketController::class, 'confirmCheckin'])->name('ticket.confirm-checkin');
 Route::get('/verify-ticket/{uuid}', [TicketController::class, 'verifyTicket'])
-    ->name('ticket.verify')
-    ->middleware(['throttle:60,1']);
+    ->name('ticket.verify');
 
 Route::post('/verify-ticket/{ticket}/{uuid}/accept', [TicketController::class, 'acceptTicket'])->name('ticket.verify.accept');
 Route::post('/verify-ticket/{ticket}/{uuid}/reject', [TicketController::class, 'rejectTicket'])->name('ticket.verify.reject');

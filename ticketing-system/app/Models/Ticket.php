@@ -18,7 +18,8 @@ class Ticket extends Model
         'end_time',
         'status',
         'valid_until',
-        'ending_notification_sent'
+        'ending_notification_sent',
+        'verification_timestamp' => 'datetime',
     ];
 
     protected $casts = [
@@ -27,7 +28,8 @@ class Ticket extends Model
         'valid_until' => 'datetime',
         'is_unlimited' => 'boolean',
         'is_in_used' => 'boolean',
-        'ending_notification_sent' => 'boolean'
+        'ending_notification_sent' => 'boolean',
+        'verification_timestamp' => 'datetime',
     ];
 
     public function user()

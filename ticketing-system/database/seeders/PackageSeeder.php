@@ -29,7 +29,7 @@ class PackageSeeder extends Seeder
                 'price' => 80.00,
                 'duration' => 240,
                 'is_recurring' => 0,
-                'pass_type' => 2,
+                'pass_type' => 5,
                 'title' => 'Coworking pass',
                 'payment_link' => env('COWORKING_PACK5_LINK')
             ],
@@ -40,7 +40,7 @@ class PackageSeeder extends Seeder
                 'price' => 300.00,
                 'duration' => 240,
                 'is_recurring' => 1,
-                'pass_type' => 3,
+                'pass_type' => 0,
                 'title' => 'Coworking pass',
                 'payment_link' => env('COWORKING_UNLIMITED_LINK')
             ],
@@ -62,7 +62,7 @@ class PackageSeeder extends Seeder
                 'price' => 155.00,
                 'duration' => 240,
                 'is_recurring' => 0,
-                'pass_type' => 2,
+                'pass_type' => 5,
                 'title' => 'All-in pass',
                 'payment_link' => env('ALLIN_PACK5_LINK')
             ],
@@ -72,7 +72,7 @@ class PackageSeeder extends Seeder
                 'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- RM25 spending credits\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
                 'price' => 800.00,
                 'duration' => 240,
-                'is_recurring' => 0,
+                'is_recurring' => 1,
                 'pass_type' => 0,
                 'title' => 'All-in pass',
                 'payment_link' => env('ALLIN_UNLIMITED_LINK')
