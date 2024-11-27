@@ -19,11 +19,9 @@ class StripeWebhookController extends Controller
 {
     public function handleWebhook(Request $request)
     {
-        Log::info('Webhook received');
         $payload = $request->all();
 
         if ($payload['type'] === 'checkout.session.completed') {
-            Log::info($payload);
             return $this->handleCheckoutSessionCompleted($payload);
         }
 
@@ -33,8 +31,6 @@ class StripeWebhookController extends Controller
     private function handleCheckoutSessionCompleted($payload)
     {
         DB::beginTransaction();
-        \Log::info('Checkout session completed');
-
 
         try {
             $session = $payload['data']['object'];
@@ -55,7 +51,6 @@ class StripeWebhookController extends Controller
                 Log::error('Package not found', ['product_id' => $productId]);
                 throw new \Exception('Package not found');
             }
-            Log::info('Package found', context: $package->toArray());
 
             // Find existing user or create new one
             $user = User::firstOrCreate(
@@ -66,8 +61,6 @@ class StripeWebhookController extends Controller
                     'uuid' => Str::uuid()
                 ]
             );
-
-            Log::info('User found or created', context: $user->toArray());
 
             $tickets = [];
 

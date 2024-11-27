@@ -9,6 +9,8 @@ use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CafeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Package;
+
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
@@ -98,9 +100,11 @@ Route::get('/404', function () {
 })->name('404');
 
 
-
+Route::get('/packages', function () {
+    $packages = Package::all();
+    return view('packages', compact('packages'));
+})->name('packages');
 Route::get('/viewticket/{uuid}', action: [TicketController::class, 'viewByUuid'])->name('ticket.view');
-Route::get('/', [TicketController::class, 'index'])->name('welcome');
 Route::get('/', function () {
     return view(view: 'errors.404');
 })->name('welcome');
