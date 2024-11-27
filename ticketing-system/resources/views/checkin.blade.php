@@ -208,6 +208,7 @@
             border-radius: 0.5rem;
             margin-top: 1rem;
             cursor: pointer;
+            border: none;
         }
 
         .refresh-button:hover {
