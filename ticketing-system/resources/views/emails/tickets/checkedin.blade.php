@@ -1,205 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        @font-face {
-            font-family: 'Sofia Pro';
-            src: url('/fonts/Sofia Pro Black Az.otf') format('opentype');
-            font-weight: 900;
-            font-style: normal;
-        }
-        :root { --gradient: linear-gradient(135deg, #2563eb, #9333ea); }
-        body { 
-            margin: 0; 
-            padding: 30px; 
-            font-family: 'Sofia Pro', 'Segoe UI', Arial, sans-serif; 
-            background: #f9fafb; 
-        }
-        .card { 
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            padding: 40px;
-            max-width: 480px;
-            margin: 0 auto;
-            box-sizing: border-box;
-            font-family: 'Sofia Pro', 'Segoe UI', Arial, sans-serif;
-        }
-        .header { 
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-align: center;
-        }
-        .receipt-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .receipt-number {
-            color: #4b5563;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-        .check-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 15px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-        }
-        .ticket-container {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        .package-name {
-            font-size: 20px;
-            font-weight: 600;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 15px 0;
-        }
-        .welcome-text {
-            color: #4b5563;
-            line-height: 1.6;
-            font-size: 15px;
-        }
-        .validity-box {
-            background: var(--gradient);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .validity-label { font-size: 14px; opacity: 0.9; }
-        .validity-date { font-size: 18px; font-weight: 600; margin-top: 5px; }
-        .steps-container {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 30px 0;
-        }
-        .steps-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 20px;
-        }
-        .step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            color: #4b5563;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-        .step-number {
-            background: var(--gradient);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-        .btn {
-            background: var(--gradient);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
-            text-align: center;
-            width: 100%;
-            box-sizing: border-box;
-            transition: transform 0.2s;
-        }
-        .notice {
-            color: #dc2626;
-            font-size: 13px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .footer {
-            text-align: center;
-            color: #6b7280;
-            font-size: 13px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-        }
-        .support a {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 500;
-        }
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-in Successful</title>
 </head>
-<body>
-    <div class="card">
-        <div class="receipt-header">
-            <div class="check-icon">✓</div>
-            <h1 class="header">Check-in Successful!</h1>
-        </div>
-        
-        <div class="ticket-container">
-            <div class="welcome-text">Welcome to </div>
-            <div class="package-name">{{ $cafe->name }}</div>
-            
-            <div class="validity-box">
-                <div class="mt-2">
-                    <div class="validity-label">Session Ends At</div>
-                    <div class="validity-date">{{ $endTime->format('h:i A') }}</div>
-                </div>
-            </div>
-            
-            <div class="welcome-text">Enjoy your productive workspace experience!</div>
-        </div>
+<body style="margin: 0; padding: 0; background-color: #f9fafb; font-family: Arial, sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="min-width: 100%; background-color: #f9fafb;">
+        <tr>
+            <td align="center" style="padding: 30px 0;">
+                <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <tr>
+                        <td style="padding: 40px;">
+                            <!-- Header -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center">
+                                        <div style="background-color: #2563eb; color: white; width: 48px; height: 48px; border-radius: 50%; line-height: 48px; text-align: center; font-size: 24px; margin-bottom: 20px;">✓</div>
+                                        <h1 style="color: #2563eb; font-size: 24px; margin: 0 0 30px 0;">Check-in Successful!</h1>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="steps-container">
-            <div class="steps-title">Workspace Guidelines:</div>
-            <div class="step">
-                <span class="step-number">1</span>
-                <span>Please keep your workspace clean</span>
-            </div>
-            <div class="step">
-                <span class="step-number">2</span>
-                <span>Respect other coworkers' space</span>
-            </div>
-            <div class="step">
-                <span class="step-number">3</span>
-                <span>Use headphones for calls/media</span>
-            </div>
-            <div class="step">
-                <span class="step-number">4</span>
-                <span>Follow cafe house rules</span>
-            </div>
-        </div>
-        
-        <div class="footer">
-            {{ config('app.name') }}<br>
-            <div class="support">
-                Need help? Contact us at <a href="mailto:hi@remotework.com.my">hi@remotework.com.my</a>
-            </div>
-        </div>
-    </div>
+                            <!-- Cafe Info -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc; border-radius: 8px; margin-bottom: 30px;">
+                                <tr>
+                                    <td style="padding: 25px;">
+                                        <p style="margin: 0; color: #4b5563;">Welcome to</p>
+                                        <h2 style="color: #2563eb; font-size: 20px; margin: 10px 0;">{{ $cafe->name }}</h2>
+                                        
+                                        <!-- Session Time -->
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #2563eb, #9333ea); border-radius: 8px; margin: 20px 0;">
+                                            <tr>
+                                                <td style="padding: 15px; color: white; text-align: center;">
+                                                    <div style="font-size: 14px;">Session Ends At</div>
+                                                    <div style="font-size: 18px; font-weight: bold; margin-top: 5px;">{{ $endTime->format('h:i A') }}</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <p style="margin: 0; color: #4b5563;">Enjoy your productive workspace experience!</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Guidelines -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc; border-radius: 8px;">
+                                <tr>
+                                    <td style="padding: 25px;">
+                                        <h3 style="color: #1f2937; font-size: 18px; margin: 0 0 20px 0;">Workspace Guidelines:</h3>
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span
+                                                        style="background-color: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-block; text-align: center; line-height: 24px; margin-right: 10px; font-size: 12px;">1</span>
+                                                    Please keep your workspace clean
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span 
+                                                        style="background-color: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-block; text-align: center; line-height: 24px; margin-right: 10px; font-size: 12px;">2</span>
+                                                    Respect other coworkers' space
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span 
+                                                        style="background-color: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-block; text-align: center; line-height: 24px; margin-right: 10px; font-size: 12px;">3</span>
+                                                    Use headphones for calls/media
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span 
+                                                        style="background-color: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-block; text-align: center; line-height: 24px; margin-right: 10px; font-size: 12px;">4</span>
+                                                    Follow cafe house rules
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Footer -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px;">
+                                            <tr>
+                                                <td align="center" style="color: #6b7280; font-size: 13px; line-height: 20px; padding: 0 20px;">
+                                                    Remote Work Malaysia<br>
+                                                    Need help? Contact us at <a href="mailto:hi@remotework.com.my"
+                                                        style="color: #2563eb; text-decoration: none;">hi@remotework.com.my</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="padding-top: 15px;">
+                                                    <table role="presentation" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td style="padding: 0 10px;">
+                                                                <a href="https://www.instagram.com/remoteworkmy/">
+                                                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/instagram.svg"
+                                                                        alt="Instagram" width="24" height="24" style="display: block; border: 0;">
+                                                                </a>
+                                                            </td>
+                                                            <td style="padding: 0 10px;">
+                                                                <a href="https://www.facebook.com/search/top?q=remote%20work%20malaysia">
+                                                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/facebook.svg"
+                                                                        alt="Facebook" width="24" height="24" style="display: block; border: 0;">
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

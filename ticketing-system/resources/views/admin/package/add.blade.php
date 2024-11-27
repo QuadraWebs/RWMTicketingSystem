@@ -215,11 +215,14 @@
                 </div>
 
                 <div class="form-field">
-                    <label class="form-label">Pass Type</label>
-                    <select name="pass_type" class="form-input form-select" required>
-                        <option value="1">One-time</option>
-                        <option value="3">Monthly</option>
-                    </select>
+                    <label class="form-label">Pass Type (No. of Entry)</label>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <input type="number" name="pass_type" id="pass_type" value="1" class="form-input" min="1" required>
+                        <label class="checkbox-label" style="display: flex; align-items: center;">
+                            <input type="checkbox" id="unlimited_pass" class="checkbox" style="margin-right: 0.5rem;">
+                            Unlimited
+                        </label>
+                    </div>
                 </div>
                 
                 <div class="form-field">
@@ -248,7 +251,22 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const passTypeInput = document.getElementById('pass_type');
+        const unlimitedCheckbox = document.getElementById('unlimited_pass');
 
+        unlimitedCheckbox.addEventListener('change', function () {
+            if (this.checked) {
+                passTypeInput.value = 0;
+                passTypeInput.disabled = true;
+            } else {
+                passTypeInput.disabled = false;
+                passTypeInput.value = 1;
+            }
+        });
+
+        passTypeInput.addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
         function updateDurationSummary(minutes) {
             if (!minutes) {
                 document.getElementById('durationSummary').textContent = '0 min';
