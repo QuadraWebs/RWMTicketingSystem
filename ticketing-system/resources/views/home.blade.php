@@ -46,10 +46,10 @@
     }
 
     .welcome-name {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         -webkit-background-clip: text;
         background-clip: text;
-        color: transparent;
+        color: ##172A91;
     }
 
     .welcome-subtitle {
@@ -58,17 +58,18 @@
     }
 
     .new-package-btn {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 0.5rem;
         border: none;
         cursor: pointer;
-        transition: opacity 0.2s;
+        transition: all 0.2s;
     }
 
     .new-package-btn:hover {
-        opacity: 0.9;
+        background: #131f69;
+        transform: translateY(-1px);
     }
 
     /* Stats Grid */
@@ -208,7 +209,7 @@
         background: #eff6ff;
         padding: 0.75rem;
         border-radius: 9999px;
-        color: #2563eb;
+        color: #172A91;
     }
 
     .activity-details h4 {
@@ -363,7 +364,7 @@
             xaxis: {
                 categories: @json($charts['ticket_usage']['categories'])
             },
-            colors: ['#4F46E5'],
+            colors: ['#172A91'],
             stroke: { curve: 'smooth' }
         });
 
@@ -380,11 +381,12 @@
             xaxis: {
                 categories: @json($charts['visit_times']['categories'])
             },
-            colors: ['#8B5CF6']
+            colors: ['#172A91']
         });
 
         ticketUsageChart.render();
         visitTimesChart.render();
     });
 </script>
+
 @endsection

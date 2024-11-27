@@ -1,74 +1,179 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-900">Edit Subscriber</h1>
-            <a href="{{ route('admin.subscribers') }}"
-               class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
-                Back to Subscribers
-            </a>
+<style>
+    .container {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+    }
+
+    .edit-card {
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e5e7eb;
+        padding: 1.5rem;
+    }
+
+    .header-page {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .back-button {
+        background: #172A91;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: opacity 0.2s;
+    }
+
+    .back-button:hover {
+        opacity: 0.9;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.625rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        transition: border-color 0.2s;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #172A91;
+        box-shadow: 0 0 0 2px rgba(23, 42, 145, 0.2);
+    }
+
+    .form-input:disabled {
+        background: #f3f4f6;
+        cursor: not-allowed;
+    }
+
+    .error-text {
+        color: #dc2626;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .cancel-button {
+        padding: 0.5rem 1rem;
+        background: #f3f4f6;
+        color: #374151;
+        border: none;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .submit-button {
+        padding: 0.5rem 1rem;
+        background: #172A91;
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .submit-button:hover,
+    .cancel-button:hover {
+        opacity: 0.9;
+    }
+
+    @media (min-width: 768px) {
+        .form-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="edit-card">
+        <div class="header-page">
+            <h1 class="page-title">Edit Subscriber</h1>
+            <a href="{{ route('admin.subscribers') }}" class="back-button">Back to Subscribers</a>
         </div>
 
         <form action="{{ route('admin.subscribers.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Name -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text"
-                           name="name"
-                           id="name"
-                           value="{{ old('name', $user->name) }}"
-                           class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 {{ $user->is_admin ? 'bg-gray-100 cursor-not-allowed' : '' }}"
-                           {{ $user->is_admin ? 'disabled' : '' }}>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" class="form-input"
+                        {{ $user->is_admin ? 'disabled' : '' }}>
                     @error('name')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <p class="error-text">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email"
-                           name="email"
-                           id="email"
-                           value="{{ old('email', $user->email) }}"
-                           class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 {{ $user->is_admin ? 'bg-gray-100 cursor-not-allowed' : '' }}"
-                           {{ $user->is_admin ? 'disabled' : '' }}>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}"
+                        class="form-input" {{ $user->is_admin ? 'disabled' : '' }}>
                     @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <p class="error-text">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Phone -->
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                    <input type="text"
-                           name="phone"
-                           id="phone"
-                           value="{{ old('phone', $user->phone) }}"
-                           class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}"
+                        class="form-input">
                     @error('phone')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <p class="error-text">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
 
-            <!-- Submit Buttons -->
-            <div class="flex justify-end gap-4 mt-6 pt-6 border-t border-gray-100">
-                <a href="{{ route('admin.subscribers') }}"
-                   class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
-                    Cancel
-                </a>
-                <button type="submit"
-                        class="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:opacity-90">
-                    Update Subscriber
-                </button>
+            <div class="button-group">
+                <button type="submit" class="submit-button">Update Subscriber</button>
             </div>
         </form>
     </div>

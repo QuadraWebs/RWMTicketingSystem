@@ -39,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.subscribers.destroy_user_ticket');
     Route::delete('/subscribers/{user}', [SubscriberController::class, 'destroy'])
         ->name('admin.subscribers.destroy');
+    Route::put('/subscribers/{user}', [SubscriberController::class, 'update'])->name('admin.subscribers.update');
+
+
 
 
     Route::get('/admin/package', [PackageController::class, 'index'])->name('admin.package');

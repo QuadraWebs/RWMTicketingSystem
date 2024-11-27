@@ -121,6 +121,16 @@
                 color: transparent;
             }
 
+            .logo {
+                display: flex;
+                align-items: center;
+            }
+
+            .logo img {
+                max-height: 40px;
+                width: auto;
+            }
+
             @media (max-width: 640px) {
                 .reject-card {
                     margin: 0.5rem;
@@ -141,7 +151,9 @@
         <div class="container">
             <header class="header">
                 <div class="header-content">
-                    <h1 class="header-title">Ticket Rejected</h1>
+                    <div class="logo">
+                        <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
+                    </div>
                 </div>
             </header>
 
@@ -165,7 +177,8 @@
 
             <footer class="footer">
                 <div class="copyright">
-                    Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                    Copyright © 2024 Wanderworks Lab, (SA0610699-K)<br>
+                    ALL RIGHT'S RESERVED
                 </div>
                 <div class="powered-by">
                     Powered by QuadraWebs

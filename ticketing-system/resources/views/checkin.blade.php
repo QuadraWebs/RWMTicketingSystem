@@ -26,7 +26,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 50%, #FAF5FF 100%);
+            background: #FFFFFF;
         }
 
         .header {
@@ -76,20 +76,27 @@
         .card-header {
             text-align: center;
             margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .icon-container {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 0.75rem;
-            background: #eff6ff;
-            border-radius: 9999px;
+            background: #F0F7FF;
+            border-radius: 50%;
             margin-bottom: 1rem;
+            width: 3.5rem;
+            height: 3.5rem;
         }
 
         .icon {
             width: 2rem;
             height: 2rem;
-            color: #3b82f6;
+            color: #172A91;
         }
 
         .card-title {
@@ -139,7 +146,8 @@
         }
 
         .result-item:hover {
-            background: #eff6ff;
+            background: #F0F7FF;
+            color: #172A91;
         }
 
         .result-name {
@@ -155,7 +163,7 @@
         .submit-button {
             width: 100%;
             padding: 0.75rem 1rem;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            background: #172A91;
             color: white;
             border: none;
             border-radius: 0.5rem;
@@ -167,6 +175,7 @@
         }
 
         .submit-button:hover {
+            background: #131f69;
             transform: scale(1.02);
         }
 
@@ -184,35 +193,42 @@
         }
 
         .qr-message {
-            margin-top: 0.75rem;
-            font-weight: 500;
-            color: #2563eb;
-            background: #eff6ff;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            display: inline-block;
+            color: #172A91;
+            background: #F0F7FF;
         }
 
         .qr-expiry {
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            color: #dc2626;
+            color: #EBA49E;
         }
 
         .refresh-button {
             display: inline-flex;
             align-items: center;
-            padding: 0.2rem 1rem;
-            background: #eff6ff;
-            color: #2563eb;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #172A91;
+            color: white;
             border-radius: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             cursor: pointer;
             border: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .refresh-button svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            transition: transform 0.3s ease;
         }
 
         .refresh-button:hover {
-            background: #dbeafe;
+            background: #131f69;
+            transform: translateY(-1px);
+        }
+
+        .refresh-button:hover svg {
+            transform: rotate(180deg);
         }
 
         .footer {
@@ -230,12 +246,17 @@
         }
 
         .powered-by {
-            font-size: 0.75rem;
-            font-weight: 500;
-            background: linear-gradient(90deg, #2563eb, #9333ea);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #172A91;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 40px;
+            width: auto;
         }
 
         @media (max-width: 640px) {
@@ -244,14 +265,9 @@
                 text-align: center;
                 gap: 0.5rem;
             }
-
-            .checkin-card {
-                padding: 1rem;
-                margin: 1rem;
-            }
-
-            .card-title {
-                font-size: 1.25rem;
+            
+            .logo {
+                justify-content: center;
             }
         }
     </style>
@@ -261,8 +277,9 @@
     <div class="container">
         <header class="header">
             <nav class="nav-container">
-                <h1 class="system-title">RWM Ticketing System</h1>
-                <span class="current-date">{{ now()->format('F d, Y') }}</span>
+                <div class="logo">
+                    <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
+                </div>
             </nav>
         </header>
 
@@ -276,6 +293,8 @@
                         </svg>
                     </div>
                     <h2 class="card-title">Ticket Check-In</h2>
+                    <span class="current-date">{{ now()->format('F d, Y') }}</span>
+
                 </div>
 
                 <form action="{{ route('ticket.confirm-checkin') }}" method="POST"
@@ -286,7 +305,7 @@
                                     text: 'Please select a cafe before confirming check-in',
                                     icon: 'warning',
                                     confirmButtonText: 'Ok',
-                                    confirmButtonColor: '#3B82F6'
+                                    confirmButtonColor: '#172A91'
                                 });
                                 return false;
                             }
@@ -365,14 +384,13 @@
                 @endif
             </div>
         </main>
-
         <footer class="footer">
             <div class="copyright">
-                Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                Copyright © 2024 Wanderworks Lab, (SA0610699-K)<br>
+                ALL RIGHT'S RESERVED
             </div>
-                <div class="powered-by">
-                    Powered by QuadraWebs
-                </div>
+            <div class="powered-by">
+                Powered by QuadraWebs
             </div>
         </footer>
     </div>

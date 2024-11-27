@@ -27,7 +27,8 @@ class PackageController extends Controller
 
     public function create()
     {
-        return view('admin.package.add');
+        $titles = Package::select('title')->distinct()->get();
+        return view('admin.package.add', compact('titles'));
     }
     
     public function store(Request $request)

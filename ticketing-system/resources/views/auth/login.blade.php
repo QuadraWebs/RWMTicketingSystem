@@ -25,7 +25,7 @@
         text-align: center;
         font-size: 1.5rem;
         font-weight: 800;
-        background: linear-gradient(to right, #2563EB, #9333EA);
+        background: #172A91;
         -webkit-background-clip: text;
         color: transparent;
     }
@@ -106,7 +106,7 @@
     .forgot-password {
         font-size: 0.875rem;
         font-weight: 500;
-        color: #2563EB;
+        color: #172A91;
         text-decoration: none;
     }
 
@@ -123,7 +123,7 @@
         font-size: 0.875rem;
         font-weight: 500;
         color: white;
-        background: linear-gradient(to right, #2563EB, #9333EA);
+        background: #172A91;
         border: none;
         border-radius: 0.375rem;
         cursor: pointer;

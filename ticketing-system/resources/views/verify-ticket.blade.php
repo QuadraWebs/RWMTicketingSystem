@@ -24,7 +24,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 50%, #FAF5FF 100%);
+            background: #FFFFFF;
         }
 
         .header {
@@ -91,7 +91,7 @@
         .icon-container {
             display: inline-block;
             padding: 1rem;
-            background: #eff6ff;
+            background: #F0F7FF;
             border-radius: 9999px;
             margin-bottom: 1rem;
         }
@@ -99,7 +99,7 @@
         .icon {
             width: 3rem;
             height: 3rem;
-            color: #3b82f6;
+            color: #172A91;
         }
 
         .card-title {
@@ -132,10 +132,9 @@
         }
 
         .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            color: #EBA49E;
             font-weight: bold;
         }
 
@@ -156,19 +155,19 @@
             gap: 0.5rem;
             padding: 0.5rem 1rem;
             border-radius: 9999px;
-            background: #fef3c7;
-            border: 1px solid #fcd34d;
+            background: #F0F7FF;
+            border: 1px solid #172A91;
         }
 
         .status-icon {
             width: 1.25rem;
             height: 1.25rem;
-            color: #d97706;
+            color: #172A91;
         }
 
         .status-text {
             font-weight: bold;
-            color: #92400e;
+            color: #172A91;
         }
 
         .warning-section {
@@ -231,13 +230,21 @@
         }
 
         .button-reject {
-            background: linear-gradient(90deg, #ef4444, #dc2626);
+            background: #EBA49E;
             color: white;
         }
 
         .button-accept {
-            background: linear-gradient(90deg, #22c55e, #16a34a);
+            background: #172A91;
             color: white;
+        }
+
+        .button-reject:hover {
+            background: #e59089;
+        }
+
+        .button-accept:hover {
+            background: #131f69;
         }
 
         .footer {
@@ -260,7 +267,18 @@
             background: linear-gradient(90deg, #2563eb, #9333ea);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            color: #172A91;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .logo img {
+            max-height: 40px;
+            width: auto;
         }
 
         @media (max-width: 640px) {
@@ -286,7 +304,9 @@
     <div class="container">
         <header class="header">
             <div class="header-content">
-                <h1 class="system-title">Ticket Verification</h1>
+                <div class="logo">
+                    <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
+                </div>
             </div>
         </header>
 
@@ -391,7 +411,8 @@
 
         <footer class="footer">
             <div class="copyright">
-                Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                Copyright © 2024 Wanderworks Lab, (SA0610699-K)<br>
+                ALL RIGHT'S RESERVED
             </div>
             <div class="powered-by">
                 Powered by QuadraWebs
