@@ -99,7 +99,7 @@
     }
 
     .button-primary {
-        background: #172A91);
+        background: #172A91;
         color: white;
         border: none;
     }

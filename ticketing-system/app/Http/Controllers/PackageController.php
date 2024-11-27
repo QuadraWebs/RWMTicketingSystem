@@ -30,23 +30,29 @@ class PackageController extends Controller
         $titles = Package::select('title')->distinct()->get();
         return view('admin.package.add', compact('titles'));
     }
-    
+
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'stripe_package_id' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'duration' => 'required|integer|min:1',
-            'is_recurring' => 'required|boolean',
-            'pass_type' => 'required|string|max:255'
+            'pass_type' => 'required|integer|min:0',
+            'payment_link' => 'nullable|string|url|max:255'
         ]);
 
+        DB::beginTransaction();
         try {
+            $validated['is_recurring'] = $request->pass_type == 0;
             Package::create($validated);
+            DB::commit();
             return redirect()->route('admin.package.add.successful');
         } catch (\Exception $e) {
+            \Log::error('Package creation failed: ' . $e->getMessage());
+            DB::rollback();
             return redirect()->route('admin.package.add.failed');
         }
     }
@@ -55,8 +61,9 @@ class PackageController extends Controller
     {
         $package = Package::findOrFail($id);
         $packages = Package::latest()->paginate(10);
+        $titles = Package::select('title')->distinct()->get();
 
-        return view('admin.package.edit', compact('package', 'packages'));
+        return view('admin.package.edit', compact('package', 'packages', 'titles'));
     }
     public function update(Request $request, $id)
     {
@@ -69,7 +76,9 @@ class PackageController extends Controller
                 'description' => $request->description,
                 'price' => $request->price,
                 'duration' => $request->duration,
-                'pass_type' => $request->pass_type
+                'pass_type' => $request->pass_type,
+                'is_recurring' => $request->pass_type == 0 ? true : false,
+                'payment_link' => $request->payment_link
             ]);
 
 

@@ -163,6 +163,41 @@
         background: #131f69;
         transform: translateY(-1px);
     }
+
+    .datalist-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .datalist-input {
+        padding-right: 2.5rem !important;
+    }
+
+    .datalist-icon {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6b7280;
+        font-size: 0.75rem;
+        pointer-events: none;
+        transition: transform 0.2s ease;
+    }
+
+    .datalist-input:focus + .datalist-icon {
+        transform: translateY(-50%) rotate(180deg);
+        color: #172A91;
+    }
+
+    /* Style for datalist options (visible in supported browsers) */
+    input::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        width: 2.5rem;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+    }
 </style>
 
 <div class="container">
@@ -182,16 +217,21 @@
                 <div class="form-field">
                     <label class="form-label">Title</label>
                     <input type="text" name="title" value="{{ $package->title }}" class="form-input" required>
+                    <datalist id="title-list">
+                        @foreach($titles as $title)
+                            <option value="{{ $title->title }}">
+                        @endforeach
+                    </datalist>
+                </div>
+                
+                <div class="form-field">
+                    <label class="form-label">Stripe Package ID</label>
+                    <input type="text" name="stripe_package_id" value="{{ $package->stripe_package_id }}" class="form-input" required>
                 </div>
         
                 <div class="form-field">
                     <label class="form-label">Name</label>
                     <input type="text" name="name" value="{{ $package->name }}" class="form-input" required>
-                </div>
-        
-                <div class="form-field">
-                    <label class="form-label">Price (RM)</label>
-                    <input type="number" name="price" value="{{ $package->price }}" step="0.01" class="form-input" required>
                 </div>
         
                 <div class="form-field">
@@ -206,11 +246,15 @@
                     </div>
                 </div>
 
+                <div class="form-field">
+                    <label class="form-label">Price (RM)</label>
+                    <input type="number" name="price" value="{{ $package->price }}" step="0.01" class="form-input" required>
+                </div>
         
                 <div class="form-field">
                     <label class="form-label">Duration (minutes)</label>
-                    <input type="number" name="duration" id="duration" value="{{ $package->duration }}" class="form-input"
-                        required>
+                    <input type="number" name="duration" id="duration" value="{{ $package->duration }}" class="form-input" min="1"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>                        required>
                     <p id="durationSummary" class="duration-summary"></p>
                 </div>
         
@@ -218,6 +262,11 @@
                     <label class="form-label">Description</label>
                     <textarea name="description" class="form-input form-textarea"
                         required>{{ $package->description }}</textarea>
+                </div>
+                
+                <div class="form-field full-width">
+                    <label class="form-label">Payment Link</label>
+                    <input type="text" name="payment_link" class="form-input" required>
                 </div>
             </div>
         
@@ -227,15 +276,15 @@
         </form>
     </div>
 </div>
-@endsection
 
-@section('scripts')
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const passTypeInput = document.getElementById('pass_type');
         const unlimitedCheckbox = document.getElementById('unlimited_pass');
+        const durationInput = document.getElementById('duration');
 
-        unlimitedCheckbox.addEventListener('change', function() {
+        unlimitedCheckbox.addEventListener('change', function () {
             if (this.checked) {
                 passTypeInput.value = 0;
                 passTypeInput.disabled = true;
@@ -245,8 +294,12 @@
             }
         });
 
-        passTypeInput.addEventListener('input', function() {
+        passTypeInput.addEventListener('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        durationInput.addEventListener('input', function () {
+            updateDurationSummary(parseInt(this.value));
         });
 
         function updateDurationSummary(minutes) {
@@ -276,8 +329,25 @@
 
             document.getElementById('durationSummary').textContent = summary;
         }
-
         updateDurationSummary(document.getElementById('duration').value);
-    });
 
+        document.querySelector('.datalist-input').addEventListener('focus', function () {
+            this.value = '';
+        });
+
+        document.querySelector('.datalist-input').addEventListener('input', function () {
+            const value = this.value.toLowerCase();
+            const options = document.querySelectorAll('#title-list option');
+
+            options.forEach(option => {
+                const optionValue = option.getAttribute('data-valu//e').toLowerCase();
+                if (optionValue.includes(value)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        });
+    });
 </script>
+@endsection

@@ -65,7 +65,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-
     Route::get('/admin/cafe', [CafeController::class, 'index'])->name('admin.cafe');
     Route::get('/admin/cafe/add', [CafeController::class, 'create'])->name('admin.cafe.add');
     Route::post('/admin/cafe', [CafeController::class, 'store'])->name('admin.cafe.store');

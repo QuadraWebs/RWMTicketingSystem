@@ -220,6 +220,25 @@
         right: 0;
         cursor: pointer;
     }
+    
+    .form-checkbox {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 0.25rem;
+        border: 1px solid #e5e7eb;
+        cursor: pointer;
+    }
+
+    .form-checkbox:checked {
+        background-color: #172A91;
+        border-color: #172A91;
+    }
+
+    .checkbox-label {
+        font-size: 0.875rem;
+        color: #374151;
+        cursor: pointer;
+    }
 
 </style>
 
@@ -252,37 +271,39 @@
                 </div>
 
                 <div class="form-field">
+                    <label class="form-label">Stripe Package ID</label>
+                    <input type="text" name="stripe_package_id" class="form-input" required>
+                </div>
+
+                <div class="form-field">
                     <label class="form-label">Name</label>
                     <input type="text" name="name" class="form-input" required>
                 </div>
 
                 <div class="form-field">
-                    <label class="form-label">Price (RM)</label>
-                    <input type="number" step="0.01" name="price" class="form-input" required>
-                </div>
-
-                <div class="form-field">
-                    <label class="form-label">Title</label>
-                    <div class="datalist-wrapper">
-                        <input type="text" name="title" class="form-input datalist-input" list="title-list" autocomplete="off" required>
-                        <datalist id="title-list">
-                            @foreach($titles as $title)
-                                <option value="{{ $title->title }}" data-value="{{ $title->title }}">
-                            @endforeach
-                        </datalist>
-                        <div class="datalist-icon">▼</div>
+                    <label class="form-label">Pass Type (No. of Entry)</label>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <input type="number" name="pass_type" value="1" id="pass_type" class="form-input"
+                            min="1" required>
+                        <label class="checkbox-label" style="display: flex; align-items: center;">
+                            <input type="checkbox" id="unlimited_pass" class="checkbox" style="margin-right: 0.5rem;">
+                            Unlimited
+                        </label>
                     </div>
                 </div>
                 
                 <div class="form-field">
-                    <label class="form-label">Duration (minutes)</label>
-                    <input type="number" name="duration" id="duration" class="form-input" required
-                        onkeypress="return (event.charCode !== 46 && event.charCode >= 48 && event.charCode <= 57)"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, ''); updateDurationSummary(this.value)" step="1" min="1"
-                        pattern="\d*">
-                    <p id="durationSummary" class="duration-summary"></p>
+                    <label class="form-label">Price (RM)</label>
+                    <input type="number" step="0.01" name="price" class="form-input" required>
                 </div>
                 
+                <div class="form-field">
+                    <label class="form-label">Duration (minutes)</label>
+                    <input type="number" name="duration" id="duration" class="form-input" min="1"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                    <p id="durationSummary" class="duration-summary"></p>
+                </div>
+
                 <div class="form-field full-width">
                     <label class="form-label">Description</label>
                     <textarea name="description" class="form-input form-textarea" required></textarea>
@@ -290,7 +311,7 @@
                 
                 <div class="form-field full-width">
                     <label class="form-label">Payment Link</label>
-                    <input type="text" name="paymentLink" class="form-input" required>
+                    <input type="text" name="payment_link" class="form-input" required>
                 </div>
             </div>
 
@@ -300,14 +321,12 @@
         </form>
     </div>
 </div>
-@endsection
 
-@section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const passTypeInput = document.getElementById('pass_type');
         const unlimitedCheckbox = document.getElementById('unlimited_pass');
-        
+        const durationInput = document.getElementById('duration');
 
         unlimitedCheckbox.addEventListener('change', function () {
             if (this.checked) {
@@ -322,6 +341,12 @@
         passTypeInput.addEventListener('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
+
+
+        durationInput.addEventListener('input', function () {
+            updateDurationSummary(parseInt(this.value));
+        });
+        
         function updateDurationSummary(minutes) {
             if (!minutes) {
                 document.getElementById('durationSummary').textContent = '0 min';
@@ -350,6 +375,11 @@
             document.getElementById('durationSummary').textContent = summary;
         }
 
+        updateDurationSummary(document.getElementById('duration').value);
+
+
+
+
         document.querySelector('.datalist-input').addEventListener('focus', function () {
             this.value = '';
         });
@@ -359,7 +389,7 @@
             const options = document.querySelectorAll('#title-list option');
 
             options.forEach(option => {
-                const optionValue = option.getAttribute('data-value').toLowerCase();
+                const optionValue = option.getAttribute('data-valu//e').toLowerCase();
                 if (optionValue.includes(value)) {
                     option.style.display = 'block';
                 } else {
@@ -368,7 +398,7 @@
             });
         });
 
-        updateDurationSummary(document.getElementById('duration').value);
     });
 
 </script>
+@endsection
