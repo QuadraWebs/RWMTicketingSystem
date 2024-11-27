@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Package;
+use Illuminate\Database\Seeder;
 
 class PackageSeeder extends Seeder
 {
@@ -11,59 +11,55 @@ class PackageSeeder extends Seeder
     {
         $packages = [
             [
-                'stripe_package_id' => 'prod_RHuQd8j6oIZuCe',
-                'name' => 'All-in pass ( Unlimited )',
-                'description' => 'All-in pass ( Unlimited )',
-                'price' => 800.00,
-                'duration' => 240,
-                'is_recurring' => false,
-                'pass_type' => 0
-            ],
-            [
-                'stripe_package_id' => 'prod_RHuQ9E8B11ecMf',
-                'name' => 'All-in pass ( Pack of 5 )',
-                'description' => 'All-in pass ( Pack of 5 )',
-                'price' => 155.00,
-                'duration' => 240,
-                'is_recurring' => false,
-                'pass_type' => 5
-            ],
-            [
-                'stripe_package_id' => 'prod_RHuPo4avHH1iq5',
-                'name' => 'All-in pass ( One Pass )',
-                'description' => 'All-in pass ( One Pass )',
-                'price' => 35.00,
-                'duration' => 240,
-                'is_recurring' => false,
-                'pass_type' => 1
-            ],
-            [
-                'stripe_package_id' => 'prod_RHuMllmo5rxe1F',
-                'name' => 'Coworking pass ( Unlimited )',
-                'description' => 'Coworking pass ( Unlimited )',
-                'price' => 300.00,
-                'duration' => 240,
-                'is_recurring' => false,
-                'pass_type' => 0
-            ],
-            [
-                'stripe_package_id' => 'prod_RGq1mdh7LCE7BR',
-                'name' => 'Coworking pass ( Pack of 5 )',
-                'description' => 'Coworking pass ( Pack of 5 )',
-                'price' => 80.00,
-                'duration' => 240,
-                'is_recurring' => false,
-                'pass_type' => 5
-            ],
-            [
-                'stripe_package_id' => 'prod_RGq0oV8wgnw5nA',
-                'name' => 'Coworking pass ( One pass )',
-                'description' => 'Coworking pass ( One pass )',
+                'stripe_package_id' => 'price_H1X2Y3Z4',
+                'name' => 'One Pass',
+                'description' => "- Up to 4 hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
                 'price' => 20.00,
                 'duration' => 240,
-                'is_recurring' => false,
-                'pass_type' => 1
+                'is_recurring' => 0,
+                'pass_type' => 1,
+                'title' => 'Coworking pass'
             ],
+            [
+                'stripe_package_id' => 'price_A7B8C9D0',
+                'name' => 'Pack of 5',
+                'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'price' => 80.00,
+                'duration' => 240,
+                'is_recurring' => 0,
+                'pass_type' => 2,
+                'title' => 'Coworking pass'
+            ],
+            [
+                'stripe_package_id' => 'price_E5F6G7H8',
+                'name' => 'Unlimited',
+                'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'price' => 300.00,
+                'duration' => 240,
+                'is_recurring' => 1,
+                'pass_type' => 3,
+                'title' => 'Coworking pass'
+            ],
+            [
+                'stripe_package_id' => 'price_J1K2L3M4',
+                'name' => 'One Pass',
+                'description' => "- Up to 4 hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- RM25 spending credits\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'price' => 35.00,
+                'duration' => 240,
+                'is_recurring' => 0,
+                'pass_type' => 1,
+                'title' => 'All-in pass'
+            ],
+            [
+                'stripe_package_id' => 'price_N5P6Q7R8',
+                'name' => 'Pack of 5',
+                'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- RM25 spending credits\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'price' => 155.00,
+                'duration' => 240,
+                'is_recurring' => 0,
+                'pass_type' => 2,
+                'title' => 'All-in pass'
+            ]
         ];
 
         foreach ($packages as $package) {

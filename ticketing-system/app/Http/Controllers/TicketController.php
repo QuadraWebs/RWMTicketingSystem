@@ -55,6 +55,7 @@ class TicketController extends Controller
                     'user_uuid' => $ticket->user_uuid,
                     'package_id' => $ticket->package_id,
                     'package_name' => $ticket->package->name,
+                    'package_title' => $ticket->package->title,
                     'package_description' => $ticket->package->description,
                     'stripe_subscription_id' => $ticket->stripe_subscription_id,
                     'is_unlimited' => $ticket->is_unlimited,

@@ -87,21 +87,39 @@ use Illuminate\Support\Str;
 
             .ticket-header {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
+                flex-direction: column;
+                gap: 0.5rem;
                 margin-bottom: 1rem;
             }
 
             .package-name {
-                font-size: 1.25rem;
-                font-weight: 600;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #6b7280;
+            }
+            
+            .package-name:hover {
+                background-color: #e0e7ff;
+                transform: translateY(-1px);
+            }
+
+            .package-title {
+                font-size: 1.5rem;
+                font-weight: 700;
                 color: #1f2937;
+                letter-spacing: -0.025em;
+            }
+
+            .package-name-wrapper {
+                display: inline-block;
             }
 
             .status-badge {
                 padding: 0.25rem 0.75rem;
                 border-radius: 9999px;
                 font-size: 0.875rem;
+                display: inline-block;
+                margin-bottom: 1rem;
             }
 
             .status-active {
@@ -253,11 +271,14 @@ use Illuminate\Support\Str;
                 @foreach($tickets as $ticket)
                     <div class="ticket-card">
                         <div class="ticket-header">
-                            <h2 class="package-name">{{ $ticket['package_name'] }}</h2>
-                            <span class="status-badge {{ $ticket['status'] === 'active' ? 'status-active' : 'status-inactive' }}">
-                                {{ ucfirst($ticket['status']) }}
-                            </span>
+                            <h2 class="package-title">{{ $ticket['package_title'] }}</h2>
+                            <div class="package-name-wrapper">
+                                <span class="package-name">{{ $ticket['package_name'] }}</span>
+                            </div>
                         </div>
+                        <span class="status-badge {{ $ticket['status'] === 'active' ? 'status-active' : 'status-inactive' }}">
+                            {{ ucfirst($ticket['status']) }}
+                        </span>
 
                         <div class="entitlement-section">
                             <h3 class="entitlement-title">Entitlement</h3>
