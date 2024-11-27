@@ -70,12 +70,14 @@ class StripeWebhookController extends Controller
             ]);
 
 
-            Log::info(message: 'Ticket created', context: $ticket->toArray());
 
+            
             DB::commit();
-            // if ($ticket) {
-            //     Mail::to($user->email)->send(new TicketCreated($ticket, $user));
-            // }
+
+            if ($ticket) {
+                Mail::to($user->email)->send(new TicketCreated($ticket, $user));
+            }
+          
             return response()->json(['status' => 'success']);
 
         } catch (\Exception $e) {
