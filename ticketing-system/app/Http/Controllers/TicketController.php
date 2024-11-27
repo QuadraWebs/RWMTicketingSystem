@@ -102,7 +102,7 @@ class TicketController extends Controller
             'ticket_id' => $ticketId,
             'uuid' => $validated['uuid'],
             'cafe_id' => $validated['cafe_id'] 
-        ], now()->addMinutes(2));
+        ], now()->addHours(24));
 
         // Get cafes data again for the view
         $cafes = Cafe::whereNull('deleted_at')
