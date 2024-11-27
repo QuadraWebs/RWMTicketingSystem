@@ -62,7 +62,7 @@
     }
 
     .add-button {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
@@ -73,7 +73,8 @@
     }
 
     .add-button:hover {
-        opacity: 0.9;
+        background: #131f69;
+        transform: translateY(-1px);
     }
 
     /* Search Section */
@@ -123,7 +124,7 @@
     }
 
     .search-button {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         padding: 0.625rem 1.5rem;
         border: none;
@@ -133,7 +134,8 @@
     }
 
     .search-button:hover {
-        opacity: 0.9;
+        background: #131f69;
+        transform: translateY(-1px);
     }
 
     /* Table Styles */

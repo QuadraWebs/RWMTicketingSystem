@@ -129,12 +129,24 @@ class SubscriberController extends Controller
                 'is_admin' => $validated['is_admin'] ?? false,
             ]);
 
-            return redirect()->route('admin.package.add.successful');
+            return redirect()->route('admin.subscribers.add.successful');
         } catch (\Exception $e) {
-            return redirect()->route('admin.package.add.failed');
+            return redirect()->route('admin.subscribers.add.failed');
         }
     }
+    public function update(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'required|string|max:20'
+        ]);
 
+        $user->update($validated);
+
+        return redirect()->route('admin.subscribers')
+            ->with('success', 'Subscriber updated successfully');
+    }
 
     public function destroyUserTicket($uuid, $ticketId)
     {

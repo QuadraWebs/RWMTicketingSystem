@@ -26,7 +26,7 @@ use Illuminate\Support\Str;
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
-                background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 50%, #FAF5FF 100%);
+                background: #FFFFFF;
             }
 
             .header {
@@ -43,36 +43,35 @@ use Illuminate\Support\Str;
                 margin: 0 auto;
                 padding: 1rem;
                 text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
 
             .system-title {
                 font-size: 1.5rem;
                 font-weight: bold;
-                background: linear-gradient(90deg, #2563eb, #9333ea);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
+                color: #172A91;
             }
 
             .welcome-text {
                 font-size: 2rem;
                 font-weight: 800;
                 color: #1f2937;
-                margin-top: 0.5rem;
             }
 
             .welcome-name {
-                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
+                color: #EBA49E;
+                font-size: 2rem;
+                font-weight: 800;
+                margin-bottom: 1rem;
             }
 
             .main-content {
                 flex: 1;
                 max-width: 120rem; /* Increased from 100rem */
                 margin: 0 auto;
-                padding: 2rem;
+                padding: 1rem;
             }
 
             .ticket-card {
@@ -99,7 +98,8 @@ use Illuminate\Support\Str;
             }
             
             .package-name:hover {
-                background-color: #e0e7ff;
+                background-color: #FFF5F4;
+                color: #EBA49E;
                 transform: translateY(-1px);
             }
 
@@ -134,8 +134,8 @@ use Illuminate\Support\Str;
 
             .passes-count {
                 font-size: 0.875rem;
-                color: #2563eb;
-                background: #eff6ff;
+                color: #172A91;
+                background: #F0F7FF;
                 padding: 0.25rem 0.5rem;
                 border-radius: 0.25rem;
                 display: inline-block;
@@ -178,12 +178,12 @@ use Illuminate\Support\Str;
             }
 
             .button-primary {
-                background: #2563eb;
+                background: #172A91;
                 color: white;
             }
 
             .button-primary:hover {
-                background: #1d4ed8;
+                background: #131f69;
             }
 
             .button-disabled {
@@ -209,10 +209,7 @@ use Illuminate\Support\Str;
             .powered-by {
                 font-size: 0.75rem;
                 font-weight: 500;
-                background: linear-gradient(90deg, #2563eb, #9333ea);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
+                color: #172A91;
             }
             
             .package-description {
@@ -255,6 +252,16 @@ use Illuminate\Support\Str;
                     margin: 1rem 0; /* Increased from 0.5rem */
                     padding: 2rem; 
                 }
+
+                .logo {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .logo img {
+                    max-height: 40px;
+                    width: auto;
+                }
             }
         </style>
     </head>
@@ -262,12 +269,17 @@ use Illuminate\Support\Str;
         <div class="container">
             <header class="header">
                 <div class="header-content">
-                    <h1 class="system-title">RWM Ticketing System</h1>
-                    <p class="welcome-text">Welcome, <span class="welcome-name">{{ $userName }}</span></p>
+                    <div class="logo">
+                        <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
+                    </div>
                 </div>
             </header>
 
+
             <main class="main-content">
+                <p class="welcome-text">Welcome,</span></p>
+                <p class="welcome-name">{{ $userName }}</p>
+
                 @foreach($tickets as $ticket)
                     <div class="ticket-card">
                         <div class="ticket-header">
@@ -289,7 +301,8 @@ use Illuminate\Support\Str;
                             Available Passes: {{ $ticket['is_unlimited'] ? 'Unlimited' : $ticket['available_pass'] }}
                         </p>
 
-                        <p class="valid-until">Valid Until: {{ $ticket['valid_until'] }}</p>
+                        <p class="valid-until">Valid Until: {{ date('Y-m-d', strtotime($ticket['valid_until'])) }}</p>
+
 
                         @if($ticket['is_in_used'] && strtotime($ticket['end_time']) > time())
                         <div class="active-session">
@@ -315,7 +328,8 @@ use Illuminate\Support\Str;
 
             <footer class="footer">
                 <div class="copyright">
-                    Copyright © 2024 Wanderworks Lab, (SA0610699-K) ALL RIGHT'S RESERVED
+                    Copyright © 2024 Wanderworks Lab, (SA0610699-K)<br>
+                    ALL RIGHT'S RESERVED
                 </div>
                 <div class="powered-by">
                     Powered by QuadraWebs

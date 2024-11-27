@@ -53,10 +53,10 @@
     .header-title {
         font-size: 1.5rem;
         font-weight: bold;
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         -webkit-background-clip: text;
         background-clip: text;
-        color: transparent;
+        color: #172A91;
     }
 
     .success-message {
@@ -99,13 +99,13 @@
     }
 
     .button-primary {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         border: none;
     }
 
     .button-primary:hover {
-        opacity: 0.9;
+        background: #131f69;
         transform: translateY(-1px);
     }
 </style>

@@ -58,7 +58,7 @@
     }
 
     .back-button {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
@@ -69,7 +69,8 @@
     }
 
     .back-button:hover {
-        opacity: 0.9;
+        background: #131f69;
+        transform: translateY(-1px);
     }
 
     /* Section Styles */
@@ -255,6 +256,25 @@
     .delete-button:hover {
         color: #b91c1c;
     }
+    
+    .edit-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: #172A91;
+        color: white;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .edit-button:hover {
+        background: #131f69;
+        transform: translateY(-1px);
+    }
 
 </style>
 
@@ -270,7 +290,12 @@
 
         <!-- Profile Information -->
         <div class="section">
-            <h2 class="section-title">Profile Information</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="section-title">Profile Information</h2>
+                <a href="{{ route('admin.subscribers.edit', $subscriber->id) }}" class="edit-button">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </a>
+            </div>
             <div class="profile-grid">
                 <div class="profile-item">
                     <label>Name</label>

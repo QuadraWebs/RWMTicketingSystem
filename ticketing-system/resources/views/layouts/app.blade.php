@@ -75,7 +75,7 @@
         }
 
         .brand-icon {
-            color: #2563eb;
+            color: #172A91;
             font-size: 1.5rem;
             margin-right: 0.5rem;
         }
@@ -108,13 +108,13 @@
         }
 
         .nav-link:hover {
-            color: #2563eb;
-            border-bottom-color: #2563eb;
+            color: #172A91;
+            border-bottom-color: #172A91;
         }
 
         .nav-link.active {
-            color: #2563eb;
-            border-bottom-color: #2563eb;
+            color: #172A91;
+            border-bottom-color: #172A91;
         }
 
         .nav-right {
@@ -156,14 +156,14 @@
         .dropdown-link {
             display: block;
             padding: 0.5rem 1rem;
-            color: #4b5563;
+            color: #EBA49E;
             text-decoration: none;
             font-size: 0.875rem;
         }
 
         .dropdown-link:hover {
-            background: #eff6ff;
-            color: #2563eb;
+            background: #F0F7FF;
+            color: #172A91;
             border-radius: 0.375rem;
         }
 
@@ -202,7 +202,7 @@
             background: linear-gradient(90deg, #2563eb, #9333ea);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            color: #172A91;
         }
 
         .footer-content {
@@ -225,7 +225,7 @@
             background: linear-gradient(90deg, #2563eb, #9333ea);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            color: #172A91;
         }
 
         @media (min-width: 640px) {
@@ -242,8 +242,7 @@
                 <div class="nav-content">
                     <div class="nav-left">
                         <a href="{{ url('/home') }}" class="brand-link">
-                            <i class="fas fa-ticket-alt brand-icon"></i>
-                            <span class="brand-text">Wanderworks Lab</span>
+                            <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
                         </a>
                         
                         <div class="nav-links">
@@ -279,8 +278,6 @@
                                 </button>
 
                                 <div x-show="open" @click.away="open = false" class="dropdown-menu">
-                                    <a href="#" class="dropdown-link">Profile</a>
-                                    <a href="#" class="dropdown-link">Settings</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="{{ route('login') }}" 
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

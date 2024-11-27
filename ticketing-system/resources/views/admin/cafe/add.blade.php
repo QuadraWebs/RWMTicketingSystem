@@ -53,7 +53,7 @@
     .header-title {
         font-size: 1.5rem;
         font-weight: bold;
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -145,7 +145,7 @@
     }
 
     .button-submit {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         border: none;
         box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
@@ -171,7 +171,7 @@
         margin: 0;
     }
     .back-button {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
@@ -182,7 +182,8 @@
     }
 
     .back-button:hover {
-        opacity: 0.9;
+        background: #131f69;
+        transform: translateY(-1px);
     }
 </style>
 

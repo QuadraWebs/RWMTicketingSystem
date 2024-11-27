@@ -53,7 +53,7 @@
     .header-title {
         font-size: 1.5rem;
         font-weight: bold;
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -145,15 +145,15 @@
     }
 
     .button-submit {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         border: none;
         box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
     }
 
     .button-submit:hover {
+        background: #131f69;
         transform: translateY(-1px);
-        box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
     }
 
     .button-submit:active {
@@ -162,7 +162,7 @@
 
     /* Number Input Styles */
     input[type="number"] {
-        -moz-appearance: textfield;
+        -moz-appearance: textfield;#172A91
     }
 
     input[type="number"]::-webkit-outer-spin-button,
@@ -171,7 +171,7 @@
         margin: 0;
     }
     .back-button {
-        background: linear-gradient(90deg, #2563eb, #9333ea);
+        background: #172A91;
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
@@ -182,14 +182,51 @@
     }
 
     .back-button:hover {
-        opacity: 0.9;
+        background: #131f69;
+        transform: translateY(-1px);
     }
+
+    .datalist-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .datalist-input {
+        padding-right: 2.5rem !important;
+    }
+
+    .datalist-icon {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6b7280;
+        font-size: 0.75rem;
+        pointer-events: none;
+        transition: transform 0.2s ease;
+    }
+
+    .datalist-input:focus + .datalist-icon {
+        transform: translateY(-50%) rotate(180deg);
+        color: #172A91;
+    }
+
+    /* Style for datalist options (visible in supported browsers) */
+    input::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        width: 2.5rem;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+    }
+
 </style>
 
 <div class="container">
     <div class="content-card">
         <div class="header-page">
-            <h1 class="header-title">Add New Subscriber</h1>
+            <h1 class="header-title">Add New Package</h1>
             <a href="{{ route('admin.package') }}" class="back-button">
                 Back to My Packages
             </a>
@@ -201,7 +238,17 @@
             <div class="form-grid">
                 <div class="form-field">
                     <label class="form-label">Title</label>
-                    <input type="text" name="title" class="form-input" required>
+                    <input type="text" 
+                        name="title" 
+                        class="form-input" 
+                        list="title-list" 
+                        autocomplete="off"
+                        required>
+                    <datalist id="title-list">
+                        @foreach($titles as $title)
+                            <option value="{{ $title->title }}">
+                        @endforeach
+                    </datalist>
                 </div>
 
                 <div class="form-field">
@@ -215,13 +262,15 @@
                 </div>
 
                 <div class="form-field">
-                    <label class="form-label">Pass Type (No. of Entry)</label>
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <input type="number" name="pass_type" id="pass_type" value="1" class="form-input" min="1" required>
-                        <label class="checkbox-label" style="display: flex; align-items: center;">
-                            <input type="checkbox" id="unlimited_pass" class="checkbox" style="margin-right: 0.5rem;">
-                            Unlimited
-                        </label>
+                    <label class="form-label">Title</label>
+                    <div class="datalist-wrapper">
+                        <input type="text" name="title" class="form-input datalist-input" list="title-list" autocomplete="off" required>
+                        <datalist id="title-list">
+                            @foreach($titles as $title)
+                                <option value="{{ $title->title }}" data-value="{{ $title->title }}">
+                            @endforeach
+                        </datalist>
+                        <div class="datalist-icon">▼</div>
                     </div>
                 </div>
                 
@@ -238,6 +287,11 @@
                     <label class="form-label">Description</label>
                     <textarea name="description" class="form-input form-textarea" required></textarea>
                 </div>
+                
+                <div class="form-field full-width">
+                    <label class="form-label">Payment Link</label>
+                    <input type="text" name="paymentLink" class="form-input" required>
+                </div>
             </div>
 
             <div class="button-group">
@@ -253,6 +307,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const passTypeInput = document.getElementById('pass_type');
         const unlimitedCheckbox = document.getElementById('unlimited_pass');
+        
 
         unlimitedCheckbox.addEventListener('change', function () {
             if (this.checked) {
@@ -294,6 +349,24 @@
 
             document.getElementById('durationSummary').textContent = summary;
         }
+
+        document.querySelector('.datalist-input').addEventListener('focus', function () {
+            this.value = '';
+        });
+
+        document.querySelector('.datalist-input').addEventListener('input', function () {
+            const value = this.value.toLowerCase();
+            const options = document.querySelectorAll('#title-list option');
+
+            options.forEach(option => {
+                const optionValue = option.getAttribute('data-value').toLowerCase();
+                if (optionValue.includes(value)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        });
 
         updateDurationSummary(document.getElementById('duration').value);
     });
