@@ -83,7 +83,7 @@
     <div class="error-container">
         <div class="error-code">401</div>
         <h1 class="error-title">Looking for a Workspace? ✨</h1>
-        <p class="error-message">While this page isn't here, your next favorite work spot is just a click away!</p>
+        <p class="error-message">While this page isn't here, your next work adventure is just a click away!</p>
         <a href="/packages" class="button-primary">Find My Perfect Spot 🎯</a>
     </div>
 </body>
