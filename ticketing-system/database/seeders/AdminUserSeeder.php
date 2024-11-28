@@ -12,7 +12,7 @@ class AdminUserSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@rmw.com',
+            'email' => 'admin@rwm.com',
             'password' => bcrypt('R3m0t3WorkMa1aYs!A'),
             'uuid' => Str::uuid(),
             'is_admin' => true,
