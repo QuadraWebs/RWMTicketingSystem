@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Illuminate\Support\Facades\Artisan;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
@@ -14,18 +14,17 @@ class Kernel extends ConsoleKernel
     ];
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('tickets:update-expired')
-            ->daily()
-            ->thenPing(config('app.url') . '/schedule/run-all');
-    
-        $schedule->command('tickets:check-ending')
-            ->everyMinute()
-            ->thenPing(config('app.url') . '/schedule/run-all');
-    
-        $schedule->command('tickets:check-ended')
-            ->everyMinute()
-            ->thenPing(config('app.url') . '/schedule/run-all');
+        // Single scheduled task to run all commands
+        $schedule->call(function () {
+            Artisan::call('tickets:update-expired');
+            Artisan::call('tickets:check-ending');
+            Artisan::call('tickets:check-ended');
+        })
+        ->everyMinute()
+        ->thenPing(config('app.url') . '/schedule/run-all');
     }
+    
+    
     
     protected function commands()
     {

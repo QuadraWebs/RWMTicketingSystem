@@ -126,13 +126,10 @@ Route::get('/health', function () {
 
 Route::get('/schedule/run-all', function () {
     Artisan::call('tickets:update-expired');
-    sleep(1);
     
     Artisan::call('tickets:check-ending');
-    sleep(1);
     
     Artisan::call('tickets:check-ended');
-    sleep(1);
     
     return response('All ticket schedules executed successfully', 200);
 });
