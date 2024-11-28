@@ -10,21 +10,26 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\UpdateExpiredTickets::class,
         Commands\CheckEndingTickets::class,
-        Commands\CheckEndedTickets::class 
+        Commands\CheckEndedTickets::class
     ];
 
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('tickets:update-expired')->everyMinute();
-        $schedule->command('tickets:update-expired')->daily();
-        $schedule->command('tickets:check-ending')->everyMinute();
-        $schedule->command('tickets:check-ended')->everyMinute();
-    }
-    
+        $schedule->command('tickets:update-expired')
+            ->daily()
+            ->thenPing(config('app.url') . '/schedule/update-expired');
 
+        $schedule->command('tickets:check-ending')
+            ->everyMinute()
+            ->thenPing(config('app.url') . '/schedule/check-ending');
+
+        $schedule->command('tickets:check-ended')
+            ->everyMinute()
+            ->thenPing(config('app.url') . '/schedule/check-ended');
+    }
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
         require base_path('routes/console.php');
     }
 }

@@ -120,3 +120,14 @@ Route::get('/verify-ticket/{uuid}', [TicketController::class, 'verifyTicket'])
 Route::post('/verify-ticket/{ticket}/{uuid}/accept', [TicketController::class, 'acceptTicket'])->name('ticket.verify.accept');
 Route::post('/verify-ticket/{ticket}/{uuid}/reject', [TicketController::class, 'rejectTicket'])->name('ticket.verify.reject');
 
+Route::get('/health', function () {
+    return response('OK', 200);
+});
+
+Route::get('/schedule/run-all', function () {
+    Artisan::call('tickets:update-expired');
+    Artisan::call('tickets:check-ending');
+    Artisan::call('tickets:check-ended');
+    
+    return response('All ticket schedules executed successfully', 200);
+});
