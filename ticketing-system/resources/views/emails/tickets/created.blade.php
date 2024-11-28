@@ -37,6 +37,8 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        
+                                        <p style="margin: 20px 0 0 0; color: #4b5563;">Your workspace transformation journey begins here! Our partner cafes are ready to welcome you.</p>
                                     </td>
                                 </tr>
                             </table>
@@ -57,7 +59,30 @@
                                                     Click the "View Ticket" button below
                                                 </td>
                                             </tr>
-                                            <!-- Repeat for steps 2-5 -->
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span style="display: inline-block; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">2</span>
+                                                    Select your desired ticket
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span style="display: inline-block; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">3</span>
+                                                    Choose your preferred cafe
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span style="display: inline-block; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">4</span>
+                                                    Click "Check-in" button
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span style="display: inline-block; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">5</span>
+                                                    Present the QR code to cafe staff within 2 minutes
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -86,6 +111,7 @@
                                 Remote Work Malaysia<br>
                                 Need help? Contact us at <a href="mailto:hi@remotework.com.my" style="color: #172A91; text-decoration: none;">hi@remotework.com.my</a>
                             </p>
+                            
                         </td>
                     </tr>
                 </table>
