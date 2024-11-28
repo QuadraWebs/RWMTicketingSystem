@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('tickets:update-expired')->everyMinute();
+        // $schedule->command('tickets:update-expired')->everyMinute();
         $schedule->command('tickets:update-expired')->daily();
         $schedule->command('tickets:check-ending')->everyMinute();
         $schedule->command('tickets:check-ended')->everyMinute();

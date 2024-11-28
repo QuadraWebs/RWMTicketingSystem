@@ -52,9 +52,9 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 
-    protected function schedule(Schedule $schedule)
-    {
-        $schedule->command('tickets:check-ending')
-            ->everyMinute();
-    }
+    // protected function schedule(Schedule $schedule)
+    // {
+    //     $schedule->command('tickets:check-ending')
+    //         ->everyMinute();
+    // }
 }
