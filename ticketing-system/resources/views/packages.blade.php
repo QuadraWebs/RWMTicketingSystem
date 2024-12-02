@@ -86,7 +86,7 @@
 
         .package-description {
             color: #666;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             line-height: 1.6;
         }
 
@@ -197,7 +197,7 @@
                             <h2 class="package-title">{{ $package->name }}</h2>
                             <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
                             <p class="package-description">{!! nl2br(e($package->description)) !!}</p>
-                            <a href="{{ $package->payment_link }}" class="buy-button">Get Started</a>
+                            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
                         </div>
                     @endif
                 @endforeach
@@ -211,8 +211,8 @@
                         <div class="package-card">
                             <h2 class="package-title">{{ $package->name }}</h2>
                             <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
-                            <p class="package-description">{!! nl2br(e($package->description)) !!}</p>
-                            <a href="{{ $package->payment_link }}" class="buy-button">Get Started</a>
+                            <p class="package-description">{!! nl2br(string: e($package->description)) !!}</p>
+                            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
                         </div>
                     @endif
                 @endforeach
