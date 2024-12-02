@@ -109,12 +109,12 @@ class StripeWebhookController extends Controller
             Log::error('Webhook processing failed', $errorDetails);
 
             // Send error notification email
-            Mail::to('liongsy020601@gmail.com')
-                ->send(new WebhookErrorNotification(
-                    $e->getMessage(),
-                    $e->getTraceAsString(),
-                    $payload
-                ));
+            Mail::to(env('DEV_EMAIL'))
+            ->send(new WebhookErrorNotification(
+                $e->getMessage(),
+                $e->getTraceAsString(),
+                $payload
+            ));
 
 
             Log::error('Webhook processing failed', [
