@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Str;
 use App\Mail\TicketCreated;
+use App\Mail\WebhookErrorNotification;
+
 
 class StripeWebhookController extends Controller
 {
@@ -98,6 +100,22 @@ class StripeWebhookController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+
+            $errorDetails = [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ];
+    
+            Log::error('Webhook processing failed', $errorDetails);
+    
+            // Send error notification email
+            Mail::to('liongsy020601@gmail.com')
+                ->send(new WebhookErrorNotification(
+                    $e->getMessage(),
+                    $e->getTraceAsString(),
+                    $payload
+                ));
+    
 
             Log::error('Webhook processing failed', [
                 'error' => $e->getMessage(),
