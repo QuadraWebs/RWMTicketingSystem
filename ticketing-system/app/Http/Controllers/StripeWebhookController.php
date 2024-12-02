@@ -81,7 +81,7 @@ class StripeWebhookController extends Controller
             }
 
             StripeTransaction::create([
-                'payment_intent_id' => $session['payment_intent'],
+                'payment_intent_id' => $session['payment_intent'] ?? 'free-transaction-' . Str::random(10),
                 'payment_link' => $session['payment_link'],
                 'payment_status' => $session['payment_status'],
                 'total_amount' => $session['amount_total'] / 100, // Convert from cents to dollars
@@ -105,9 +105,9 @@ class StripeWebhookController extends Controller
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ];
-    
+
             Log::error('Webhook processing failed', $errorDetails);
-    
+
             // Send error notification email
             Mail::to('liongsy020601@gmail.com')
                 ->send(new WebhookErrorNotification(
@@ -115,7 +115,7 @@ class StripeWebhookController extends Controller
                     $e->getTraceAsString(),
                     $payload
                 ));
-    
+
 
             Log::error('Webhook processing failed', [
                 'error' => $e->getMessage(),
