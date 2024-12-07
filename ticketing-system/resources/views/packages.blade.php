@@ -74,7 +74,28 @@
             padding: 2rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
         }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            animation: zoom-bounce 2s ease-in-out infinite;
+        }
+
 
         .package-card:hover {
             transform: translateY(-5px);
@@ -97,6 +118,8 @@
             color: #666;
             margin-bottom: 1rem;
             line-height: 1.6;
+            flex-grow: 1;
+            /* Take up remaining space */
         }
 
         .buy-button {
@@ -110,6 +133,19 @@
             width: 100%;
             text-align: center;
         }
+
+        @keyframes zoom-bounce {
+
+            0%,
+            100% {
+                transform: rotate(3deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(3deg) scale(1.1);
+            }
+        }
+
 
         .buy-button:hover {
             background: #EBA49E;
@@ -161,8 +197,218 @@
             color: #EBA49E;
         }
 
+        .description-text {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
+        }
+
+        .included-section {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .included-title {
+            color: #172A91;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .included-list {
+            color: #4a5568;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .included-intro {
+            font-size: 1.1rem;
+            color: #172A91;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .included-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .included-items-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .included-items-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .included-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(23, 42, 145, 0.03);
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .included-item:hover {
+            transform: translateX(5px);
+        }
+
+        .included-item span {
+            color: #EBA49E;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+
+        .why-choose-section {
+            background: linear-gradient(145deg, #172A91, #1e357d);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .why-choose-title {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .why-choose-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #EBA49E;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin: 2rem 0;
+            width: 100%;
+            /* Ensure full width */
+            max-width: 100%;
+            /* Prevent overflow */
+        }
+
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-title {
+            color: #EBA49E;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-text {
+            color: white;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .closing-text {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+
 
         @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                /* Reduce container padding */
+            }
+
+            .included-section,
+            .why-choose-section {
+                padding: 2rem 1rem;
+                /* Reduced padding */
+                margin-top: 2rem;
+            }
+
+            .benefit-item {
+                padding: 1.5rem;
+                /* Slightly reduced padding */
+            }
+
+            .benefits-grid {
+                gap: 1.5rem;
+                padding: 0;
+                /* Remove any extra padding */
+            }
+
+            .included-items {
+                grid-template-columns: 1fr;
+            }
+
+            .included-section {
+                padding: 1.5rem;
+            }
+
+            .included-items-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .included-title,
+            .why-choose-title {
+                font-size: 1.75rem;
+                text-align: center;
+            }
+
+            .benefits-grid {
+                gap: 1.5rem;
+            }
+
+            .closing-text {
+                font-size: 1.1rem;
+                padding: 1.5rem;
+            }
+
             .packages-grid {
                 grid-template-columns: 1fr;
             }
@@ -198,33 +444,213 @@
             <button class="tab-button" onclick="switchTab('allin')">All-in Pass</button>
         </div>
 
+
+        <div class="description-text">
+            WorkSpace Pass gives you easy, everyday access to your favorite WorkSpace. Choose any WorkSpace, anywhere,
+            with one flexible membership.
+        </div>
+
+
         <div id="coworking" class="tab-content active">
             <div class="packages-grid">
-                @foreach($packages as $package)
-                    @if($package->title == 'Coworking pass')
-                        <div class="package-card">
-                            <h2 class="package-title">{{ $package->name }}</h2>
-                            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
-                            <p class="package-description">{!! nl2br(e($package->description)) !!}</p>
-                            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
+            @foreach($packages as $package)
+    @if($package->title == 'Coworking pass')
+        <div class="package-card">
+            @if($package->id == 2)
+                <div class="popular-badge">Most Popular</div>
+            @endif
+            <h2 class="package-title">{{ $package->name }}</h2>
+            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
+            
+            {{-- Replace dynamic description with hardcoded ones --}}
+            @if($package->id == 1)
+                <p class="package-description">
+                    Perfect for a Trial or a Change of Scene<br><br>
+                    ● Ideal for individuals who want to explore our WorkSpace's or need a productive environment for 4 hours.<br><br>
+                    ● No commitment, just drop in and experience a professional setup designed to enhance your focus.
+                </p>
+            @elseif($package->id == 2)
+                <p class="package-description">
+                    Flexibility for Hybrid Work<br><br>
+                    ● Tailored for remote or hybrid workers who need an inspiring WorkSpace occasionally.<br><br>
+                    ● Save more while enjoying 5 sessions of access.<br><br>
+                    ● Great for those balancing work-from-home with on-site productivity.
+                </p>
+            @elseif($package->id == 3)
+                <p class="package-description">
+                    Your Ultimate Productivity Solution<br><br>
+                    ● Perfect for full-time remote workers or freelancers who need consistent WorkSpaces.<br><br>
+                    ● Unlimited access to all cafes, coworking facilities, giving you the freedom to work on your terms every day.<br><br>
+                    ● Build a routine in a vibrant and collaborative environment.
+                </p>
+            @endif
+            
+            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
+        </div>
+    @endif
+@endforeach
+
+            </div>
+            <div class="included-section">
+                <h2 class="included-title">Included in all Plans</h2>
+                <div class="included-list">
+                    <p class="included-intro">
+                        Perfect for those who are looking for no fuss. Just productivity.
+                    </p>
+                    <div class="included-items-container">
+                        <div class="included-items-column">
+                            <div class="included-item">
+                                <span>✓</span> Up to 4 hours per WorkSpace
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> Wi-Fi, plug point, drinking water
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> DeviceCover TM
+                            </div>
                         </div>
-                    @endif
-                @endforeach
+                        <div class="included-items-column">
+                            <div class="included-item">
+                                <span>✓</span> Redeemable at any partner WorkSpaces
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> Privileged rates on community events
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> Valid for 1 month after purchase
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="why-choose-section">
+                <h2 class="why-choose-title">Why Choose our Coworking Pass?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-title">Convenient & Accessible</div>
+                        <div class="benefit-text">
+                            Our WorkSpaces are easy to reach and are ready to welcome you.
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-title">Plug in Anytime</div>
+                        <div class="benefit-text">
+                            Enjoy peace of mind knowing you're more than welcome to settle in and get straight to work.
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-title">Community</div>
+                        <div class="benefit-text">
+                            Network with like-minded professionals.
+                        </div>
+                    </div>
+                </div>
+                <div class="closing-text">
+                    Which pass fits your work style? Let us help you make the most of your workday!
+                </div>
             </div>
         </div>
 
         <div id="allin" class="tab-content">
             <div class="packages-grid">
-                @foreach($packages as $package)
-                    @if($package->title == 'All-in pass')
-                        <div class="package-card">
-                            <h2 class="package-title">{{ $package->name }}</h2>
-                            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
-                            <p class="package-description">{!! nl2br(string: e($package->description)) !!}</p>
-                            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
+            @foreach($packages as $package)
+    @if($package->title == 'All-in pass')
+        <div class="package-card">
+            @if($package->id == 4)
+                <div class="popular-badge">Most Popular</div>
+            @endif
+            <h2 class="package-title">{{ $package->name }}</h2>
+            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
+            
+            @if($package->id == 4)
+                <p class="package-description">
+                    Perfect for Quick, Productive Days<br><br>
+                    ● Gain access to our vibrant partner WorkSpaces for 4 hours.<br><br>
+                    ● Includes RM 25 spending credits to use for F&B.<br><br>
+                    ● Ideal for individuals who want to
+                </p>
+            @elseif($package->id == 5)
+                <p class="package-description">
+                    Great for Balanced Work Weeks<br><br>
+                    ● Enjoy 5 access to our inspiring WorkSpaces.<br><br>
+                    ● Includes RM 125 (RM 25 x 5) spending credits, perfect for grabbing your comfort food and drinks.<br><br>
+                    ● Perfect for hybrid or part-time remote workers who value flexibility and perks.
+                </p>
+            @elseif($package->id == 6)
+                <p class="package-description">
+                    Your Premium Coworking Experience<br><br>
+                    ● Unlimited access to our WorkSpaces for the month.<br><br>
+                    ● Includes a no-limits F&B package (RM25 per WorkSpace, unlimited) spending credits, ensuring you have everything you need to stay productive.<br><br>
+                    ● Designed for full-time remote workers or freelancers looking for consistent access to professional and inspiring WorkSpaces.
+                </p>
+            @endif
+            
+            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
+        </div>
+    @endif
+@endforeach
+            </div>
+
+            <div class="included-section">
+                <h2 class="included-title">Included in all Plans</h2>
+                <div class="included-list">
+                    <p class="included-intro">
+                        Perfect for those who are looking for that extra perk on your workday.
+                    </p>
+                    <div class="included-items-container">
+                        <div class="included-items-column">
+                            <div class="included-item">
+                                <span>✓</span> Up to 4-hours per WorkSpace
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> Wi-Fi, plug point, drinking water
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> DeviceCover TM
+                            </div>
                         </div>
-                    @endif
-                @endforeach
+                        <div class="included-items-column">
+                            <div class="included-item">
+                                <span>✓</span> Up to unlimited spending credits
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> Redeemable at any partner WorkSpaces
+                            </div>
+                            <div class="included-item">
+                                <span>✓</span> Valid for 1 month after purchase
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="why-choose-section">
+                <h2 class="why-choose-title">Why Choose Our All-In Passes?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-title">Value with Flexibility</div>
+                        <div class="benefit-text">
+                            Work on your schedule while enjoying added spending credits.
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-title">Boost Your Productivity Anytime</div>
+                        <div class="benefit-text">
+                            Enjoy peace of mind knowing you can step in, focus, and make the most of your workday with
+                            meaningful perks.
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-title">Community Perks</div>
+                        <div class="benefit-text">
+                            Build connections in a dynamic and collaborative setting.
+                        </div>
+                    </div>
+                </div>
+                <div class="closing-text">
+                    Which pass suits your style of work? Treat yourself to a WorkSpace that works for you!
+                </div>
             </div>
         </div>
         <div class="footer">
@@ -252,7 +678,8 @@
             </div>
 
             <div class="powered-by">
-                <a href="https://www.quadrawebs.com" target="_blank" style="color: #172A91; text-decoration: none;">
+                <a href="https://www.quadrawebs.com" target="_blank" rel="noopener noreferrer"
+                    style="color: #EBA49E; text-decoration: none;">
                     Powered by QuadraWebs
                 </a>
             </div>
