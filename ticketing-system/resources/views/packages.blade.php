@@ -6,12 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="WorkSpace that works for you">
-    <meta property="og:description" content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
+    <meta property="og:description"
+        content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
     <meta property="og:image" content="{{ asset('images/rwm-logo.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Remote Work Malaysia">
-    <meta name="description" content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
+    <meta name="description"
+        content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
 
     <style>
         * {
@@ -453,42 +455,45 @@
 
         <div id="coworking" class="tab-content active">
             <div class="packages-grid">
-            @foreach($packages as $package)
-    @if($package->title == 'Coworking pass')
-        <div class="package-card">
-            @if($package->id == 2)
-                <div class="popular-badge">Most Popular</div>
-            @endif
-            <h2 class="package-title">{{ $package->name }}</h2>
-            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
-            
-            {{-- Replace dynamic description with hardcoded ones --}}
-            @if($package->id == 1)
-                <p class="package-description">
-                    Perfect for a Trial or a Change of Scene<br><br>
-                    ● Ideal for individuals who want to explore our WorkSpace's or need a productive environment for 4 hours.<br><br>
-                    ● No commitment, just drop in and experience a professional setup designed to enhance your focus.
-                </p>
-            @elseif($package->id == 2)
-                <p class="package-description">
-                    Flexibility for Hybrid Work<br><br>
-                    ● Tailored for remote or hybrid workers who need an inspiring WorkSpace occasionally.<br><br>
-                    ● Save more while enjoying 5 sessions of access.<br><br>
-                    ● Great for those balancing work-from-home with on-site productivity.
-                </p>
-            @elseif($package->id == 3)
-                <p class="package-description">
-                    Your Ultimate Productivity Solution<br><br>
-                    ● Perfect for full-time remote workers or freelancers who need consistent WorkSpaces.<br><br>
-                    ● Unlimited access to all cafes, coworking facilities, giving you the freedom to work on your terms every day.<br><br>
-                    ● Build a routine in a vibrant and collaborative environment.
-                </p>
-            @endif
-            
-            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
-        </div>
-    @endif
-@endforeach
+                @foreach($packages as $package)
+                    @if($package->title == 'Coworking pass')
+                        <div class="package-card">
+                            @if($package->id == 2)
+                                <div class="popular-badge">Most Popular</div>
+                            @endif
+                            <h2 class="package-title">{{ $package->name }}</h2>
+                            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
+
+                            {{-- Replace dynamic description with hardcoded ones --}}
+                            @if($package->id == 1)
+                                <p class="package-description">
+                                    Perfect for a Trial or a Change of Scene<br><br>
+                                    ● Ideal for individuals who want to explore our WorkSpace's or need a productive environment for
+                                    4 hours.<br><br>
+                                    ● No commitment, just drop in and experience a professional setup designed to enhance your
+                                    focus.
+                                </p>
+                            @elseif($package->id == 2)
+                                <p class="package-description">
+                                    Flexibility for Hybrid Work<br><br>
+                                    ● Tailored for remote or hybrid workers who need an inspiring WorkSpace occasionally.<br><br>
+                                    ● Save more while enjoying 5 sessions of access.<br><br>
+                                    ● Great for those balancing work-from-home with on-site productivity.
+                                </p>
+                            @elseif($package->id == 3)
+                                <p class="package-description">
+                                    Your Ultimate Productivity Solution<br><br>
+                                    ● Perfect for full-time remote workers or freelancers who need consistent WorkSpaces.<br><br>
+                                    ● Unlimited access to all cafes, coworking facilities, giving you the freedom to work on your
+                                    terms every day.<br><br>
+                                    ● Build a routine in a vibrant and collaborative environment.
+                                </p>
+                            @endif
+
+                            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
+                        </div>
+                    @endif
+                @endforeach
 
             </div>
             <div class="included-section">
@@ -554,42 +559,45 @@
 
         <div id="allin" class="tab-content">
             <div class="packages-grid">
-            @foreach($packages as $package)
-    @if($package->title == 'All-in pass')
-        <div class="package-card">
-            @if($package->id == 4)
-                <div class="popular-badge">Most Popular</div>
-            @endif
-            <h2 class="package-title">{{ $package->name }}</h2>
-            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
-            
-            @if($package->id == 4)
-                <p class="package-description">
-                    Perfect for Quick, Productive Days<br><br>
-                    ● Gain access to our vibrant partner WorkSpaces for 4 hours.<br><br>
-                    ● Includes RM 25 spending credits to use for F&B.<br><br>
-                    ● Ideal for individuals who want to
-                </p>
-            @elseif($package->id == 5)
-                <p class="package-description">
-                    Great for Balanced Work Weeks<br><br>
-                    ● Enjoy 5 access to our inspiring WorkSpaces.<br><br>
-                    ● Includes RM 125 (RM 25 x 5) spending credits, perfect for grabbing your comfort food and drinks.<br><br>
-                    ● Perfect for hybrid or part-time remote workers who value flexibility and perks.
-                </p>
-            @elseif($package->id == 6)
-                <p class="package-description">
-                    Your Premium Coworking Experience<br><br>
-                    ● Unlimited access to our WorkSpaces for the month.<br><br>
-                    ● Includes a no-limits F&B package (RM25 per WorkSpace, unlimited) spending credits, ensuring you have everything you need to stay productive.<br><br>
-                    ● Designed for full-time remote workers or freelancers looking for consistent access to professional and inspiring WorkSpaces.
-                </p>
-            @endif
-            
-            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
-        </div>
-    @endif
-@endforeach
+                @foreach($packages as $package)
+                    @if($package->title == 'All-in pass')
+                        <div class="package-card">
+                            @if($package->id == 4)
+                                <div class="popular-badge">Most Popular</div>
+                            @endif
+                            <h2 class="package-title">{{ $package->name }}</h2>
+                            <div class="package-price">RM {{ number_format($package->price, 2) }}</div>
+
+                            @if($package->id == 4)
+                                <p class="package-description">
+                                    Perfect for Quick, Productive Days<br><br>
+                                    ● Gain access to our vibrant partner WorkSpaces for 4 hours.<br><br>
+                                    ● Includes <b>RM 25 spending credits</b> to use for F&B.<br><br>
+                                    ● Ideal for individuals who want to
+                                </p>
+                            @elseif($package->id == 5)
+                                <p class="package-description">
+                                    Great for Balanced Work Weeks<br><br>
+                                    ● Enjoy 5 access to our inspiring WorkSpaces.<br><br>
+                                    ● Includes <b>RM 125 (RM 25 x 5) spending credits</b>, perfect for grabbing your comfort food and
+                                    drinks.<br><br>
+                                    ● Perfect for hybrid or part-time remote workers who value flexibility and perks.
+                                </p>
+                            @elseif($package->id == 6)
+                                <p class="package-description">
+                                    Your Premium Coworking Experience<br><br>
+                                    ● Unlimited access to our WorkSpaces for the month.<br><br>
+                                    ● Includes a no-limits F&B package <b>(RM25 per WorkSpace, unlimited) spending credits</b>, ensuring
+                                    you have everything you need to stay productive.<br><br>
+                                    ● Designed for full-time remote workers or freelancers looking for consistent access to
+                                    professional and inspiring WorkSpaces.
+                                </p>
+                            @endif
+
+                            <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
+                        </div>
+                    @endif
+                @endforeach
             </div>
 
             <div class="included-section">
