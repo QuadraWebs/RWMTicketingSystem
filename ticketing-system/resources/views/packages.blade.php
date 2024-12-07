@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Coworking Packages</title>
+    <title>Remote Work Malaysia</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="WorkSpace that works for you">
