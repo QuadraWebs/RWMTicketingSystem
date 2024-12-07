@@ -354,7 +354,7 @@
                         <span class="info-value">{{ $end_time->format('h:i A') }}</span>
                     </div>
                     <div class="info-row">
-                        <span class="info-label">Package Entitlement:</span>
+                        <span class="info-label">Included in Pass:</span>
                     </div>
                     <div class="package-description">{{ $package->description }}</div>
                     <div class="info-row">
@@ -370,14 +370,14 @@
                 </div>
 
                 <div class="warning-section">
-                    <p class="warning-title">⚠️ Please verify:</p>
+                    <p class="warning-title">⚠️ I've verify:</p>
                     <ul class="warning-list">
                         @if($ticket->is_unlimited)
-                            <li>1. Customer's name by checking their NRIC/Business Card</li>
-                            <li>2. Confirm you are the correct cafe location: <span
+                            <li>1. Customer with a photo ID with the same name</li>
+                            <li>2. that this is the correct WorkSpace: <span
                                     class="gradient-text">{{ $selected_cafe }}</span></li>
                         @else
-                            <li>1. Confirm you are the correct cafe location: <span
+                            <li>1. that this is the correcetr WorkSpace: <span
                                     class="gradient-text">{{ $selected_cafe }}</span></li>
                         @endif
                     </ul>

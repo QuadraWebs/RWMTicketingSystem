@@ -408,5 +408,33 @@
         </div>
     </div>
 </div>
+<script>
+function showDeleteTicketModal(deleteUrl) {
+    if (confirm('Are you sure you want to delete this ticket?')) {
+        // Create and submit a form to handle the DELETE request
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = deleteUrl;
+        
+        // Add CSRF token
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = '_token';
+        csrfToken.value = '{{ csrf_token() }}';
+        form.appendChild(csrfToken);
+        
+        // Add method spoofing for DELETE
+        const methodField = document.createElement('input');
+        methodField.type = 'hidden';
+        methodField.name = '_method';
+        methodField.value = 'DELETE';
+        form.appendChild(methodField);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+</script>
+
 
 @endsection

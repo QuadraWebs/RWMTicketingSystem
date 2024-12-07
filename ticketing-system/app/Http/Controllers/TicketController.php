@@ -222,14 +222,14 @@ class TicketController extends Controller
 
             $retrieveTicket = Ticket::find($ticket_id);
             $users = User::where('uuid', $ticket->user_uuid)->first();
-            $cafe = Cafe::find($cafe_id); // Changed from User to Cafe model
+            $cafe = Cafe::find($cafe_id); 
 
             Mail::to($user->email)->send(new CheckedIn($retrieveTicket, $users, $cafe));
 
 
             return view('accept-ticket', [
-                'message' => 'Ticket Accepted Successfully',
-                'action' => 'You can now proceed to enter the cafe'
+                'message' => 'Check in successful',
+                'action' => 'Your WorkSpace awaits. Have a good workday!'
             ]);
         } catch (\Exception $e) {
             DB::rollback();
@@ -251,8 +251,8 @@ class TicketController extends Controller
             
             DB::commit();
             return view('reject-ticket', [
-                'message' => 'Ticket Rejected',
-                'action' => 'This ticket has been rejected for entry'
+                'message' => 'Check in unsuccessful',
+                'action' => 'Your pass is still valid for the next use.'
             ]);
         } catch (\Exception $e) {
             DB::rollback();

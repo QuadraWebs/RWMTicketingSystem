@@ -270,6 +270,25 @@
                 justify-content: center;
             }
         }
+
+        .redemption-text {
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin: 0.5rem 0;
+        }
+
+        .highlight {
+            color: #172A91;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        .checkin-prompt {
+            text-align: center;
+            color: #172A91;
+            font-weight: 500;
+            font-size: 1.125rem;
+        }
     </style>
 </head>
 
@@ -292,9 +311,9 @@
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                     </div>
-                    <h2 class="card-title">Ticket Check-In</h2>
+                    <h2 class="card-title">Check-In</h2>
                     <span class="current-date">{{ now()->format('F d, Y') }}</span>
-
+                    <p class="redemption-text">Redeemable at <span class="highlight">any WorkSpaces</span> during their remote work hours</p>
                 </div>
 
                 <form action="{{ route('ticket.confirm-checkin') }}" method="POST"
@@ -313,9 +332,9 @@
                         ">
                     @csrf
                     <div class="search-container">
-                        <label class="search-label">Select Cafe</label>
+                        <label class="search-label">Select WorkSpace</label>
                         <input type="text" x-model="search" @click="open = true" @click.away="open = false"
-                            :value="selectedCafe" placeholder="Search cafe..." class="search-input">
+                            :value="selectedCafe" placeholder="Search WorkSpace..." class="search-input">
 
                         <div x-show="open" class="search-results">
                             <template
@@ -357,8 +376,9 @@
                     <input type="hidden" name="uuid" value="{{ $uuid }}">
                     <input type="hidden" name="ticket_id" value="{{ $ticket_id }}">
 
+                    <div class="checkin-prompt">Ready to Check-in?</div>
                     <button type="submit" class="submit-button">
-                        Confirm Check In
+                        Confirm Check-in
                     </button>
                 </form>
 
@@ -366,7 +386,7 @@
                     <div class="qr-section">
                         <div class="qr-container">
                             {!! QrCode::size(150)->format('svg')->errorCorrection('H')->generate($verificationUrl) !!}
-                            <p class="qr-message">Please show this QR code to the cashier</p>
+                            <p class="qr-message">Ask the WorkSpace crew to scan your QR Code using any QR Scanner</p>
                             <div class="qr-expiry">
                                 <p>This QR code will expire in 2 minutes</p>
                                 <p>Expires at: {{ now()->addMinutes(2)->format('h:i:s A') }}</p>
