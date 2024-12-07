@@ -3,7 +3,16 @@
 
 <head>
     <title>Coworking Packages</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="WorkSpace that works for you">
+    <meta property="og:description" content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
+    <meta property="og:image" content="{{ asset('images/rwm-logo.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Remote Work Malaysia">
+    <meta name="description" content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
+
     <style>
         * {
             margin: 0;

@@ -23,8 +23,7 @@
                                         <div
                                             style="background-color: #2563eb; color: white; width: 48px; height: 48px; border-radius: 50%; line-height: 48px; text-align: center; font-size: 24px; margin-bottom: 20px;">
                                             ⏰</div>
-                                        <h1 style="color: #2563eb; font-size: 24px; margin: 0 0 30px 0;">Time's Almost
-                                            Up!</h1>
+                                        <h1 style="color: #2563eb; font-size: 24px; margin: 0 0 30px 0;">Time's Almost Up!</h1>
                                     </td>
                                 </tr>
                             </table>
@@ -52,8 +51,9 @@
                                             </tr>
                                         </table>
 
-                                        <p style="margin: 0; color: #4b5563;">Please prepare to wrap up your work
-                                            session. Thank you for using our workspace!</p>
+                                        <p style="margin: 0; color: #4b5563;">Need to extend? Get your next WorkSpace pass 
+                                            <a href="{{ route('packages') }}" style="color: #172A91; text-decoration: none; font-weight: 500;">here</a>
+                                        </p>
                                     </td>
                                 </tr>
                             </table>

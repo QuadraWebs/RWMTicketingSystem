@@ -49,6 +49,13 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f0f7ff; border: 1px solid #172A91; border-radius: 8px; margin: 20px 0;">
+                                            <tr>
+                                                <td style="padding: 15px; text-align: center;">
+                                                    <p style="margin: 0; color: #4b5563;">Need another productive session? Get your next WorkSpace pass <a href="{{ route('packages') }}" style="color: #172A91; text-decoration: none; font-weight: 500;">here</a>.</p>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>
