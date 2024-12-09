@@ -248,6 +248,14 @@ class TicketController extends Controller
                 ->where('status', TicketStatus::Active)
                 ->first();
 
+                
+            if ($ticket->is_in_used) {
+                return view('accept-ticket', [
+                    'message' => 'Already Checked In',
+                    'action' => 'This ticket has already been used for check-in.'
+                ]);
+            }
+
             $package = Package::where('id', $ticket->package_id)
                 ->first();
             
@@ -273,7 +281,6 @@ class TicketController extends Controller
                 'user_id' => $user->id
             ]);
 
-            
             DB::commit();
 
             $retrieveTicket = Ticket::find($ticket_id);
