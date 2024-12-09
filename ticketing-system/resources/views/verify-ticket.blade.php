@@ -77,35 +77,35 @@
 
         .verify-card {
             max-width: 48rem;
-            margin: 1rem auto;
+            margin: 0.5rem auto;
             background: white;
             border-radius: 0.75rem;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border: 1px solid #e5e7eb;
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .card-header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .icon-container {
             display: inline-block;
-            padding: 1rem;
+            padding: 0.75rem; 
             background: #F0F7FF;
             border-radius: 9999px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .icon {
-            width: 3rem;
-            height: 3rem;
+            width: 2.5rem; 
+            height: 2.5rem; 
             color: #172A91;
         }
 
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: #111827;
         }
@@ -113,24 +113,30 @@
         .info-section {
             background: #f9fafb;
             border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
+            padding: 0.75rem; 
         }
 
         .info-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
+            align-items: flex-start;  
+            margin-bottom: 0.25rem;
+            gap: 1rem; 
         }
 
         .info-label {
             color: #6b7280;
+            flex: 0 0 auto; 
+            min-width: 100px; 
         }
 
         .info-value {
             font-weight: 500;
             color: #111827;
+            flex: 1;  
+            text-align: right;
+            word-wrap: break-word;  
+            max-width: 60%;
         }
 
         .gradient-text {
@@ -176,15 +182,19 @@
             background: #fffbeb;
             border: 1px solid #fcd34d;
             border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 1.5rem 0;
+            padding: 0.75rem;
         }
 
         .warning-title {
             color: #b45309;
             text-align: center;
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem; 
+            font-size: 0.9rem; 
+        }
+        
+        .warning-list li {
+            margin-bottom: 0.25rem; 
         }
 
         .warning-list {
@@ -192,12 +202,15 @@
             text-align: center;
             font-weight: 500;
             list-style: none;
+            font-size: 0.85rem; 
+            margin: 0; 
+            padding: 0; 
         }
 
         .button-group {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
+            margin-top: 0.75rem;
             width: 100%;
         }
 
@@ -207,10 +220,10 @@
 
         .button {
             width: 100%;
-            padding: 1rem;
+            padding: 0.75rem;
             border: none;
             border-radius: 0.5rem;
-            font-size: 1.125rem;
+            font-size: 1rem; 
             font-weight: 500;
             cursor: pointer;
             display: flex;
@@ -227,8 +240,8 @@
         }
         
         .button svg {
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 1.25rem; 
+            height: 1.25rem;
         }
 
         .button-reject {
@@ -285,8 +298,8 @@
 
         @media (max-width: 640px) {
             .verify-card {
-                margin: 0.5rem;
-                padding: 1rem;
+                margin: 0.25rem;
+                padding: 0.75rem;
             }
 
             .button-group {
@@ -294,9 +307,25 @@
             }
 
             .info-row {
-                flex-direction: column;
+                flex-direction: row;
                 align-items: flex-start;
-                gap: 0.25rem;
+                gap: 0.5rem;
+                justify-content: space-between; 
+            }
+
+            .info-label {
+                flex: 1; 
+                text-align: left;
+                font-size: 0.9rem;
+            }
+
+            .info-value {
+                flex: 1;
+                text-align: right;
+                font-size: 0.9rem;
+            }
+            .card-title {
+                font-size: 1.1rem; 
             }
         }
     </style>
@@ -323,13 +352,25 @@
 
             <div class="verify-card">
                 <div class="card-header">
-                    <div class="icon-container">
+                    <!-- <div class="icon-container">
                         <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                    </div>
+                    </div> -->
                     <h2 class="card-title">Pending Verification</h2>
+                    <p style="color: #6b7280; margin-top: 0.5rem; font-size: 0.9rem;">Your responsibility as host:</p>
+                    @if($package->title === 'Coworking pass')
+                        <!-- <p style="color: #374151; margin-top: 0.5rem; font-size: 0.9rem;">{{ $package->title }}</p> -->
+                        <p style="color: #374151; margin-top: 0.25rem; font-size: 0.9rem;">Collect payment as usual</p>
+                    @elseif($package->title === 'All-in pass')
+                        <!-- <p style="color: #374151; margin-top: 0.5rem; font-size: 0.9rem;">{{ $package->title }}</p> -->
+                        <ul style="list-style-type: disc; padding-left: 1.5rem; color: #374151; font-size: 0.9rem; text-align: left;">
+                            <li style="margin-bottom: 0.25rem; text-align: left;">For bill less than RM25, customer does not need to pay. The bill will be settled separately.</li>
+                            <li style="margin-bottom: 0.25rem; text-align: left;">For bill more than RM25, collect the excess.</li>
+                            <li style="text-align: left;">E.g. If customer spends RM30, you will deduct RM25 and collect RM5 from customer.</li>
+                        </ul>
+                    @endif
                 </div>
 
                 <div class="info-section">
@@ -340,7 +381,7 @@
                         </div>
                     @endif
                     <div class="info-row">
-                        <span class="info-label">Cafe:</span>
+                        <span class="info-label">WorkSpace:</span>
                         <span class="info-value">{{ $selected_cafe }}</span>
                     </div>
                     <div class="info-row">
@@ -356,10 +397,6 @@
                         <span class="info-value">{{ $end_time->format('h:i A') }}</span>
                     </div>
                     <div class="info-row">
-                        <span class="info-label">Included in Pass:</span>
-                    </div>
-                    <div class="package-description">{{ $package->description }}</div>
-                    <div class="info-row">
                         <span class="info-label">Status:</span>
                         <span class="status-badge">
                             <svg class="status-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -369,17 +406,32 @@
                             <span class="status-text">Pending</span>
                         </span>
                     </div>
+                    <div class="info-row">
+                        <span class="info-label">Included in Pass:</span>
+                    </div>
+                    <div class="package-description">{{ $package->description }}</div>
+                    <p style="margin-top: 0.2rem; font-size: 0.9rem;">
+                        Review your café information page 
+                        <a href="https://remotework.com.my/map/" 
+                        target="_blank" 
+                        style="color: #172A91; text-decoration: underline;">
+                        here
+                        </a>.
+                    </p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280;">
+                        You can screenshot this for your own record.
+                    </p>
                 </div>
 
                 <div class="warning-section">
-                    <p class="warning-title">⚠️ I've verify:</p>
+                    <p class="warning-title">⚠️ I've verified:</p>
                     <ul class="warning-list">
                         @if($ticket->is_unlimited)
                             <li>1. Customer with a photo ID with the same name</li>
                             <li>2. that this is the correct WorkSpace: <span
                                     class="gradient-text">{{ $selected_cafe }}</span></li>
                         @else
-                            <li>1. that this is the correcetr WorkSpace: <span
+                            <li>1. that this is the correct WorkSpace: <span
                                     class="gradient-text">{{ $selected_cafe }}</span></li>
                         @endif
                     </ul>
@@ -393,7 +445,7 @@
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
-                            Reject
+                            Cancel
                         </button>
                     </form>
 
@@ -404,7 +456,7 @@
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            Accept
+                            Check in
                         </button>
                     </form>
                 </div>
@@ -413,7 +465,7 @@
 
         <div class="footer">
             <div style="margin-top: 10px; color: #172A91; font-size: 13px;">
-                Need help? Contact us at <a href="mailto:hi@remotework.com.my" style="color: #EBA49E; text-decoration: none;">hi@remotework.com.my</a>
+                Need help? Contact us at <a href="mailto:hi@remotework.com.my" style="color: #EBA49E; text-decoration: none;">hi@remotework.com.my</a> or <a href="tel:+60107973713" style="color: #EBA49E; text-decoration: none;">+60107973713</a>
             </div>
             <!-- Social Media Icons -->
             <div style="margin-top: 10px; margin-bottom:10px">

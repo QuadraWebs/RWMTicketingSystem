@@ -325,6 +325,7 @@
                         <tr>
                             <th>Actions</th>
                             <th>Package</th>
+                            <th>Name</th>
                             <th>Status</th>
                             <th>Valid Until</th>
                             <th>Available Passes</th>
@@ -345,7 +346,16 @@
                                         </button>
                                     </div>
                                 </td>
-                                <td>{{ $ticket->package->title }}</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                        <span style="font-weight: 500;">{{ $ticket->package->title }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                        <span style="font-weight: 500;">{{ $ticket->package->name }}</span>
+                                    </div>
+                                </td>
                                 <td>
                                     <span class="status-badge {{ $ticket->status == 'active' ? 'status-active' : 'status-in-use' }}">
                                         {{ ucfirst($ticket->status) }}

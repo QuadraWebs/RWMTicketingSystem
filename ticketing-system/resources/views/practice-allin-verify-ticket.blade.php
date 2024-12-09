@@ -180,7 +180,7 @@
             background: #fffbeb;
             border: 1px solid #fcd34d;
             border-radius: 0.5rem;
-            padding: 0.75rem;  
+            padding: 0.75rem;
         }
 
         .warning-title {
