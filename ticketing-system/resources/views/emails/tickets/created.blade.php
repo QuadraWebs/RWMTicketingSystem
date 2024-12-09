@@ -33,7 +33,8 @@
                                 <td align="center" style="padding: 25px;">
                                     <p style="margin: 0; color: #4b5563; text-align: center;">Thank you for choosing</p>
                                     <h2 style="color: #172A91; font-size: 20px; margin: 10px 0; text-align: center;">
-                                        {{$ticket->package->title}} - {{ $ticket->package->name }}</h2>
+                                        {{$ticket->package->title}} - {{ $ticket->package->name }}
+                                    </h2>
                                     <p style="margin: 0 0 20px 0; color: #4b5563; text-align: center;">from Remote Work
                                         Malaysia</p>
 
@@ -45,7 +46,8 @@
                                                 <div style="font-size: 14px; text-align: center;">Expires on</div>
                                                 <div
                                                     style="font-size: 18px; font-weight: bold; margin-top: 5px; text-align: center;">
-                                                    {{ $ticket->valid_until->format('d M Y') }}</div>
+                                                    {{ $ticket->valid_until->format('d M Y') }}
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
@@ -146,13 +148,7 @@
                     </td>
                 </tr>
 
-                <!-- Notice -->
-                <tr>
-                    <td align="center" style="padding: 0 40px;">
-                        <p style="color: #dc2626; font-size: 13px;">* All tickets are non-refundable</p>
-                    </td>
-                </tr>
-
+         
                 <!-- Important Notes Section -->
                 <tr>
                     <td style="padding: 20px 40px;">
@@ -165,7 +161,8 @@
                                     <ul style="margin: 0; padding: 0 0 0 20px; color: #4b5563;">
                                         <li style="margin-bottom: 10px;">Each pass admits one person and is for one-time
                                             use (except monthly pass).</li>
-                                        <li style="margin-bottom: 10px;">You can redeem it at any WorkSpaces during
+                                        <li style="margin-bottom: 10px;">You can redeem it at <a href="https://remotework.com.my/map/"
+                                            style="color: #172A91; text-decoration: none;">any WorkSpaces</a> during
                                             their remote work hours.</li>
                                         <li style="margin-bottom: 10px;">For questions related to WorkSpaces and seat
                                             availability, please contact the WorkSpace directly.</li>
@@ -196,11 +193,8 @@
                             <tr>
                                 <td style="padding: 20px 0;">
                                     <h3 style="color: #1f2937; font-size: 16px; margin: 0 0 10px 0;">Inspire yourself
-                                        with the next WorkSpace</h3>
-                                    <p style="margin: 0;">
-                                        <a href="https://pass.remotework.com.my/packages"
-                                            style="color: #172A91; text-decoration: none;">Browse WorkSpaces</a>
-                                    </p>
+                                        with the <a href="https://pass.remotework.com.my/packages"
+                                            style="color: #172A91; text-decoration: none;">next Workspace Pass</a></h3>
                                 </td>
                             </tr>
                         </table>
