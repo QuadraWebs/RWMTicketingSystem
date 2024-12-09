@@ -116,9 +116,13 @@ Route::post('/ticket/checkin/{uuid}', [TicketController::class, 'checkin'])->nam
 Route::post('/ticket/confirm-checkin', [TicketController::class, 'confirmCheckin'])->name('ticket.confirm-checkin');
 Route::get('/verify-ticket/{uuid}', [TicketController::class, 'verifyTicket'])
     ->name('ticket.verify');
+Route::get('/workspace-practice-verify-ticket', [TicketController::class, 'workSpacePracticeVerifyTicket'])
+->name('ticket.practice.verify');
 
 Route::post('/verify-ticket/{ticket}/{uuid}/accept', [TicketController::class, 'acceptTicket'])->name('ticket.verify.accept');
 Route::post('/verify-ticket/{ticket}/{uuid}/reject', [TicketController::class, 'rejectTicket'])->name('ticket.verify.reject');
+Route::post('/verify-ticket/workspace-practice-accept', [TicketController::class, 'workSpacePracticeAcceptTicket'])->name('ticket.practice.verify.accept');
+Route::post('/verify-ticket/workspace-practice-reject', [TicketController::class, 'workSpacePracticeRejectTicket'])->name('ticket.practice.verify.reject');
 
 Route::get('/health', function () {
     return response('OK', 200);

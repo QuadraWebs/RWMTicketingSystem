@@ -181,6 +181,51 @@ class TicketController extends Controller
         }
     }
 
+    public function workSpacePracticeVerifyTicket()
+    {
+        try {
+            // $cafeId = DB::table('cafes')->select('id')->orderBy('id')->first()->id;
+
+            // $ticketId = $request->query('ticket_id');
+
+            $ticket = Ticket::where('id', 28)->firstOrFail();
+            // $ticket = Ticket::where('id', 5)->firstOrFail();
+
+
+            // if (now()->isAfter($ticket->verification_timestamp)) {
+            //     return view('expired-ticket', [
+            //         'message' => 'This QR code has expired',
+            //         'action' => 'Please return to the check-in page to generate a new QR code'
+            //     ]);
+            // }
+
+            $package = Package::findOrFail($ticket->package_id);
+
+            $endTime = now()->addMinutes($package->duration);
+
+            $cafe = Cafe::first();
+
+            $user = User::where('uuid', '8db84656-5adc-4432-a0c3-f41abbdc5f2d')->first();
+
+            // $user = User::where('uuid', '35e71014-0e54-4d38-b740-c7b9158fa430')->first();
+
+            return view('practice-verify-ticket', [
+                'ticket_id' => $ticket->id,
+                'ticket' => $ticket,
+                'package' => $package,
+                'selected_cafe' => $cafe->name,
+                'customer_name' => $user->name,
+                'end_time' => $endTime
+            ]);
+
+        } catch (HttpException $e) {
+            return view('expired-ticket', [
+                'message' => 'This QR code has expired',
+                'action' => 'Please return to the check-in page to generate a new QR code'
+            ]);
+        }
+    }
+
     public function acceptTicket($ticket_id, $uuid, Request $request) {
         $cafe_id = $request->input('cafe_id');
     
@@ -257,6 +302,28 @@ class TicketController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollback();
+            return redirect()->back()->with('error', 'Failed to process ticket');
+        }
+    }
+
+    public function workSpacePracticeAcceptTicket() {
+        try {
+            return view('accept-ticket', [
+                'message' => 'Check in successful',
+                'action' => 'Your WorkSpace awaits. Have a good workday!'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    
+    public function workSpacePracticeRejectTicket() {
+        try {
+            return view('reject-ticket', [
+                'message' => 'Check in unsuccessful',
+                'action' => 'Your pass is still valid for the next use.'
+            ]);
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to process ticket');
         }
     }
