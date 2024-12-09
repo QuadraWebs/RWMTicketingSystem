@@ -185,7 +185,7 @@
                             <tr>
                                 <td style="padding: 20px 0; border-bottom: 1px solid #e5e7eb;">
                                     <h3 style="color: #1f2937; font-size: 16px; margin: 0 0 10px 0;">Need support?</h3>
-                                    <p style="margin: 0; color: #4b5563;">Browse our <a href="#"
+                                    <p style="margin: 0; color: #4b5563;">Browse our <a href="https://remotework.com.my/#faq"
                                             style="color: #172A91; text-decoration: none;">FAQ</a> for quick answers.
                                     </p>
                                 </td>
