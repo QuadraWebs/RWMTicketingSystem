@@ -268,6 +268,24 @@ use Illuminate\Support\Str;
                 margin-bottom: 0.5rem;
                 display: block;
             }
+
+            .redemption-text {
+                font-size: 0.875rem;
+                color: #4b5563;
+                margin: 0.5rem 0;
+            }
+
+            .highlight {
+                color: #172A91;
+                font-weight: 500;
+                text-decoration: underline;
+            }
+            
+            .purchase-date {
+                font-size: 0.875rem;
+                color: #6b7280;
+                margin-top: 0.25rem;
+            }
         </style>
     </head>
     <body>
@@ -278,33 +296,46 @@ use Illuminate\Support\Str;
                         <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
                     </div>
                 </div>
-                <div style="margin-top: 10px; text-align: center;">
-                    Redeemable at <a href="https://remotework.com.my/map/" style="color: #172A91; text-decoration: none;">any partner cafes</a> during designated remote work hours
-                </div>
             </header>
 
             <main class="main-content">
                 <p class="welcome-text">Welcome,</span></p>
                 <p class="welcome-name">{{ $userName }}</p>
+                <p class="redemption-text">Redeemable at <a href="https://remotework.com.my/map/" class="highlight" style="text-decoration: none;">any WorkSpaces</a> during their remote work hours</p>
 
                 @php
-                    $activeTickets = $tickets->filter(function($ticket) {
-                        return !$ticket['is_in_used'] && $ticket['status'] === 'active';
+                    $currentTime = time();
+                    
+                    $activeTickets = $tickets->filter(function($ticket) use ($currentTime) {
+                        $validUntil = strtotime($ticket['valid_until']);
+                        
+                        return (
+                            ($ticket['is_unlimited'] && $validUntil > $currentTime) ||
+                            (!$ticket['is_unlimited'] && $ticket['available_pass'] > 0 && $validUntil > $currentTime)
+                        ) && !$ticket['is_in_used'];
                     });
                     
-                    $usedTickets = $tickets->filter(function($ticket) {
-                        return $ticket['is_in_used'] || $ticket['status'] === 'inactive';
+                    $usedTickets = $tickets->filter(function($ticket) use ($currentTime) {
+                        $validUntil = strtotime($ticket['valid_until']);
+                        
+                        return (
+                            (!$ticket['is_unlimited'] && $ticket['available_pass'] <= 0) ||
+                            $validUntil <= $currentTime ||
+                            $ticket['is_in_used']
+                        );
                     });
                 @endphp
 
                 @if($activeTickets->count() > 0)
-                    <h3 style="margin: 1rem 0; color: #172A91;">Active Tickets</h3>
                     @foreach($activeTickets as $ticket)
                         <div class="ticket-card">
                             <div class="ticket-header">
                                 <h2 class="package-title">{{ $ticket['package_title'] }}</h2>
                                 <div class="package-name-wrapper">
                                     <span class="package-name">{{ $ticket['package_name'] }}</span>
+                                </div>
+                                <div class="purchase-date">
+                                    Purchase Date: {{ date('Y-m-d', strtotime($ticket['created_at'])) }}
                                 </div>
                             </div>
                             <span class="status-badge {{ $ticket['status'] === 'active' ? 'status-active' : 'status-inactive' }}">
@@ -343,7 +374,7 @@ use Illuminate\Support\Str;
                                 </form>
                             @else
                                 <button class="action-button button-disabled">
-                                    {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'Used' : 'Inactive') }}
+                                    {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'Used' : 'Expired') }}
                                 </button>
                             @endif
                         </div>
@@ -358,14 +389,23 @@ use Illuminate\Support\Str;
                                 <div class="package-name-wrapper">
                                     <span class="package-name">{{ $ticket['package_name'] }}</span>
                                 </div>
+                                <div class="purchase-date">
+                                    Purchase Date: {{ date('Y-m-d', strtotime($ticket['created_at'])) }}
+                                </div>
                             </div>
                             <span class="status-badge {{ $ticket['status'] === 'active' ? 'status-active' : 'status-inactive' }}">
                                 {{ ucfirst($ticket['status']) }}
                             </span>
 
                             <div class="entitlement-section">
-                                <h3 class="entitlement-title">Entitlement</h3>
-                                <p class="package-description">{!! nl2br(str_replace(search: '- ', replace: "<br>-", subject: $ticket['package_description'])) !!}</p>
+                                <h3 class="entitlement-title">Included in Pass</h3>
+                                <p class="package-description">
+                                    {!! nl2br(str_replace(
+                                        search: ['- ', "\n"], 
+                                        replace: ['• ', '<br>'], 
+                                        subject: trim($ticket['package_description'])
+                                    )) !!}
+                                </p>
                             </div>
 
                             <p class="passes-count">
@@ -382,7 +422,7 @@ use Illuminate\Support\Str;
                             @endif
 
                             <button class="action-button button-disabled">
-                                {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'Used' : 'Inactive') }}
+                                {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'Used' : 'Expired') }}
                             </button>
                         </div>
                     @endforeach

@@ -64,7 +64,8 @@ class TicketController extends Controller
                     'start_time' => $ticket->start_time,
                     'end_time' => $ticket->end_time,
                     'status' => $ticket->status,
-                    'valid_until' => $ticket->valid_until
+                    'valid_until' => $ticket->valid_until,
+                    'created_at' => $ticket->created_at
                 ];
             });
         return view('welcome', compact('tickets', 'userName'));
