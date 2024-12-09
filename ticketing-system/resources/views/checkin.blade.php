@@ -107,7 +107,7 @@
 
         .search-container {
             position: relative;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
         .search-label {
@@ -171,7 +171,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s;
-            margin-top: 2rem;
+            margin-top: 0;
         }
 
         .submit-button:hover {
@@ -289,7 +289,8 @@
             text-align: center;
             color: #172A91;
             font-weight: 500;
-            font-size: 1.125rem;
+            font-size: 0.875rem;
+            margin-bottom: 0.8rem;  
         }
     </style>
 </head>
@@ -313,7 +314,7 @@
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                     </div>
-                    <h2 class="card-title">Check-In</h2>
+                    <h2 class="card-title">Check-in</h2>
                     <span class="current-date">{{ now()->format('F d, Y') }}</span>
                     <p class="redemption-text">Redeemable at <a href="https://remotework.com.my/map/" class="highlight" style="text-decoration: none;">any WorkSpaces</a> during their remote work hours</p>
                 </div>
