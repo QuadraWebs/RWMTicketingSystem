@@ -315,7 +315,7 @@
                     </div>
                     <h2 class="card-title">Check-In</h2>
                     <span class="current-date">{{ now()->format('F d, Y') }}</span>
-                    <p class="redemption-text">Redeemable at <span class="highlight">any WorkSpaces</span> during their remote work hours</p>
+                    <p class="redemption-text">Redeemable at <a href="https://remotework.com.my/map/" class="highlight" style="text-decoration: none;">any WorkSpaces</a> during their remote work hours</p>
                 </div>
 
                 <form action="{{ route('ticket.confirm-checkin') }}" method="POST"

@@ -278,6 +278,9 @@ use Illuminate\Support\Str;
                         <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
                     </div>
                 </div>
+                <div style="margin-top: 10px; text-align: center;">
+                    Redeemable at <a href="https://remotework.com.my/map/" style="color: #172A91; text-decoration: none;">any partner cafes</a> during designated remote work hours
+                </div>
             </header>
 
             <main class="main-content">
@@ -340,7 +343,7 @@ use Illuminate\Support\Str;
                                 </form>
                             @else
                                 <button class="action-button button-disabled">
-                                    {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'No Passes Available' : 'Ticket Inactive') }}
+                                    {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'Used' : 'Inactive') }}
                                 </button>
                             @endif
                         </div>
@@ -379,7 +382,7 @@ use Illuminate\Support\Str;
                             @endif
 
                             <button class="action-button button-disabled">
-                                {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'No Passes Available' : 'Ticket Inactive') }}
+                                {{ $ticket['is_in_used'] ? 'Ticket In Use' : ($ticket['available_pass'] <= 0 ? 'Used' : 'Inactive') }}
                             </button>
                         </div>
                     @endforeach
