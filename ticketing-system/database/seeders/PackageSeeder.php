@@ -14,7 +14,7 @@ class PackageSeeder extends Seeder
             [
                 'stripe_package_id' => env('COWORKING_ONEPASS_ID'),
                 'name' => 'One Pass',
-                'description' => "- Up to 4 hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'description' => "- Up to 4 hours per WorkSpace\n\n- Wifi, plug point, drinking water\n\n- DeviceCover ™\n\n- Redeemable at any partner WorkSpaces\n\n- Privileged rates on community events\n\n- Valid for 1 month after purchase",
                 'price' => 20.00,
                 'duration' => 240,
                 'is_recurring' => 0,
@@ -25,7 +25,7 @@ class PackageSeeder extends Seeder
             [
                 'stripe_package_id' => env('COWORKING_PACK5_ID'),
                 'name' => 'Pack of 5',
-                'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'description' => "- Up to 4-hours WorkSpace\n\n- Wifi, plug point, drinking water\n\n- DeviceCover ™\n\n- Redeemable at any partner WorkSpaces\n\n- Privileged rates on community events\n\n- Valid for 1 month after purchase",
                 'price' => 80.00,
                 'duration' => 240,
                 'is_recurring' => 0,
@@ -36,7 +36,7 @@ class PackageSeeder extends Seeder
             [
                 'stripe_package_id' => env('COWORKING_UNLIMITED_ID'),
                 'name' => 'Unlimited',
-                'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'description' => "- Up to 4-hours WorkSpace\n\n- Wifi, plug point, drinking water\n\n- DeviceCover ™\n\n- Redeemable at any partner WorkSpaces\n\n- Privileged rates on community events\n\n- Valid for 1 month after purchase",
                 'price' => 300.00,
                 'duration' => 240,
                 'is_recurring' => 1,
@@ -47,7 +47,7 @@ class PackageSeeder extends Seeder
             [
                 'stripe_package_id' => env('ALLIN_ONEPASS_ID'),
                 'name' => 'One Pass',
-                'description' => "- Up to 4 hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- RM25 spending credits\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'description' => "- Up to 4 hours WorkSpace\n\n- Wifi, plug point, drinking water\n\n- DeviceCover ™\n\n- RM25 spending credits\n\n- Redeemable at any partner WorkSpaces\n\n- Privileged rates on community events\n\n- Valid for 1 month after purchase",
                 'price' => 35.00,
                 'duration' => 240,
                 'is_recurring' => 0,
@@ -58,7 +58,7 @@ class PackageSeeder extends Seeder
             [
                 'stripe_package_id' => env('ALLIN_PACK5_ID'),
                 'name' => 'Pack of 5',
-                'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- RM25 spending credits\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'description' => "- Up to 4-hours WorkSpace\n\n- Wifi, plug point, drinking water\n\n- DeviceCover ™\n\n- RM25 spending credits\n\n- Redeemable at any partner WorkSpaces\n\n- Privileged rates on community events\n\n- Valid for 1 month after purchase",
                 'price' => 155.00,
                 'duration' => 240,
                 'is_recurring' => 0,
@@ -69,7 +69,7 @@ class PackageSeeder extends Seeder
             [
                 'stripe_package_id' => env('ALLIN_UNLIMITED_ID'),
                 'name' => 'Unlimited',
-                'description' => "- Up to 4-hours use\n\n- Wifi, plug point, drinking water\n\n- DeviceCover\n\n- RM25 spending credits\n\n- Redeemable at any partner cafes\n\n- Privileged rates on community events",
+                'description' => "- Up to 4-hours WorkSpace\n\n- Wifi, plug point, drinking water\n\n- DeviceCover ™\n\n- RM25 spending credits\n\n- Redeemable at any partner WorkSpaces\n\n- Privileged rates on community events",
                 'price' => 800.00,
                 'duration' => 240,
                 'is_recurring' => 1,
