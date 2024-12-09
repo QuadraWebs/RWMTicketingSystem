@@ -174,7 +174,7 @@
 
             <div class="footer">
                 <div style="margin-top: 10px; color: #172A91; font-size: 13px;">
-                    Need help? Contact us at <a href="mailto:hi@remotework.com.my" style="color: #EBA49E; text-decoration: none;">hi@remotework.com.my</a>
+                    Need help? Contact us at <a href="mailto:hi@remotework.com.my" style="color: #EBA49E; text-decoration: none;">hi@remotework.com.my</a> or <a href="tel:+60107973713" style="color: #EBA49E; text-decoration: none;">+60107973713</a>
                 </div>
                 <!-- Social Media Icons -->
                 <div style="margin-top: 10px; margin-bottom:10px">

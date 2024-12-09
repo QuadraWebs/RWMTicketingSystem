@@ -436,7 +436,7 @@
                 </div>
 
                 <div class="button-group">
-                    <form class="button-form" action="{{ route('ticket.verify.reject', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST">
+                    <form class="button-form" action="{{ route('ticket.practice.verify.reject') }}" method="POST">
                         @csrf
                         <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
                         <button type="submit" class="button button-reject">
@@ -447,7 +447,7 @@
                         </button>
                     </form>
 
-                    <form class="button-form" action="{{ route('ticket.verify.accept', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST">
+                    <form class="button-form" action="{{ route('ticket.practice.verify.accept') }}" method="POST">
                         @csrf
                         <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
                         <button type="submit" class="button button-accept">

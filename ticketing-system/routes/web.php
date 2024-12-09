@@ -118,11 +118,15 @@ Route::get('/verify-ticket/{uuid}', [TicketController::class, 'verifyTicket'])
     ->name('ticket.verify');
 Route::get('/workspace-practice-verify-ticket', [TicketController::class, 'workSpacePracticeVerifyTicket'])
 ->name('ticket.practice.verify');
+Route::get('/workspace-practice-allin-verify-ticket', [TicketController::class, 'workSpacePracticeAllInVerifyTicket'])
+->name('ticket.practice.allin.verify');
 
 Route::post('/verify-ticket/{ticket}/{uuid}/accept', [TicketController::class, 'acceptTicket'])->name('ticket.verify.accept');
 Route::post('/verify-ticket/{ticket}/{uuid}/reject', [TicketController::class, 'rejectTicket'])->name('ticket.verify.reject');
 Route::post('/verify-ticket/workspace-practice-accept', [TicketController::class, 'workSpacePracticeAcceptTicket'])->name('ticket.practice.verify.accept');
 Route::post('/verify-ticket/workspace-practice-reject', [TicketController::class, 'workSpacePracticeRejectTicket'])->name('ticket.practice.verify.reject');
+Route::post('/verify-ticket/workspace-practice-allin-accept', [TicketController::class, 'workSpacePracticeAllInAcceptTicket'])->name('ticket.practice.allin.verify.accept');
+Route::post('/verify-ticket/workspace-practice-allin-reject', [TicketController::class, 'workSpacePracticeAllInRejectTicket'])->name('ticket.practice.allin.verify.reject');
 
 Route::get('/health', function () {
     return response('OK', 200);

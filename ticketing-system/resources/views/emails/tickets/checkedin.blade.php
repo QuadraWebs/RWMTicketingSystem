@@ -48,7 +48,7 @@
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc; border-radius: 8px;">
                                 <tr>
                                     <td style="padding: 25px;">
-                                        <h3 style="color: #1f2937; font-size: 18px; margin: 0 0 20px 0;">Workspace Guidelines:</h3>
+                                        <h3 style="color: #1f2937; font-size: 18px; margin: 0 0 20px 0;">How to enjoy the workspace that works for you:</h3>
                                         <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding: 8px 0;">
@@ -61,21 +61,21 @@
                                                 <td style="padding: 8px 0;">
                                                     <span 
                                                         style="background-color: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-block; text-align: center; line-height: 24px; margin-right: 10px; font-size: 12px;">2</span>
-                                                    Respect other coworkers' space
+                                                    Use headphones for calls and media
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="padding: 8px 0;">
                                                     <span 
                                                         style="background-color: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-block; text-align: center; line-height: 24px; margin-right: 10px; font-size: 12px;">3</span>
-                                                    Use headphones for calls/media
+                                                    Share tables if possible. Make new friends!
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="padding: 8px 0;">
                                                     <span 
                                                         style="background-color: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-block; text-align: center; line-height: 24px; margin-right: 10px; font-size: 12px;">4</span>
-                                                    Follow cafe house rules
+                                                    Follow WorkSpace's house rules
                                                 </td>
                                             </tr>
                                         </table>
