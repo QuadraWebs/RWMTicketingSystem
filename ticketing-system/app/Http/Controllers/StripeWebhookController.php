@@ -73,7 +73,7 @@ class StripeWebhookController extends Controller
                     'status' => TicketStatus::Active,
                     'is_unlimited' => (int) ($package->pass_type === 0),
                     'available_pass' => $package->pass_type ?: 0,
-                    'valid_until' => now()->addDays(30),
+                    'valid_until' => now()->addDays(31),
                     'ending_notification_sent' => false,
                 ]);
 
