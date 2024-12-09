@@ -24,6 +24,6 @@ class TicketCreated extends Mailable
     public function build()
     {
         return $this->markdown('emails.tickets.created')
-            ->subject('Your Cafe Workspace Pass - Work From Anywhere, Starting Today!');
+            ->subject('Your WorkSpace Pass - Workspace that works for you');
     }
 }
