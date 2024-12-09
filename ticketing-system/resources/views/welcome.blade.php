@@ -6,7 +6,9 @@ use Illuminate\Support\Str;
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>RWM Ticketing System</title>
+        <title>Wanderworks Lab</title>
+        <meta property="og:image" content="{{ asset('favicon.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
         <style>
             @font-face {
                 font-family: 'Sofia Pro';

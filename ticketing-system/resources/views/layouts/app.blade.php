@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
+    <title>Wanderworks Lab</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Wanderworks Lab</title>
+    <meta property="og:image" content="{{ asset('favicon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -42,7 +44,7 @@
 
         .header {
             background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border-bottom: 1px solid #e5e7eb;
             position: sticky;
             top: 0;
@@ -148,7 +150,7 @@
             width: 12rem;
             background: white;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             padding: 0.25rem;
             margin-top: 0.5rem;
         }
@@ -235,6 +237,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -244,19 +247,23 @@
                         <a href="{{ url('/home') }}" class="brand-link">
                             <img src="{{ asset('images/rwm-logo.png') }}" alt="RWM Logo" style="height: 40px;">
                         </a>
-                        
+
                         <div class="nav-links">
                             @auth
-                                <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                                <a href="{{ route('home') }}"
+                                    class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                                     Dashboard
                                 </a>
-                                <a href="{{ route('admin.subscribers') }}" class="nav-link {{ request()->routeIs('admin.subscribers') ? 'active' : '' }}">
+                                <a href="{{ route('admin.subscribers') }}"
+                                    class="nav-link {{ request()->routeIs('admin.subscribers') ? 'active' : '' }}">
                                     Subscribers
                                 </a>
-                                <a href="{{ route('admin.package') }}" class="nav-link {{ request()->routeIs('admin.package') ? 'active' : '' }}">
+                                <a href="{{ route('admin.package') }}"
+                                    class="nav-link {{ request()->routeIs('admin.package') ? 'active' : '' }}">
                                     My Package
                                 </a>
-                                <a href="{{ route('admin.cafe') }}" class="nav-link {{ request()->routeIs('admin.cafe') ? 'active' : '' }}">
+                                <a href="{{ route('admin.cafe') }}"
+                                    class="nav-link {{ request()->routeIs('admin.cafe') ? 'active' : '' }}">
                                     Cafes
                                 </a>
                             @endauth
@@ -279,7 +286,7 @@
 
                                 <div x-show="open" @click.away="open = false" class="dropdown-menu">
                                     <div class="dropdown-divider"></div>
-                                    <a href="{{ route('login') }}" 
+                                    <a href="{{ route('login') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                         class="dropdown-link danger">
                                         {{ __('Logout') }}
@@ -316,4 +323,5 @@
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
+
 </html>

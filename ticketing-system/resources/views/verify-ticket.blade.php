@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RWM Ticketing System - Verify Ticket</title>
+    <title>Wanderworks Lab - Verify Ticket</title>
+    <meta property="og:image" content="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <style>
         @font-face {
             font-family: 'Sofia Pro';

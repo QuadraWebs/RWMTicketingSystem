@@ -437,7 +437,9 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
+                    <a href="https://remotework.com.my/">
                     <img src="{{ asset('images/white.png') }}" alt="RWM Logo" style="height: 40px;">
+                    </a>
                 </div>
             </div>
         </header>
