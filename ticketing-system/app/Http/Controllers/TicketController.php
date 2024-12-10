@@ -209,8 +209,8 @@ class TicketController extends Controller
     public function workSpacePracticeVerifyTicket()
     {
         try {
-            $ticket = Ticket::where('id', 4)->firstOrFail();
-            //$ticket = Ticket::where('id', 28)->firstOrFail();
+            //$ticket = Ticket::where('id', 4)->firstOrFail();
+            $ticket = Ticket::where('id', 28)->firstOrFail();
             $package = Package::findOrFail($ticket->package_id);
             // Format package description
             $formattedPackage = clone $package;
@@ -240,8 +240,8 @@ class TicketController extends Controller
     public function workSpacePracticeAllInVerifyTicket()
     {
         try {
-            $ticket = Ticket::where('id', 5)->firstOrFail();
-            //$ticket = Ticket::where('id', 30)->firstOrFail();
+            //$ticket = Ticket::where('id', 5)->firstOrFail();
+            $ticket = Ticket::where('id', 30)->firstOrFail();
             $package = Package::findOrFail($ticket->package_id);
             $endTime = now()->addMinutes($package->duration);
             $cafe = Cafe::first();
