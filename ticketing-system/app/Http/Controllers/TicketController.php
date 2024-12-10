@@ -148,8 +148,12 @@ class TicketController extends Controller
         $counter = 1;
         
         foreach ($lines as $line) {
-            if (trim($line)) {
-                $line = trim(str_replace('- ', '', $line));
+            $trimmedLine = trim($line);
+            if ($trimmedLine && 
+                !str_starts_with(strtolower($trimmedLine), '- privileged') && 
+                !str_starts_with(strtolower($trimmedLine), '- valid')) {
+                
+                $line = trim(str_replace('- ', '', $trimmedLine));
                 $formattedDescription .= $counter . '. ' . $line . "\n";
                 $counter++;
             }
@@ -157,6 +161,7 @@ class TicketController extends Controller
         
         return $formattedDescription;
     }
+
 
     public function verifyTicket(Request $request, $uuid)
     {
