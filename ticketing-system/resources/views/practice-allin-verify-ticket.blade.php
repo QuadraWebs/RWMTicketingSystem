@@ -414,8 +414,8 @@
                         <a href="https://remotework.com.my/map/" 
                         target="_blank" 
                         style="color: #172A91; text-decoration: underline;">
-                        here
-                        </a>.
+                        here.
+                        </a>
                     </p>
                     <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280;">
                         You can screenshot this for your own record.
