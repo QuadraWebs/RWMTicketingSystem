@@ -363,11 +363,11 @@
                         <p style="color: #374151; margin-top: 0.25rem; font-size: 0.9rem;">Collect payment as usual</p>
                     @elseif($package->title === 'All-in pass')
                         <!-- <p style="color: #374151; margin-top: 0.5rem; font-size: 0.9rem;">{{ $package->title }}</p> -->
-                        <ul style="list-style-type: disc; padding-left: 1.5rem; color: #374151; font-size: 0.9rem; text-align: left;">
-                            <li style="margin-bottom: 0.25rem; text-align: left;">For bill less than RM25, customer does not need to pay. The bill will be settled separately.</li>
-                            <li style="margin-bottom: 0.25rem; text-align: left;">For bill more than RM25, collect the excess.</li>
-                            <li style="text-align: left;">E.g. If customer spends RM30, you will deduct RM25 and collect RM5 from customer.</li>
-                        </ul>
+                        <div style="color: #374151; font-size: 0.9rem; text-align: left;">
+                            <p style="margin-bottom: 0.25rem;">For bill less than RM25, customer does not need to pay. The bill will be settled separately.</p>
+                            <p style="margin-bottom: 0.25rem;">For bill more than RM25, collect the excess.</p>
+                            <p>E.g. If customer spends RM30, you will deduct RM25 and collect RM5 from customer.</p>
+                        </div>
                     @endif
                 </div>
 
@@ -408,6 +408,7 @@
                         <span class="info-label">Included in Pass:</span>
                     </div>
                     <div class="package-description">{{ $package->description }}</div>
+
                     <p style="margin-top: 0.2rem; font-size: 0.9rem;">
                         Review your café information page 
                         <a href="https://remotework.com.my/map/" 
