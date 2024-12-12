@@ -307,7 +307,6 @@
                 <li style="color:white">All Workspace Pass features</li>
                 <li class="highlight-feature" style="color: #EBA49E;">RM25 F&B vouchers x unlimited</li>
                 <li class="highlight-feature" style="color: #EBA49E;">Priority access to new WorkSpaces</li>
-                <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #EBA49E; text-decoration: underline;">Special Member-Only Event Deals</a></li>
                 </ul>
         </div>
         <div style="flex: 1; text-align: right; padding: 1rem;">
