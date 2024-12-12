@@ -292,10 +292,72 @@
 
             .workspace-features {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-                margin-bottom: 2rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
             }
+
+            .feature-group {
+                margin-bottom: 1rem;
+            }
+
+            .main-feature {
+                color: white;
+                font-size: 1.1rem;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .sub-features {
+                margin-left: 2.5rem;
+                margin-top: 0.5rem;
+            }
+
+            .right-features {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .sub-feature {
+                color: white;
+                opacity: 0.9;
+                position: relative;
+                padding-left: 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .sub-feature::before {
+                content: "•";
+                position: absolute;
+                left: 0;
+                color: white;
+            }
+
+            .highlight-feature {
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .highlight-feature::before {
+                content: "✓";
+                color: #172A91;
+            }
+
+            @media (max-width: 768px) {
+                .workspace-features {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+
+                .sub-features {
+                    margin-left: 1.5rem;
+                }
+            }
+
 
             .workspace-feature {
                 color: white;
@@ -395,7 +457,7 @@
                 src: url('{{ asset("fonts/COOPBL.TTF") }}') format('truetype');
             }
         </style>
-
+        
         <div style="text-align: center; margin-bottom: 3rem;">
             <h1
                 style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600; font-family: 'Cooper Black', serif;">
@@ -426,14 +488,25 @@
                 </div>
 
                 <div class="workspace-features">
-                    <div class="workspace-feature">5 Coworking Passes</div>
-                    <div class="workspace-feature">Up to 4 hours per WorkSpace</div>
-                    <div class="workspace-feature">Wi-Fi, plug point, drinking water</div>
-                    <div class="workspace-feature">Device Cover<sup>TM</sup></div>
-                    <div class="workspace-feature">Virtual focused session</div>
-                    <div class="workspace-feature">Access to work buddies</div>
-                    <div class="workspace-feature">Special Member-Only Event Deals</div>
-                </div>
+    <div class="feature-group">
+        <div class="highlight-feature">5 Coworking Passes</div>
+        <div class="sub-features">
+            <div class="sub-feature">Up to 4 hours per WorkSpace</div>
+            <div class="sub-feature">Wi-Fi, plug point, drinking water</div>
+            <div class="sub-feature">Device Cover<sup>TM</sup></div>
+        </div>
+    </div>
+    
+    <div class="right-features">
+        <div class="highlight-feature">Virtual focused session</div>
+        <div class="highlight-feature">Access to work buddies</div>
+        <div class="highlight-feature">
+            <a href="https://remotework.com.my/blog" target="_blank" style="color: white; text-decoration: underline;">
+                Special Member-Only Event Deals
+            </a>
+        </div>
+    </div>
+</div>
             </div>
         </div>
 
@@ -450,9 +523,9 @@
                     <li class="sub-feature">Up to 4 hours per WorkSpace</li>
                     <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
                     <li class="sub-feature">Device Cover<sup>TM</sup></li>
-                    <li class="sub-feature">Virtual focused session</li>
-                    <li class="sub-feature">Access to work buddies</li>
-                    <li class="sub-feature"><a href="https://remotework.com.my/blog" target="_blank"
+                    <li class="highlight-feature">Virtual focused session</li>
+                    <li class="highlight-feature">Access to work buddies</li>
+                    <li class="highlight-feature"><a href="https://remotework.com.my/blog" target="_blank"
                             style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
                             Deals</a></li>
                     <li class="highlight-feature">RM25 F&B voucher x 1</li>
@@ -476,9 +549,9 @@
                     <li class="sub-feature">Up to 4 hours per WorkSpace</li>
                     <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
                     <li class="sub-feature">Device Cover<sup>TM</sup></li>
-                    <li class="sub-feature">Virtual focused session</li>
-                    <li class="sub-feature">Access to work buddies</li>
-                    <li class="sub-feature"><a href="https://remotework.com.my/blog" target="_blank"
+                    <li class="highlight-feature">Virtual focused session</li>
+                    <li class="highlight-feature">Access to work buddies</li>
+                    <li class="highlight-feature"><a href="https://remotework.com.my/blog" target="_blank"
                             style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
                             Deals</a></li>
 
@@ -501,9 +574,9 @@
                     <li class="sub-feature">Up to 4 hours per WorkSpace</li>
                     <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
                     <li class="sub-feature">Device Cover<sup>TM</sup></li>
-                    <li class="sub-feature">Virtual focused session</li>
-                    <li class="sub-feature">Access to work buddies</li>
-                    <li class="sub-feature"><a href="https://remotework.com.my/blog" target="_blank"
+                    <li class="highlight-feature">Virtual focused session</li>
+                    <li class="highlight-feature">Access to work buddies</li>
+                    <li class="highlight-feature"><a href="https://remotework.com.my/blog" target="_blank"
                             style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
                             Deals</a></li>
 
@@ -553,9 +626,7 @@
         </div>
 
         <div style="text-align: center; margin: 2rem 0;">
-    <a href="https://remotework.com.my/map/" 
-       target="_blank"
-       style="
+            <a href="https://remotework.com.my/map/" target="_blank" style="
            display: inline-flex;
            align-items: center;
            gap: 0.5rem;
@@ -568,16 +639,15 @@
            transition: all 0.3s ease;
            border: 1px solid rgba(255, 255, 255, 0.2);
            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-       "
-       onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.2)'"
-       onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255, 255, 255, 0.1)'">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-            <circle cx="12" cy="9" r="2.5"/>
-        </svg>
-        Discover Our Partner WorkSpaces
-    </a>
-</div>
+       " onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.2)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255, 255, 255, 0.1)'">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                </svg>
+                Discover Our Partner WorkSpaces
+            </a>
+        </div>
 
 
         <!-- Footer -->
