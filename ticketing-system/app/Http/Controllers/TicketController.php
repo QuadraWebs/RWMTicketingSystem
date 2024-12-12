@@ -141,6 +141,28 @@ class TicketController extends Controller
         ]);
     }
 
+    private function formatDescription($description)
+    {
+        $lines = explode("\n", $description);
+        $formattedDescription = '';
+        $counter = 1;
+        
+        foreach ($lines as $line) {
+            $trimmedLine = trim($line);
+            if ($trimmedLine && 
+                !str_starts_with(strtolower($trimmedLine), '- privileged') && 
+                !str_starts_with(strtolower($trimmedLine), '- valid')) {
+                
+                $line = trim(str_replace('- ', '', $trimmedLine));
+                $formattedDescription .= $counter . '. ' . $line . "\n";
+                $counter++;
+            }
+        }
+        
+        return $formattedDescription;
+    }
+
+
     public function verifyTicket(Request $request, $uuid)
     {
         try {
@@ -157,9 +179,11 @@ class TicketController extends Controller
             }
 
             $package = Package::findOrFail($ticket->package_id);
+            // Format package description
+            $formattedPackage = clone $package;
+            $formattedPackage->description = $this->formatDescription($package->description);
 
             $endTime = now()->addMinutes($package->duration);
-
             $cafe = Cafe::findOrFail($cafeId);
             $user = User::where('uuid', $uuid)->first();
             $customerName = $user ? $user->name : 'Guest';
@@ -167,7 +191,7 @@ class TicketController extends Controller
             return view('verify-ticket', [
                 'ticket_id' => $ticketId,
                 'ticket' => $ticket,
-                'package' => $package,
+                'package' => $formattedPackage,  // Pass formatted package
                 'selected_cafe' => $cafe->name,
                 'customer_name' => $customerName,
                 'end_time' => $endTime
@@ -180,14 +204,18 @@ class TicketController extends Controller
             ]);
         }
     }
+    
 
     public function workSpacePracticeVerifyTicket()
     {
         try {
-
+            //$ticket = Ticket::where('id', 4)->firstOrFail();
             $ticket = Ticket::where('id', 28)->firstOrFail();
-            // $ticket = Ticket::where('id', 4)->firstOrFail();
             $package = Package::findOrFail($ticket->package_id);
+            // Format package description
+            $formattedPackage = clone $package;
+            $formattedPackage->description = $this->formatDescription($package->description);
+
             $endTime = now()->addMinutes($package->duration);
             $cafe = Cafe::first();
             $user = User::where('uuid', '8db84656-5adc-4432-a0c3-f41abbdc5f2d')->first();
@@ -195,7 +223,7 @@ class TicketController extends Controller
             return view('practice-verify-ticket', [
                 'ticket_id' => $ticket->id,
                 'ticket' => $ticket,
-                'package' => $package,
+                'package' => $formattedPackage,  // Pass formatted package
                 'selected_cafe' => 'Practice WorkSpace',
                 'customer_name' => 'Practice Users',
                 'end_time' => $endTime
@@ -212,17 +240,21 @@ class TicketController extends Controller
     public function workSpacePracticeAllInVerifyTicket()
     {
         try {
+            //$ticket = Ticket::where('id', 5)->firstOrFail();
             $ticket = Ticket::where('id', 30)->firstOrFail();
-            // $ticket = Ticket::where('id', 5)->firstOrFail();
             $package = Package::findOrFail($ticket->package_id);
             $endTime = now()->addMinutes($package->duration);
             $cafe = Cafe::first();
             $user = User::where('uuid', '8db84656-5adc-4432-a0c3-f41abbdc5f2d')->first();
 
+            $formattedPackage = clone $package;
+            $formattedPackage->description = $this->formatDescription($package->description);
+            
+
             return view('practice-verify-ticket', [
                 'ticket_id' => $ticket->id,
                 'ticket' => $ticket,
-                'package' => $package,
+                'package' => $formattedPackage,  
                 'selected_cafe' => 'Practice WorkSpace',
                 'customer_name' => 'Practice Users',
                 'end_time' => $endTime
@@ -235,6 +267,7 @@ class TicketController extends Controller
             ]);
         }
     }
+
 
     public function acceptTicket($ticket_id, $uuid, Request $request) {
         $cafe_id = $request->input('cafe_id');
