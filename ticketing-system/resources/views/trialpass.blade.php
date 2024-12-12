@@ -206,7 +206,7 @@
 
             <div class="package-card">
                 <h2 class="package-title">Trial All-in Pass</h2>
-                <div class="package-price">RM30</div>
+                <div class="package-price">RM35</div>
                 <ul class="pass-features">
                     <li>1 Coworking Pass</li>
                     <li>Up to 4 hours per WorkSpace</li>

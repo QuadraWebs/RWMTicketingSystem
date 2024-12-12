@@ -311,6 +311,18 @@
                 color: #172A91;
             }
 
+            .sub-feature {
+                position: relative;
+                padding-left: 20px;
+            }
+
+            .pass-features li.sub-feature:before {
+                content: "•" !important;
+                font-size: 1.5rem;
+                color: #172A91;
+            }
+
+
             .workspace-cta {
                 text-align: center;
                 margin-top: 2rem;
@@ -326,8 +338,26 @@
                     gap: 2rem;
                 }
 
+
+
                 .workspace-features {
                     grid-template-columns: 1fr;
+
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .workspace-feature {
+                    font-size: 1rem;
+                    gap: 0.3rem;
+                }
+
+                .workspace-pass {
+                    padding: 2rem 1.5rem;
+                }
+
+                .workspace-content {
+                    gap: 1.5rem;
                 }
 
                 .workspace-title {
@@ -359,10 +389,16 @@
                     radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
                 opacity: 0.8;
             }
+
+            @font-face {
+                font-family: 'Cooper Black';
+                src: url('{{ asset("fonts/COOPBL.TTF") }}') format('truetype');
+            }
         </style>
 
         <div style="text-align: center; margin-bottom: 3rem;">
-            <h1 style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600;">
+            <h1
+                style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600; font-family: 'Cooper Black', serif;">
                 WorkSpace that works for you
             </h1>
             <p style="color: white; font-size: 1.2rem; line-height: 1.6; max-width: 800px; margin: 0 auto;">
@@ -381,10 +417,11 @@
                     </div>
                     <p style="color: white; opacity: 0.9;">Your gateway to productive workspaces</p>
                     <div class="workspace-cta">
-                        <button class="buy-button"
-                            style="background: #172A91; font-size: 1.2rem; padding: 1.2rem 2.5rem; font-weight: 600; box-shadow: 0 4px 15px rgba(23, 42, 145, 0.2);">
+                        <a href="https://buy.stripe.com/bIYcNv4gYfwz5TWdQT" class="buy-button"
+                            style="background: #172A91; font-size: 1.2rem; padding: 1.2rem 2.5rem; font-weight: 600; box-shadow: 0 4px 15px rgba(23, 42, 145, 0.2); text-decoration: none; display: inline-block;">
                             Get Started
-                        </button>
+                        </a>
+
                     </div>
                 </div>
 
@@ -409,14 +446,15 @@
                 <div class="pass-price">RM80 + RM20 /month</div>
                 <div style="color: #666; margin-bottom: 1rem;">Total: RM100/month</div>
                 <ul class="pass-features">
-                <li style="padding-left: 1.5rem;">5 Coworking Passes</li>
-    <li style="padding-left: 1.5rem;">Up to 4 hours per WorkSpace</li>
-    <li style="padding-left: 1.5rem;">Wi-Fi, plug point, drinking water</li>
-    <li style="padding-left: 1.5rem;">Device Cover<sup>TM</sup></li>
-    <li style="padding-left: 1.5rem;">Virtual focused session</li>
-    <li style="padding-left: 1.5rem;">Access to work buddies</li>
-    <li style="padding-left: 1.5rem;"><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
-
+                    <li class="highlight-feature">5 Coworking Passes</li>
+                    <li class="sub-feature">Up to 4 hours per WorkSpace</li>
+                    <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
+                    <li class="sub-feature">Device Cover<sup>TM</sup></li>
+                    <li class="sub-feature">Virtual focused session</li>
+                    <li class="sub-feature">Access to work buddies</li>
+                    <li class="sub-feature"><a href="https://remotework.com.my/blog" target="_blank"
+                            style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
+                            Deals</a></li>
                     <li class="highlight-feature">RM25 F&B voucher x 1</li>
                     <li class="highlight-feature">Save RM5 on F&B add-on</li>
                 </ul>
@@ -434,13 +472,15 @@
                 <div class="pass-price">RM80 + RM80 /month</div>
                 <div style="color: #666; margin-bottom: 1rem;">Total: RM160/month</div>
                 <ul class="pass-features">
-                <li style="padding-left: 1.5rem;">5 Coworking Passes</li>
-    <li style="padding-left: 1.5rem;">Up to 4 hours per WorkSpace</li>
-    <li style="padding-left: 1.5rem;">Wi-Fi, plug point, drinking water</li>
-    <li style="padding-left: 1.5rem;">Device Cover<sup>TM</sup></li>
-    <li style="padding-left: 1.5rem;">Virtual focused session</li>
-    <li style="padding-left: 1.5rem;">Access to work buddies</li>
-    <li style="padding-left: 1.5rem;"><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+                    <li class="highlight-feature">5 Coworking Passes</li>
+                    <li class="sub-feature">Up to 4 hours per WorkSpace</li>
+                    <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
+                    <li class="sub-feature">Device Cover<sup>TM</sup></li>
+                    <li class="sub-feature">Virtual focused session</li>
+                    <li class="sub-feature">Access to work buddies</li>
+                    <li class="sub-feature"><a href="https://remotework.com.my/blog" target="_blank"
+                            style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
+                            Deals</a></li>
 
                     <li class="highlight-feature">RM25 F&B voucher x 5</li>
                     <li class="highlight-feature">Save RM45 on F&B add-on</li>
@@ -457,14 +497,16 @@
                 <div class="pass-price">RM80 + RM220 /month</div>
                 <div style="color: #666; margin-bottom: 1rem;">Total: RM300/month</div>
                 <ul class="pass-features">
-    <li style="padding-left: 1.5rem;">Up to 4 hours per WorkSpace</li>
-    <li style="padding-left: 1.5rem;">Wi-Fi, plug point, drinking water</li>
-    <li style="padding-left: 1.5rem;">Device Cover<sup>TM</sup></li>
-    <li style="padding-left: 1.5rem;">Virtual focused session</li>
-    <li style="padding-left: 1.5rem;">Access to work buddies</li>
-    <li style="padding-left: 1.5rem;"><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
-
                     <li class="highlight-feature">Monthly unlimited passes</li>
+                    <li class="sub-feature">Up to 4 hours per WorkSpace</li>
+                    <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
+                    <li class="sub-feature">Device Cover<sup>TM</sup></li>
+                    <li class="sub-feature">Virtual focused session</li>
+                    <li class="sub-feature">Access to work buddies</li>
+                    <li class="sub-feature"><a href="https://remotework.com.my/blog" target="_blank"
+                            style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
+                            Deals</a></li>
+
                     <li class="highlight-feature">Even more privileged rates</li>
                     <li class="highlight-feature">Save forever more</li>
                 </ul>
