@@ -106,6 +106,16 @@ Route::get('/packages', function () {
     $packages = Package::all();
     return view('packages', compact('packages'));
 })->name('packages');
+
+Route::get('/introduction', function () {
+    return view('introduction');
+})->name('introduction');
+
+Route::get('/trial-pass', function () {
+    return view('trialpass');
+})->name('trialpass');
+
+
 Route::get('/viewticket/{uuid}', action: [TicketController::class, 'viewByUuid'])->name('ticket.view');
 Route::get('/', function () {
     return view(view: 'errors.404');
