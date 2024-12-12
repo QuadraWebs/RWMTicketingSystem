@@ -324,8 +324,8 @@
         <div class="trial-pass">
             <h2 class="pass-title">Trial Coworking Pass</h2>
             <p style="margin-bottom: 1rem;">Use Promo Code "<b>20OFF</b>"</p>
-            <button class="buy-button">Redeem Now</button>
-        </div>
+            <a href="https://pass.remotework.com.my/trial-pass" class="buy-button">Redeem Now</a>
+            </div>
 
         <!-- Footer -->
         <div class="footer">
