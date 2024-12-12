@@ -552,6 +552,34 @@
             <a href="https://pass.remotework.com.my/trial-pass" class="buy-button">Redeem Now</a>
         </div>
 
+        <div style="text-align: center; margin: 2rem 0;">
+    <a href="https://remotework.com.my/map/" 
+       target="_blank"
+       style="
+           display: inline-flex;
+           align-items: center;
+           gap: 0.5rem;
+           background: rgba(255, 255, 255, 0.1);
+           color: white;
+           padding: 1rem 2rem;
+           border-radius: 2rem;
+           text-decoration: none;
+           font-weight: 500;
+           transition: all 0.3s ease;
+           border: 1px solid rgba(255, 255, 255, 0.2);
+           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.2)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255, 255, 255, 0.1)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        Discover Our Partner WorkSpaces
+    </a>
+</div>
+
+
         <!-- Footer -->
         <div class="footer">
             <div style="margin-top: 10px; color: white; font-size: 13px;">
