@@ -167,29 +167,32 @@
         }
 
         .popular-badge {
-        position: absolute;
-        top: -15px;
-        right: -15px;
-        background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 2rem;
-        font-size: 1rem;
-        font-weight: 700;
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        animation: zoom-bounce 2s ease-in-out infinite;
-    }
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            animation: zoom-bounce 2s ease-in-out infinite;
+        }
 
-    @keyframes zoom-bounce {
-        0%, 100% {
-            transform: rotate(3deg) scale(1);
+        @keyframes zoom-bounce {
+
+            0%,
+            100% {
+                transform: rotate(3deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(3deg) scale(1.1);
+            }
         }
-        50% {
-            transform: rotate(3deg) scale(1.1);
-        }
-    }
 
 
         /* Mobile Responsiveness */
@@ -222,6 +225,182 @@
             </div>
         </header>
 
+        <!-- Add these styles -->
+        <style>
+            .workspace-pass {
+                background: linear-gradient(135deg, #EBA49E, #e89891);
+                border-radius: 2rem;
+                padding: 3rem 2rem;
+                margin-bottom: 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .workspace-pass::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 300px;
+                height: 300px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+                border-radius: 50%;
+                transform: translate(50%, -50%);
+            }
+
+            .workspace-content {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                gap: 3rem;
+                align-items: center;
+            }
+
+            .workspace-header {
+                position: relative;
+            }
+
+            .base-badge {
+                background: #172A91;
+                color: white;
+                padding: 0.5rem 1.5rem;
+                border-radius: 2rem;
+                font-size: 0.9rem;
+                font-weight: 600;
+                display: inline-block;
+                margin-bottom: 1rem;
+            }
+
+            .workspace-title {
+                color: white;
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                line-height: 1.2;
+            }
+
+            .workspace-price {
+                color: #172A91;
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin: 1.5rem 0;
+            }
+
+            .workspace-price span {
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+
+            .workspace-features {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .workspace-feature {
+                color: white;
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .workspace-feature::before {
+                content: "✓";
+                font-weight: bold;
+                color: #172A91;
+            }
+
+            .workspace-cta {
+                text-align: center;
+                margin-top: 2rem;
+            }
+
+            @media (max-width: 768px) {
+                .workspace-pass {
+                    padding: 2rem 1.5rem;
+                }
+
+                .workspace-content {
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+
+                .workspace-features {
+                    grid-template-columns: 1fr;
+                }
+
+                .workspace-title {
+                    font-size: 2rem;
+                }
+            }
+
+            .workspace-pass {
+                background: linear-gradient(135deg, #EBA49E 0%, #e89891 50%, #dc8680 100%);
+                box-shadow:
+                    0 20px 40px rgba(235, 164, 158, 0.2),
+                    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+                border-radius: 2rem;
+                padding: 3rem 2rem;
+                margin-bottom: 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .workspace-pass::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                background:
+                    radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+                opacity: 0.8;
+            }
+        </style>
+
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600;">
+                WorkSpace that works for you
+            </h1>
+            <p style="color: white; font-size: 1.2rem; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+                Don't settle for less. Elevate your workday with a pass that fits your schedule and perks that make a
+                difference
+            </p>
+        </div>
+        <!-- The new WorkSpace Pass section -->
+        <div class="workspace-pass">
+            <div class="workspace-content">
+                <div class="workspace-header">
+                    <div class="base-badge">BASE PASS</div>
+                    <h2 class="workspace-title">WorkSpace Pass</h2>
+                    <div class="workspace-price">
+                        RM80 <span>/month</span>
+                    </div>
+                    <p style="color: white; opacity: 0.9;">Your gateway to productive workspaces</p>
+                    <div class="workspace-cta">
+                        <button class="buy-button"
+                            style="background: #172A91; font-size: 1.2rem; padding: 1.2rem 2.5rem; font-weight: 600; box-shadow: 0 4px 15px rgba(23, 42, 145, 0.2);">
+                            Get Started
+                        </button>
+                    </div>
+                </div>
+
+                <div class="workspace-features">
+                    <div class="workspace-feature">5 Coworking Passes</div>
+                    <div class="workspace-feature">Up to 4 hours per WorkSpace</div>
+                    <div class="workspace-feature">Wi-Fi, plug point, drinking water</div>
+                    <div class="workspace-feature">Device Cover<sup>TM</sup></div>
+                    <div class="workspace-feature">Virtual focused session</div>
+                    <div class="workspace-feature">Access to work buddies</div>
+                    <div class="workspace-feature">Special Member-Only Event Deals</div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Main Passes Grid -->
         <div class="passes-grid">
             <!-- Basic Workspace Pass -->
@@ -230,13 +409,14 @@
                 <div class="pass-price">RM80 + RM20 /month</div>
                 <div style="color: #666; margin-bottom: 1rem;">Total: RM100/month</div>
                 <ul class="pass-features">
-                    <li>5 Coworking Passes</li>
-                    <li>Up to 4 hours per WorkSpace</li>
-                    <li>Wi-Fi, plug point, drinking water</li>
-                    <li>Device Cover TM</li>
-                    <li>Virtual focused session</li>
-                    <li>Access to work buddies</li>
-                    <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+                <li style="padding-left: 1.5rem;">5 Coworking Passes</li>
+    <li style="padding-left: 1.5rem;">Up to 4 hours per WorkSpace</li>
+    <li style="padding-left: 1.5rem;">Wi-Fi, plug point, drinking water</li>
+    <li style="padding-left: 1.5rem;">Device Cover<sup>TM</sup></li>
+    <li style="padding-left: 1.5rem;">Virtual focused session</li>
+    <li style="padding-left: 1.5rem;">Access to work buddies</li>
+    <li style="padding-left: 1.5rem;"><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+
                     <li class="highlight-feature">RM25 F&B voucher x 1</li>
                     <li class="highlight-feature">Save RM5 on F&B add-on</li>
                 </ul>
@@ -248,19 +428,20 @@
 
             <!-- Plus Workspace Pass -->
             <div class="pass-card" style="position: relative;">
-            <div class="popular-badge">Best Seller</div>
+                <div class="popular-badge">Best Seller</div>
 
                 <h2 class="pass-title">Power Boost Pass</h2>
                 <div class="pass-price">RM80 + RM80 /month</div>
                 <div style="color: #666; margin-bottom: 1rem;">Total: RM160/month</div>
                 <ul class="pass-features">
-                    <li>5 Coworking Passes</li>
-                    <li>Up to 4 hours per WorkSpace</li>
-                    <li>Wi-Fi, plug point, drinking water</li>
-                    <li>Device Cover TM</li>
-                    <li>Virtual focused session</li>
-                    <li>Access to work buddies</li>
-                    <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+                <li style="padding-left: 1.5rem;">5 Coworking Passes</li>
+    <li style="padding-left: 1.5rem;">Up to 4 hours per WorkSpace</li>
+    <li style="padding-left: 1.5rem;">Wi-Fi, plug point, drinking water</li>
+    <li style="padding-left: 1.5rem;">Device Cover<sup>TM</sup></li>
+    <li style="padding-left: 1.5rem;">Virtual focused session</li>
+    <li style="padding-left: 1.5rem;">Access to work buddies</li>
+    <li style="padding-left: 1.5rem;"><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+
                     <li class="highlight-feature">RM25 F&B voucher x 5</li>
                     <li class="highlight-feature">Save RM45 on F&B add-on</li>
                 </ul>
@@ -273,16 +454,16 @@
             <!-- Premium Workspace Pass -->
             <div class="pass-card">
                 <h2 class="pass-title">Peak Performance Pass</h2>
-                <div class="pass-price">RM80 + RM200 /month</div>
-                <div style="color: #666; margin-bottom: 1rem;">Total: RM280/month</div>
+                <div class="pass-price">RM80 + RM220 /month</div>
+                <div style="color: #666; margin-bottom: 1rem;">Total: RM300/month</div>
                 <ul class="pass-features">
-                    <li>5 Coworking Passes</li>
-                    <li>Up to 4 hours per WorkSpace</li>
-                    <li>Wi-Fi, plug point, drinking water</li>
-                    <li>Device Cover TM</li>
-                    <li>Virtual focused session</li>
-                    <li>Access to work buddies</li>
-                    <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+    <li style="padding-left: 1.5rem;">Up to 4 hours per WorkSpace</li>
+    <li style="padding-left: 1.5rem;">Wi-Fi, plug point, drinking water</li>
+    <li style="padding-left: 1.5rem;">Device Cover<sup>TM</sup></li>
+    <li style="padding-left: 1.5rem;">Virtual focused session</li>
+    <li style="padding-left: 1.5rem;">Access to work buddies</li>
+    <li style="padding-left: 1.5rem;"><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+
                     <li class="highlight-feature">Monthly unlimited passes</li>
                     <li class="highlight-feature">Even more privileged rates</li>
                     <li class="highlight-feature">Save forever more</li>
@@ -291,41 +472,43 @@
             </div>
         </div>
 
-        <div class="ultimate-perk" style="background: linear-gradient(165deg, #172A91, #1e357d); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); position: relative;">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-        <div style="flex: 1; text-align: left; padding: 1rem;">
-            <h2 class="pass-title" style="color: white; font-size: 1.6rem; font-weight: 600;">Infinity Elite Pass</h2>
-            <div style="color: #EBA49E; font-size: 24px; margin: 0.5rem 0; font-weight: 600;">
-                RM80 + RM700 /month
+        <div class="ultimate-perk"
+            style="background: linear-gradient(165deg, #172A91, #1e357d); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; text-align: left; padding: 1rem;">
+                    <h2 class="pass-title" style="color: white; font-size: 1.6rem; font-weight: 600;">Infinity Elite
+                        Pass</h2>
+                    <div style="color: #EBA49E; font-size: 24px; margin: 0.5rem 0; font-weight: 600;">
+                        RM80 + RM720 /month
+                    </div>
+                    <div style="color: white; font-size: 1.1rem;">
+                        Total: RM800/month
+                    </div>
+                </div>
+                <div style="flex: 2; text-align: left; padding: 1rem;">
+                    <ul class="pass-features" style="color: white; font-size: 1.1rem; font-weight: 500;">
+                        <li style="color:white">All Workspace Pass features</li>
+                        <li class="highlight-feature" style="color: #EBA49E;">RM25 F&B vouchers x unlimited</li>
+                        <li class="highlight-feature" style="color: #EBA49E;">Priority access to new WorkSpaces</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; text-align: right; padding: 1rem;">
+                    <a href="https://buy.stripe.com/3cseVD5l20BFaaceV5" style="background-color: #EBA49E;"
+                        class="buy-button">Buy Now!</a>
+                </div>
             </div>
-            <div style="color: white; font-size: 1.1rem;">
-                Total: RM780/month
+            <div
+                style="position: absolute; bottom: 1rem; right: 1rem; font-size: 0.8rem; color: rgba(255,255,255,0.7);">
+                F&B voucher is valid at all partner WorkSpaces
             </div>
         </div>
-        <div style="flex: 2; text-align: left; padding: 1rem;">
-            <ul class="pass-features" style="color: white; font-size: 1.1rem; font-weight: 500;">
-                <li style="color:white">All Workspace Pass features</li>
-                <li class="highlight-feature" style="color: #EBA49E;">RM25 F&B vouchers x unlimited</li>
-                <li class="highlight-feature" style="color: #EBA49E;">Priority access to new WorkSpaces</li>
-                </ul>
-        </div>
-        <div style="flex: 1; text-align: right; padding: 1rem;">
-        <a href="https://buy.stripe.com/3cseVD5l20BFaaceV5" style="background-color: #EBA49E;" class="buy-button">Buy Now!</a>
-        </div>
-    </div>
-    <div style="position: absolute; bottom: 1rem; right: 1rem; font-size: 0.8rem; color: rgba(255,255,255,0.7);">
-        F&B voucher is valid at all partner WorkSpaces
-    </div>
-</div>
-
-
 
         <!-- Trial Pass -->
         <div class="trial-pass">
             <h2 class="pass-title">Trial Coworking Pass</h2>
             <p style="margin-bottom: 1rem;">Use Promo Code "<b>20OFF</b>"</p>
             <a href="https://pass.remotework.com.my/trial-pass" class="buy-button">Redeem Now</a>
-            </div>
+        </div>
 
         <!-- Footer -->
         <div class="footer">
