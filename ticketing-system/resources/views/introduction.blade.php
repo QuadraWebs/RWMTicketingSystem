@@ -236,7 +236,7 @@
                     <li>Device Cover TM</li>
                     <li>Virtual focused session</li>
                     <li>Access to work buddies</li>
-                    <li>Special Member-Only Event Deals</li>
+                    <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
                     <li class="highlight-feature">RM25 F&B voucher x 1</li>
                     <li class="highlight-feature">Save RM5 on F&B add-on</li>
                 </ul>
@@ -260,7 +260,7 @@
                     <li>Device Cover TM</li>
                     <li>Virtual focused session</li>
                     <li>Access to work buddies</li>
-                    <li>Special Member-Only Event Deals</li>
+                    <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
                     <li class="highlight-feature">RM25 F&B voucher x 5</li>
                     <li class="highlight-feature">Save RM45 on F&B add-on</li>
                 </ul>
@@ -282,7 +282,7 @@
                     <li>Device Cover TM</li>
                     <li>Virtual focused session</li>
                     <li>Access to work buddies</li>
-                    <li>Special Member-Only Event Deals</li>
+                    <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event Deals</a></li>
                     <li class="highlight-feature">Monthly unlimited passes</li>
                     <li class="highlight-feature">Even more privileged rates</li>
                     <li class="highlight-feature">Save forever more</li>
@@ -307,8 +307,8 @@
                 <li style="color:white">All Workspace Pass features</li>
                 <li class="highlight-feature" style="color: #EBA49E;">RM25 F&B vouchers x unlimited</li>
                 <li class="highlight-feature" style="color: #EBA49E;">Priority access to new WorkSpaces</li>
-                <li class="highlight-feature" style="color: #EBA49E;">Enhanced privileged rates</li>
-            </ul>
+                <li><a href="https://remotework.com.my/blog" target="_blank" style="cursor: pointer; color: #EBA49E; text-decoration: underline;">Special Member-Only Event Deals</a></li>
+                </ul>
         </div>
         <div style="flex: 1; text-align: right; padding: 1rem;">
         <a href="https://buy.stripe.com/3cseVD5l20BFaaceV5" style="background-color: #EBA49E;" class="buy-button">Buy Now!</a>
