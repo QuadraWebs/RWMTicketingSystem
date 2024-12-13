@@ -362,7 +362,7 @@
                                     </span>
                                 </td>
                                 <td>{{ $ticket->valid_until->format('M d, Y') }}</td>
-                                <td>{{ $ticket->remaining_passes ?? 'Unlimited' }}</td>
+                                <td>{{ $ticket->available_pass ?? 'Unlimited' }}</td>
                             </tr>
                         @endforeach
                     </tbody>
