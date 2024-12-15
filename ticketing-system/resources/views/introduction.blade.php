@@ -2,6 +2,15 @@
 <html>
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SJ9K7GGKQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8SJ9K7GGKQ');
+    </script>
     <title>Remote Work Malaysia - Introduction</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -457,7 +466,7 @@
                 src: url('{{ asset("fonts/COOPBL.TTF") }}') format('truetype');
             }
         </style>
-        
+
         <div style="text-align: center; margin-bottom: 3rem;">
             <h1
                 style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600; font-family: 'Cooper Black', serif;">
@@ -488,25 +497,26 @@
                 </div>
 
                 <div class="workspace-features">
-    <div class="feature-group">
-        <div class="highlight-feature">5 Coworking Passes</div>
-        <div class="sub-features">
-            <div class="sub-feature">Up to 4 hours per WorkSpace</div>
-            <div class="sub-feature">Wi-Fi, plug point, drinking water</div>
-            <div class="sub-feature">Device Cover<sup>TM</sup></div>
-        </div>
-    </div>
-    
-    <div class="right-features">
-        <div class="highlight-feature">Virtual focused session</div>
-        <div class="highlight-feature">Access to work buddies</div>
-        <div class="highlight-feature">
-            <a href="https://remotework.com.my/blog" target="_blank" style="color: white; text-decoration: underline;">
-                Special Member-Only Event Deals
-            </a>
-        </div>
-    </div>
-</div>
+                    <div class="feature-group">
+                        <div class="highlight-feature">5 Coworking Passes</div>
+                        <div class="sub-features">
+                            <div class="sub-feature">Up to 4 hours per WorkSpace</div>
+                            <div class="sub-feature">Wi-Fi, plug point, drinking water</div>
+                            <div class="sub-feature">Device Cover<sup>TM</sup></div>
+                        </div>
+                    </div>
+
+                    <div class="right-features">
+                        <div class="highlight-feature">Virtual focused session</div>
+                        <div class="highlight-feature">Access to work buddies</div>
+                        <div class="highlight-feature">
+                            <a href="https://remotework.com.my/blog" target="_blank"
+                                style="color: white; text-decoration: underline;">
+                                Special Member-Only Event Deals
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

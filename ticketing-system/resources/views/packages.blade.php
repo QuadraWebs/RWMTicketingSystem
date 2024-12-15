@@ -2,11 +2,21 @@
 <html>
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SJ9K7GGKQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8SJ9K7GGKQ');
+    </script>
     <title>Remote Work Malaysia</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="WorkSpace that works for you">
-    <meta property="og:description" content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
+    <meta property="og:description"
+        content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
     <meta property="og:image" content="{{ asset('favicon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -438,7 +448,7 @@
             <div class="header-content">
                 <div class="logo">
                     <a href="https://remotework.com.my/">
-                    <img src="{{ asset('images/white.png') }}" alt="RWM Logo" style="height: 40px;">
+                        <img src="{{ asset('images/white.png') }}" alt="RWM Logo" style="height: 40px;">
                     </a>
                 </div>
             </div>
@@ -581,7 +591,8 @@
                                 <p class="package-description">
                                     Great for Balanced Work Weeks<br><br>
                                     ● Enjoy 5 access to our inspiring WorkSpaces.<br><br>
-                                    ● Includes <b>RM 125 (RM 25 x 5) spending credits</b>, perfect for grabbing your comfort food and
+                                    ● Includes <b>RM 125 (RM 25 x 5) spending credits</b>, perfect for grabbing your comfort food
+                                    and
                                     drinks.<br><br>
                                     ● Perfect for hybrid or part-time remote workers who value flexibility and perks.
                                 </p>
@@ -589,7 +600,8 @@
                                 <p class="package-description">
                                     Your Premium Coworking Experience<br><br>
                                     ● Unlimited access to our WorkSpaces for the month.<br><br>
-                                    ● Includes a no-limits F&B package <b>(RM25 per WorkSpace, unlimited) spending credits</b>, ensuring
+                                    ● Includes a no-limits F&B package <b>(RM25 per WorkSpace, unlimited) spending credits</b>,
+                                    ensuring
                                     you have everything you need to stay productive.<br><br>
                                     ● Designed for full-time remote workers or freelancers looking for consistent access to
                                     professional and inspiring WorkSpaces.
