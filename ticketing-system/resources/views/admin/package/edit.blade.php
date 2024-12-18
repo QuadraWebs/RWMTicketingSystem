@@ -254,7 +254,7 @@
                 <div class="form-field">
                     <label class="form-label">Duration (minutes)</label>
                     <input type="number" name="duration" id="duration" value="{{ $package->duration }}" class="form-input" min="1"
-                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>                        required>
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>                   
                     <p id="durationSummary" class="duration-summary"></p>
                 </div>
         
@@ -266,7 +266,7 @@
                 
                 <div class="form-field full-width">
                     <label class="form-label">Payment Link</label>
-                    <input type="text" name="payment_link" class="form-input" required>
+                    <input type="text" value="{{ $package->payment_link }}" name="payment_link" class="form-input" required>
                 </div>
             </div>
         

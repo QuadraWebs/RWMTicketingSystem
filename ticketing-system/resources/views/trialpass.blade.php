@@ -209,9 +209,9 @@
                     <li>Device Cover TM</li>
                     <li>Valid at any partner WorkSpaces</li>
                 </ul>
-                <div class="reminder-text">
+                <!-- <div class="reminder-text">
                     Use Promo Code "20OFF"
-                </div>
+                </div> -->
                 <a href="https://buy.stripe.com/8wM6p714M2JN4PS002" class="buy-button">Redeem Now</a>
             </div>
 
@@ -226,9 +226,9 @@
                     <li>Valid at any partner WorkSpaces</li>
                     <li class="highlight-feature">RM25 F&B voucher x 1</li>
                 </ul>
-                <div class="reminder-text">
+                <!-- <div class="reminder-text">
                     Use Promo Code "20OFF"
-                </div>
+                </div> -->
                 <a href="https://buy.stripe.com/fZebJr8xe8471DG5kp" class="buy-button">Redeem Now</a>
             </div>
         </div>
