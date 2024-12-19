@@ -467,8 +467,7 @@
 
         <div id="coworking" class="tab-content active">
             <div class="packages-grid">
-                @foreach($packages as $package)
-                    @if($package->title == 'Coworking pass')
+            @foreach($packages->where('title', 'Coworking pass')->sortBy('id') as $package)
                         <div class="package-card">
                             @if($package->id == 2)
                                 <div class="popular-badge">Most Popular</div>
@@ -504,7 +503,6 @@
 
                             <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
                         </div>
-                    @endif
                 @endforeach
 
             </div>
@@ -571,8 +569,7 @@
 
         <div id="allin" class="tab-content">
             <div class="packages-grid">
-                @foreach($packages as $package)
-                    @if($package->title == 'All-in pass')
+            @foreach($packages->where('title', 'All-in pass')->sortBy('id') as $package)
                         <div class="package-card">
                             @if($package->id == 4)
                                 <div class="popular-badge">Most Popular</div>
@@ -610,7 +607,6 @@
 
                             <a href="{{ $package->payment_link }}" class="buy-button">Buy Now!</a>
                         </div>
-                    @endif
                 @endforeach
             </div>
 
