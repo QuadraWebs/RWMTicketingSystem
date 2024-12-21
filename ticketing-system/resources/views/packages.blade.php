@@ -26,6 +26,13 @@
         content="Elevate your workday with a pass that fits your schedule and perks that make a difference">
 
     <style>
+         @font-face {
+            font-family: 'Sofia Pro';
+            src: url('/fonts/Sofia Pro Regular Az.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -33,7 +40,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
             background: #172A91;
             min-height: 100vh;
             padding: 2rem;

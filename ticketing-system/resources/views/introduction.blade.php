@@ -23,6 +23,13 @@
     <meta property="og:site_name" content="Remote Work Malaysia">
 
     <style>
+        @font-face {
+            font-family: 'Sofia Pro';
+            src: url('/fonts/Sofia Pro Regular Az.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -30,7 +37,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
             background: #172A91;
             min-height: 100vh;
             padding: 1.5rem;
@@ -284,17 +291,17 @@
         }
 
         @media (max-width: 768px) {
-    .buy-button {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-    }
-    
-    .passes-grid .base-pass-card div[style*="display: flex"] {
-        text-align: center;
-        width: 100%;
-    }
-}
+            .buy-button {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .passes-grid .base-pass-card div[style*="display: flex"] {
+                text-align: center;
+                width: 100%;
+            }
+        }
 
 
         @media (max-width: 768px) {
@@ -356,13 +363,12 @@
         }
 
         /* Add to the style section */
-.buy-button, 
-.pass-title, 
-.intro-text h1,
-.trial-pass-section h3 {
-    font-family: 'Cooper Black', serif;
-}
-
+        .buy-button,
+        .pass-title,
+        .intro-text h1,
+        .trial-pass-section h3 {
+            font-family: 'Cooper Black', serif;
+        }
     </style>
 </head>
 
@@ -399,9 +405,11 @@
                 </ul>
 
                 <div style="display: flex; gap: 1rem; justify-content: center;">
-    <a href="https://buy.stripe.com/bIYcNv4gYfwz5TWdQT" class="buy-button" style="background: #172A91; font-family: 'Cooper Black', serif;">Get Started</a>
-    <a href="{{ route('introduction-details') }}" class="buy-button" style="background: #EBA49E; font-family: 'Cooper Black', serif;">Add Ons</a>
-</div>
+                    <a href="https://buy.stripe.com/bIYcNv4gYfwz5TWdQT" class="buy-button"
+                        style="background: #172A91; font-family: 'Cooper Black', serif;">Get Started</a>
+                    <a href="{{ route('introduction-details') }}" class="buy-button"
+                        style="background: #EBA49E; font-family: 'Cooper Black', serif;">Add Ons</a>
+                </div>
             </div>
 
 
@@ -415,8 +423,9 @@
                     <li>Priority access to new WorkSpaces</li>
                     <li>All Base Pass features included</li>
                 </ul>
-                <a href="https://buy.stripe.com/3cseVD5l20BFaaceV5" class="buy-button" style="font-family: 'Cooper Black', serif;">Buy Now</a>
-                </div>
+                <a href="https://buy.stripe.com/3cseVD5l20BFaaceV5" class="buy-button"
+                    style="font-family: 'Cooper Black', serif;">Buy Now</a>
+            </div>
         </div>
 
         <!-- One Pass Section -->
@@ -426,9 +435,10 @@
                 Journey</h3>
             <p style="color: white; opacity: 0.7; margin-bottom: 1rem">Experience the future of work with a single pass
                 - perfect for first-time remote workers</p>
-                <a href="/trial-pass" class="buy-button" style="background: #EBA49E; font-family: 'Cooper Black', serif;">Get One Pass</a>
+            <a href="/trial-pass" class="buy-button"
+                style="background: #EBA49E; font-family: 'Cooper Black', serif;">Get One Pass</a>
 
-</div>
+        </div>
 
         <div style="text-align: center; margin: 2rem 0;">
             <a href="https://remotework.com.my/map/" target="_blank" style="

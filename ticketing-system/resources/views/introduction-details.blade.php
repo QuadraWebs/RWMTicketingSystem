@@ -22,7 +22,13 @@
     <meta property="og:site_name" content="Remote Work Malaysia">
 
     <style>
-        /* Base styles from introduction.blade.php */
+        @font-face {
+            font-family: 'Sofia Pro';
+            src: url('/fonts/Sofia Pro Regular Az.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -30,7 +36,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Sofia Pro', system-ui, -apple-system, sans-serif;
             background: #172A91;
             min-height: 100vh;
             padding: 1.5rem;
@@ -229,7 +235,7 @@
             font-weight: 600;
         }
 
-       
+
 
         @media (max-width: 768px) {
             .addons-grid {
@@ -266,14 +272,14 @@
                 padding: 1rem;
             }
         }
-        /* Add to the style section */
-.buy-button, 
-.addon-card h2, 
-.intro-text h1,
-.addon-price {
-    font-family: 'Cooper Black', serif;
-}
 
+        /* Add to the style section */
+        .buy-button,
+        .addon-card h2,
+        .intro-text h1,
+        .addon-price {
+            font-family: 'Cooper Black', serif;
+        }
     </style>
 </head>
 
@@ -305,8 +311,9 @@
                     <li>Usable at any partner WorkSpaces</li>
                 </ul>
                 <div class="savings">Save <strong>RM5</strong> (20% off)</div>
-                <a href="https://buy.stripe.com/4gw00J6p6acf4PS3cl" class="buy-button" style="font-family: 'Cooper Black', serif;">Purchase with add-on</a>
-                </div>
+                <a href="https://buy.stripe.com/4gw00J6p6acf4PS3cl" class="buy-button"
+                    style="font-family: 'Cooper Black', serif;">Purchase with add-on</a>
+            </div>
 
             <!-- Value Add-on -->
             <div class="addon-card">
@@ -317,7 +324,8 @@
                     <li>Usable at any partner WorkSpaces</li>
                 </ul>
                 <div class="savings">Save <strong>RM35</strong> (24% off)</div>
-                <a href="https://buy.stripe.com/eVa6p7aFm5VZ5TWcMW" class="buy-button" style="font-family: 'Cooper Black', serif;">Purchase with add-on</a>
+                <a href="https://buy.stripe.com/eVa6p7aFm5VZ5TWcMW" class="buy-button"
+                    style="font-family: 'Cooper Black', serif;">Purchase with add-on</a>
             </div>
 
             <!-- Premium Add-on -->
@@ -331,7 +339,8 @@
                 </ul>
                 <div class="savings">Save <strong>∞</strong> (Unlimited)</div>
 
-                <a href="https://buy.stripe.com/00gcNv8xe7030zC3co" class="buy-button" style="font-family: 'Cooper Black', serif;">Purchase with add-on</a>
+                <a href="https://buy.stripe.com/00gcNv8xe7030zC3co" class="buy-button"
+                    style="font-family: 'Cooper Black', serif;">Purchase with add-on</a>
             </div>
         </div>
 
