@@ -10,16 +10,20 @@ class CafeController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-
-        $cafes = Cafe::when($search, function ($query) use ($search) {
-            return $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('address', 'like', '%' . $search . '%');
-        })
+    
+        $cafes = Cafe::withCount(['ticketAudits' => function ($query) {
+                $query->where('status', '!=', 'rejected');
+            }])
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('address', 'like', '%' . $search . '%');
+            })
             ->latest()
             ->paginate(10);
-
+    
         return view('admin.cafe.adminCafe', compact('cafes'));
     }
+    
 
     public function create()
     {

@@ -10,6 +10,9 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CafeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Package;
+use App\Models\Ticket;
+use App\Models\User;
+use App\Mail\TicketCreated;
 
 Auth::routes();
 
@@ -115,6 +118,16 @@ Route::get('/trial-pass', function () {
     return view('trialpass');
 })->name('trialpass');
 
+Route::get('/introduction/workspace-pass', function () {
+    return view('introduction-details');
+})->name('introduction-details');
+
+Route::get('/admin/subscribers/{uuid}/ticket/{ticket}/resend-welcome', function($uuid, $ticket) {
+    $ticket = Ticket::findOrFail($ticket);
+    $user = User::where('uuid', $uuid)->firstOrFail();
+    Mail::to($user->email)->send(new TicketCreated($ticket, $user));
+    return back()->with('success', 'Welcome email resent successfully');
+})->name('admin.subscribers.resend-welcome');
 
 Route::get('/viewticket/{uuid}', action: [TicketController::class, 'viewByUuid'])->name('ticket.view');
 Route::get('/', function () {

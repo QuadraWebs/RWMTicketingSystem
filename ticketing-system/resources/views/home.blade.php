@@ -340,7 +340,9 @@
                             <p>{{ $activity['time'] }}</p>
                         </div>
                     </div>
-                    <span class="activity-status">{{ $activity['status'] }}</span>
+                    <span class="activity-status" style="background: {{ $activity['status'] === 'Rejected' ? '#FEE2E2' : '#ECFDF5' }}; color: {{ $activity['status'] === 'Rejected' ? '#DC2626' : '#065F46' }};">
+    {{ $activity['status'] }}
+</span>
                 </div>
                 @endforeach
             </div>

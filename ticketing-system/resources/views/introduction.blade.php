@@ -8,7 +8,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-8SJ9K7GGKQ');
     </script>
     <title>Remote Work Malaysia - Introduction</title>
@@ -24,7 +23,6 @@
     <meta property="og:site_name" content="Remote Work Malaysia">
 
     <style>
-        /* Base styles from packages.blade.php */
         * {
             margin: 0;
             padding: 0;
@@ -35,7 +33,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #172A91;
             min-height: 100vh;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .container {
@@ -43,9 +41,8 @@
             margin: 0 auto;
         }
 
-        /* Header and Logo styles */
         .header {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .logo {
@@ -55,177 +52,322 @@
         }
 
         .logo img {
-            max-height: 40px;
+            max-height: 35px;
             width: auto;
         }
 
-        /* Pass Cards Grid */
-        .passes-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-bottom: 3rem;
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .pass-card {
+        .intro-text h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-family: 'Cooper Black', serif;
+        }
+
+        .intro-text p {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .passes-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .base-pass-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 50%, #EBA49E 300%);
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            min-height: 450px;
+            box-shadow:
+                0 20px 40px rgba(235, 164, 158, 0.2),
+                0 0 0 2px rgba(235, 164, 158, 0.1),
+                inset 0 0 60px rgba(23, 42, 145, 0.05);
+            border: 3px solid #172A91;
+            position: relative;
+            transition: all 0.4s ease;
+            transform: scale(1.02);
+            overflow: hidden;
+        }
+
+        .base-pass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(45deg, rgba(235, 164, 158, 0.1) 0%, transparent 40%),
+                linear-gradient(135deg, rgba(23, 42, 145, 0.15) 10%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(235, 164, 158, 0.1) 0%, transparent 40%);
+            opacity: 0.9;
+        }
+
+        .base-pass-card::after {
+            content: "Best Value";
+            position: absolute;
+            top: 1rem;
+            right: -3rem;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 0.75rem 3rem;
+            transform: rotate(45deg);
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: zoom-bounce 2s ease-in-out infinite;
+        }
+
+
+        @keyframes zoom-bounce {
+
+            0%,
+            100% {
+                transform: rotate(45deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(45deg) scale(1.1);
+            }
+        }
+
+
+        @keyframes shine {
+            0% {
+                background-position: -100%;
+            }
+
+            100% {
+                background-position: 200%;
+            }
+        }
+
+        .base-pass-card .pass-title {
+            background: linear-gradient(135deg, #172A91 0%, #EBA49E 200%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
+            font-weight: 800;
+            animation: titleGlow 2s infinite;
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(235, 164, 158, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(235, 164, 158, 0.5);
+            }
+        }
+
+        .base-pass-card .buy-button {
+            background: linear-gradient(45deg, #172A91, #EBA49E);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .ultimate-pass-card {
             background: white;
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+            min-height: 450px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
         .pass-title {
-            color: #172A91;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
+            color: #172A91;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
         }
 
         .pass-price {
+            font-size: 2rem;
+            margin: 1.2rem 0;
             color: #EBA49E;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pass-price span {
+            font-size: 1rem;
+            opacity: 0.8;
         }
 
         .pass-features {
             list-style: none;
-            margin-bottom: 2rem;
-            flex-grow: 1;
+            margin: 1.5rem 0;
+            position: relative;
+            z-index: 2;
         }
 
         .pass-features li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
             color: #666;
             display: flex;
             align-items: center;
+            font-size: 1rem;
         }
 
         .pass-features li:before {
             content: "✓";
             color: #EBA49E;
-            margin-right: 0.5rem;
+            margin-right: 0.8rem;
             font-weight: bold;
         }
 
-        /* Ultimate Perk Card */
-        .ultimate-perk {
-            background: linear-gradient(145deg, #172A91, #1e357d);
-            color: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        /* Trial Pass Section */
-        .trial-pass {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        /* Button Styles */
         .buy-button {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 2rem;
             background: #172A91;
             color: white;
             text-decoration: none;
-            border-radius: 0.5rem;
-            transition: background 0.3s ease;
-            text-align: center;
+            border-radius: 0.8rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
             border: none;
             cursor: pointer;
         }
 
         .buy-button:hover {
             background: #EBA49E;
+            transform: translateY(-2px);
         }
 
-        /* Footer styles from packages.blade.php */
+        .trial-pass-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+        }
+
         .footer {
             text-align: center;
-            margin-top: 4rem;
+            margin-top: 3rem;
             padding: 1rem;
             color: white;
         }
 
-        .highlight-feature {
-            color: #000;
-            font-weight: 700;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .highlight-feature:before {
-            content: "★";
-            position: absolute;
-            left: 0;
-            color: #000;
-        }
-
-        .reminder-text {
-            font-size: 0.8rem;
-            color: #666;
-            font-style: italic;
-            margin-top: 0.5rem;
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 2rem;
-            font-size: 1rem;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            animation: zoom-bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes zoom-bounce {
-
-            0%,
-            100% {
-                transform: rotate(3deg) scale(1);
-            }
-
-            50% {
-                transform: rotate(3deg) scale(1.1);
-            }
-        }
+        @media (max-width: 768px) {
+    .buy-button {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .passes-grid .base-pass-card div[style*="display: flex"] {
+        text-align: center;
+        width: 100%;
+    }
+}
 
 
-        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .passes-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            .container {
-                padding: 1rem;
+            .base-pass-card,
+            .ultimate-pass-card {
+                min-height: auto;
+                padding: 2rem 1.5rem;
             }
 
-            .pass-card,
-            .ultimate-perk,
-            .trial-pass {
+            .addons-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+
+
+
+            .addon-card {
+                min-height: auto;
                 margin-bottom: 1.5rem;
             }
+
+            .intro-text h1 {
+                font-size: 1.8rem;
+                padding: 0 1rem;
+            }
+
+            .intro-text p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .pass-title {
+                font-size: 1.6rem;
+            }
+
+            .pass-price {
+                font-size: 1.8rem;
+            }
+
+            .addon-price {
+                font-size: 2.2rem;
+            }
+
+            .savings {
+                font-size: 1.1rem;
+                padding: 0.75rem;
+            }
+
+            .buy-button {
+                width: 100%;
+                padding: 1rem;
+            }
         }
+
+        /* Add to the style section */
+.buy-button, 
+.pass-title, 
+.intro-text h1,
+.trial-pass-section h3 {
+    font-family: 'Cooper Black', serif;
+}
+
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <div class="logo">
                 <a href="https://remotework.com.my/">
@@ -234,421 +376,75 @@
             </div>
         </header>
 
-        <!-- Add these styles -->
-        <style>
-            .workspace-pass {
-                background: linear-gradient(135deg, #EBA49E, #e89891);
-                border-radius: 2rem;
-                padding: 3rem 2rem;
-                margin-bottom: 4rem;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .workspace-pass::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 300px;
-                height: 300px;
-                background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-                border-radius: 50%;
-                transform: translate(50%, -50%);
-            }
-
-            .workspace-content {
-                display: grid;
-                grid-template-columns: 1fr 2fr;
-                gap: 3rem;
-                align-items: center;
-            }
-
-            .workspace-header {
-                position: relative;
-            }
-
-            .base-badge {
-                background: #172A91;
-                color: white;
-                padding: 0.5rem 1.5rem;
-                border-radius: 2rem;
-                font-size: 0.9rem;
-                font-weight: 600;
-                display: inline-block;
-                margin-bottom: 1rem;
-            }
-
-            .workspace-title {
-                color: white;
-                font-size: 2.5rem;
-                font-weight: 700;
-                margin-bottom: 1rem;
-                line-height: 1.2;
-            }
-
-            .workspace-price {
-                color: #172A91;
-                font-size: 2.5rem;
-                font-weight: 700;
-                margin: 1.5rem 0;
-            }
-
-            .workspace-price span {
-                font-size: 1.2rem;
-                font-weight: 500;
-            }
-
-            .workspace-features {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-
-            .feature-group {
-                margin-bottom: 1rem;
-            }
-
-            .main-feature {
-                color: white;
-                font-size: 1.1rem;
-                font-weight: 500;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .sub-features {
-                margin-left: 2.5rem;
-                margin-top: 0.5rem;
-            }
-
-            .right-features {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .sub-feature {
-                color: white;
-                opacity: 0.9;
-                position: relative;
-                padding-left: 1rem;
-                margin-top: 0.5rem;
-            }
-
-            .sub-feature::before {
-                content: "•";
-                position: absolute;
-                left: 0;
-                color: white;
-            }
-
-            .highlight-feature {
-                color: white;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .highlight-feature::before {
-                content: "✓";
-                color: #172A91;
-            }
-
-            @media (max-width: 768px) {
-                .workspace-features {
-                    grid-template-columns: 1fr;
-                    gap: 1.5rem;
-                }
-
-                .sub-features {
-                    margin-left: 1.5rem;
-                }
-            }
-
-
-            .workspace-feature {
-                color: white;
-                font-size: 1.1rem;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .workspace-feature::before {
-                content: "✓";
-                font-weight: bold;
-                color: #172A91;
-            }
-
-            .sub-feature {
-                position: relative;
-                padding-left: 20px;
-            }
-
-            .pass-features li.sub-feature:before {
-                content: "•" !important;
-                font-size: 1.5rem;
-                color: #172A91;
-            }
-
-
-            .workspace-cta {
-                text-align: center;
-                margin-top: 2rem;
-            }
-
-            @media (max-width: 768px) {
-                .workspace-pass {
-                    padding: 2rem 1.5rem;
-                }
-
-                .workspace-content {
-                    grid-template-columns: 1fr;
-                    gap: 2rem;
-                }
-
-
-
-                .workspace-features {
-                    grid-template-columns: 1fr;
-
-                    gap: 1rem;
-                    margin-bottom: 1.5rem;
-                }
-
-                .workspace-feature {
-                    font-size: 1rem;
-                    gap: 0.3rem;
-                }
-
-                .workspace-pass {
-                    padding: 2rem 1.5rem;
-                }
-
-                .workspace-content {
-                    gap: 1.5rem;
-                }
-
-                .workspace-title {
-                    font-size: 2rem;
-                }
-            }
-
-            .workspace-pass {
-                background: linear-gradient(135deg, #EBA49E 0%, #e89891 50%, #dc8680 100%);
-                box-shadow:
-                    0 20px 40px rgba(235, 164, 158, 0.2),
-                    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
-                border-radius: 2rem;
-                padding: 3rem 2rem;
-                margin-bottom: 4rem;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .workspace-pass::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 100%;
-                height: 100%;
-                background:
-                    radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                    radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
-                opacity: 0.8;
-            }
-
-            @font-face {
-                font-family: 'Cooper Black';
-                src: url('{{ asset("fonts/COOPBL.TTF") }}') format('truetype');
-            }
-        </style>
-
-        <div style="text-align: center; margin-bottom: 3rem;">
-            <h1
-                style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600; font-family: 'Cooper Black', serif;">
-                WorkSpace that works for you
-            </h1>
-            <p style="color: white; font-size: 1.2rem; line-height: 1.6; max-width: 800px; margin: 0 auto;">
-                Don't settle for less. Elevate your workday with a pass that fits your schedule and perks that make a
-                difference
-            </p>
-        </div>
-        <!-- The new WorkSpace Pass section -->
-        <div class="workspace-pass">
-            <div class="workspace-content">
-                <div class="workspace-header">
-                    <div class="base-badge">BASE PASS</div>
-                    <h2 class="workspace-title">WorkSpace Pass</h2>
-                    <div class="workspace-price">
-                        RM80 <span>/month</span>
-                    </div>
-                    <p style="color: white; opacity: 0.9;">Your gateway to productive workspaces</p>
-                    <div class="workspace-cta">
-                        <a href="https://buy.stripe.com/bIYcNv4gYfwz5TWdQT" class="buy-button"
-                            style="background: #172A91; font-size: 1.2rem; padding: 1.2rem 2.5rem; font-weight: 600; box-shadow: 0 4px 15px rgba(23, 42, 145, 0.2); text-decoration: none; display: inline-block;">
-                            Get Started
-                        </a>
-
-                    </div>
-                </div>
-
-                <div class="workspace-features">
-                    <div class="feature-group">
-                        <div class="highlight-feature">5 Coworking Passes</div>
-                        <div class="sub-features">
-                            <div class="sub-feature">Up to 4 hours per WorkSpace</div>
-                            <div class="sub-feature">Wi-Fi, plug point, drinking water</div>
-                            <div class="sub-feature">Device Cover<sup>TM</sup></div>
-                        </div>
-                    </div>
-
-                    <div class="right-features">
-                        <div class="highlight-feature">Virtual focused session</div>
-                        <div class="highlight-feature">Access to work buddies</div>
-                        <div class="highlight-feature">
-                            <a href="https://remotework.com.my/blog" target="_blank"
-                                style="color: white; text-decoration: underline;">
-                                Special Member-Only Event Deals
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="intro-text">
+            <h1>WorkSpace that works for you</h1>
+            <p>Don't settle for less. Elevate your workday with a pass that fits your schedule and perks that make a
+                difference</p>
         </div>
 
-
-        <!-- Main Passes Grid -->
         <div class="passes-grid">
-            <!-- Basic Workspace Pass -->
-            <div class="pass-card">
-                <h2 class="pass-title">Starter Spark Pass</h2>
-                <div class="pass-price">RM80 + RM20 /month</div>
-                <div style="color: #666; margin-bottom: 1rem;">Total: RM100/month</div>
+            <!-- Base Pass -->
+            <div class="base-pass-card">
+                <h2 class="pass-title" style="font-size: 2.5rem;">WorkSpace Pass</h2>
+                <div class="pass-price" style="font-size: 3rem;">RM80 <span>/month</span></div>
                 <ul class="pass-features">
-                    <li class="highlight-feature">5 Coworking Passes</li>
-                    <li class="sub-feature">Up to 4 hours per WorkSpace</li>
-                    <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
-                    <li class="sub-feature">Device Cover<sup>TM</sup></li>
-                    <li class="highlight-feature">Virtual focused session</li>
-                    <li class="highlight-feature">Access to work buddies</li>
-                    <li class="highlight-feature"><a href="https://remotework.com.my/blog" target="_blank"
-                            style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
-                            Deals</a></li>
-                    <li class="highlight-feature">RM25 F&B voucher x 1</li>
-                    <li class="highlight-feature">Save RM5 on F&B add-on</li>
-                </ul>
-                <div class="reminder-text">
-                    F&B voucher is valid at all partner WorkSpaces
-                </div>
-                <a href="https://buy.stripe.com/4gw00J6p6acf4PS3cl" class="buy-button">Buy Now!</a>
-            </div>
-
-            <!-- Plus Workspace Pass -->
-            <div class="pass-card" style="position: relative;">
-                <div class="popular-badge">Best Seller</div>
-
-                <h2 class="pass-title">Power Boost Pass</h2>
-                <div class="pass-price">RM80 + RM80 /month</div>
-                <div style="color: #666; margin-bottom: 1rem;">Total: RM160/month</div>
-                <ul class="pass-features">
-                    <li class="highlight-feature">5 Coworking Passes</li>
-                    <li class="sub-feature">Up to 4 hours per WorkSpace</li>
-                    <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
-                    <li class="sub-feature">Device Cover<sup>TM</sup></li>
-                    <li class="highlight-feature">Virtual focused session</li>
-                    <li class="highlight-feature">Access to work buddies</li>
-                    <li class="highlight-feature"><a href="https://remotework.com.my/blog" target="_blank"
-                            style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
-                            Deals</a></li>
-
-                    <li class="highlight-feature">RM25 F&B voucher x 5</li>
-                    <li class="highlight-feature">Save RM45 on F&B add-on</li>
-                </ul>
-                <div class="reminder-text">
-                    F&B voucher is valid at all partner WorkSpaces
-                </div>
-                <a href="https://buy.stripe.com/eVa6p7aFm5VZ5TWcMW" class="buy-button">Buy Now!</a>
-            </div>
-
-            <!-- Premium Workspace Pass -->
-            <div class="pass-card">
-                <h2 class="pass-title">Peak Performance Pass</h2>
-                <div class="pass-price">RM80 + RM220 /month</div>
-                <div style="color: #666; margin-bottom: 1rem;">Total: RM300/month</div>
-                <ul class="pass-features">
-                    <li class="highlight-feature">Monthly unlimited passes</li>
-                    <li class="sub-feature">Up to 4 hours per WorkSpace</li>
-                    <li class="sub-feature">Wi-Fi, plug point, drinking water</li>
-                    <li class="sub-feature">Device Cover<sup>TM</sup></li>
-                    <li class="highlight-feature">Virtual focused session</li>
-                    <li class="highlight-feature">Access to work buddies</li>
-                    <li class="highlight-feature"><a href="https://remotework.com.my/blog" target="_blank"
-                            style="cursor: pointer; color: #666; text-decoration: underline;">Special Member-Only Event
-                            Deals</a></li>
-
-                    <li class="highlight-feature">Even more privileged rates</li>
-                    <li class="highlight-feature">Save forever more</li>
-                </ul>
-                <a href="https://buy.stripe.com/00gcNv8xe7030zC3co" class="buy-button">Buy Now!</a>
-            </div>
-        </div>
-
-        <div class="ultimate-perk"
-            style="background: linear-gradient(165deg, #172A91, #1e357d); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); position: relative;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1; text-align: left; padding: 1rem;">
-                    <h2 class="pass-title" style="color: white; font-size: 1.6rem; font-weight: 600;">Infinity Elite
-                        Pass</h2>
-                    <div style="color: #EBA49E; font-size: 24px; margin: 0.5rem 0; font-weight: 600;">
-                        RM80 + RM720 /month
-                    </div>
-                    <div style="color: white; font-size: 1.1rem;">
-                        Total: RM800/month
-                    </div>
-                </div>
-                <div style="flex: 2; text-align: left; padding: 1rem;">
-                    <ul class="pass-features" style="color: white; font-size: 1.1rem; font-weight: 500;">
-                        <li style="color:white">All Workspace Pass features</li>
-                        <li class="highlight-feature" style="color: #EBA49E;">RM25 F&B vouchers x unlimited</li>
-                        <li class="highlight-feature" style="color: #EBA49E;">Priority access to new WorkSpaces</li>
+                    <li style="font-weight: 600;">5 Coworking Passes</li>
+                    <ul style="margin-left: 1.5rem; font-size: 0.95rem; list-style: disc;">
+                        <li style="color: #666;">Up to 4 hours per WorkSpace</li>
+                        <li style="color: #666;">Wi-Fi, plug point, drinking water</li>
+                        <li style="color: #666;">Device Cover™</li>
+                        <li style="color: #666;">Virtual focused session</li>
+                        <li style="color: #666;">Access to work buddies</li>
                     </ul>
-                </div>
-                <div style="flex: 1; text-align: right; padding: 1rem;">
-                    <a href="https://buy.stripe.com/3cseVD5l20BFaaceV5" style="background-color: #EBA49E;"
-                        class="buy-button">Buy Now!</a>
-                </div>
+                </ul>
+
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+    <a href="https://buy.stripe.com/bIYcNv4gYfwz5TWdQT" class="buy-button" style="background: #172A91; font-family: 'Cooper Black', serif;">Get Started</a>
+    <a href="{{ route('introduction-details') }}" class="buy-button" style="background: #EBA49E; font-family: 'Cooper Black', serif;">Add Ons</a>
+</div>
             </div>
-            <div
-                style="position: absolute; bottom: 1rem; right: 1rem; font-size: 0.8rem; color: rgba(255,255,255,0.7);">
-                F&B voucher is valid at all partner WorkSpaces
-            </div>
+
+
+            <!-- Ultimate Pass -->
+            <div class="ultimate-pass-card">
+                <h2 class="pass-title">Infinity Elite Pass</h2>
+                <div class="pass-price">RM800 <span>/month</span></div>
+                <ul class="pass-features">
+                    <li>Unlimited Workspace Access</li>
+                    <li>RM25 F&B vouchers x unlimited</li>
+                    <li>Priority access to new WorkSpaces</li>
+                    <li>All Base Pass features included</li>
+                </ul>
+                <a href="https://buy.stripe.com/3cseVD5l20BFaaceV5" class="buy-button" style="font-family: 'Cooper Black', serif;">Buy Now</a>
+                </div>
         </div>
 
-        <!-- Trial Pass -->
-        <div class="trial-pass">
-            <h2 class="pass-title">Trial WorkSpace Pass</h2>
-            <a href="https://pass.remotework.com.my/trial-pass" class="buy-button">View Passes</a>
-        </div>
+        <!-- One Pass Section -->
+        <div class="trial-pass-section"
+            style="background: linear-gradient(135deg, rgba(235, 164, 158, 0.15) 0%, rgba(235, 164, 158, 0.05) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(235, 164, 158, 0.2);">
+            <h3 style="color: white; opacity: 0.9; margin-bottom: 0.8rem; font-size: 1.2rem;">Start Your Remote Work
+                Journey</h3>
+            <p style="color: white; opacity: 0.7; margin-bottom: 1rem">Experience the future of work with a single pass
+                - perfect for first-time remote workers</p>
+                <a href="/trial-pass" class="buy-button" style="background: #EBA49E; font-family: 'Cooper Black', serif;">Get One Pass</a>
+
+</div>
 
         <div style="text-align: center; margin: 2rem 0;">
             <a href="https://remotework.com.my/map/" target="_blank" style="
-           display: inline-flex;
-           align-items: center;
-           gap: 0.5rem;
-           background: rgba(255, 255, 255, 0.1);
-           color: white;
-           padding: 1rem 2rem;
-           border-radius: 2rem;
-           text-decoration: none;
-           font-weight: 500;
-           transition: all 0.3s ease;
-           border: 1px solid rgba(255, 255, 255, 0.2);
-           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-       " onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.2)'"
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);"
+                onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.2)'"
                 onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255, 255, 255, 0.1)'">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
@@ -661,12 +457,11 @@
 
         <!-- Footer -->
         <div class="footer">
-            <div style="margin-top: 10px; color: white; font-size: 13px;">
+            <div style="margin-bottom: 1rem;">
                 Need help? Contact us at <a href="mailto:hi@remotework.com.my"
                     style="color: #EBA49E; text-decoration: none;">hi@remotework.com.my</a>
             </div>
-            <!-- Social Media Icons -->
-            <div style="margin-top: 10px; margin-bottom:10px">
+            <div style="margin: 1rem 0;">
                 <a href="https://www.instagram.com/remoteworkmy/" style="display: inline-block; margin: 0 10px;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                         <path
@@ -681,12 +476,10 @@
                     </svg>
                 </a>
             </div>
-
             <div class="copyright">
                 Copyright © 2024 Wanderworks Lab, (SA0610699-K)<br>
                 ALL RIGHT'S RESERVED
             </div>
-
             <div class="powered-by">
                 <a href="https://www.quadrawebs.com" target="_blank" rel="noopener noreferrer"
                     style="color: #EBA49E; text-decoration: none;">

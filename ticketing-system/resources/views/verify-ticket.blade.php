@@ -447,27 +447,28 @@
                 </div>
 
                 <div class="button-group">
-                    <form class="button-form" action="{{ route('ticket.verify.reject', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
-                        <button type="submit" class="button button-reject">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                            Cancel
-                        </button>
-                    </form>
+                <form class="button-form" onsubmit="handleCancel(this)" action="{{ route('ticket.verify.reject', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST">
+    @csrf
+    <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
+    <button type="submit" class="button button-reject">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+        Cancel
+    </button>
+</form>
 
-                    <form class="button-form" action="{{ route('ticket.verify.accept', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
-                        <button type="submit" class="button button-accept">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            Check in
-                        </button>
-                    </form>
+<form class="button-form" onsubmit="handleCheckIn(this)" action="{{ route('ticket.verify.accept', ['ticket' => $ticket_id, 'uuid' => request()->route('uuid')]) }}" method="POST">
+    @csrf
+    <input type="hidden" name="cafe_id" value="{{ request()->query('cafe_id') }}">
+    <button type="submit" class="button button-accept">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        Check in
+    </button>
+</form>
+
                 </div>
             </div>
         </main>
@@ -506,3 +507,48 @@
 </body>
 
 </html>
+
+<script>
+    function handleCheckIn(form) {
+    const checkInButton = form.querySelector('button');
+    const cancelButton = document.querySelector('.button-reject');
+    
+    checkInButton.innerHTML = `
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        Checking in...
+    `;
+    checkInButton.disabled = true;
+    checkInButton.style.opacity = '0.7';
+    checkInButton.style.cursor = 'not-allowed';
+    
+    cancelButton.disabled = true;
+    cancelButton.style.opacity = '0.7';
+    cancelButton.style.cursor = 'not-allowed';
+    
+    form.submit();
+}
+
+function handleCancel(form) {
+    const cancelButton = form.querySelector('button');
+    const checkInButton = document.querySelector('.button-accept');
+    
+    cancelButton.innerHTML = `
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+        Cancelling...
+    `;
+    cancelButton.disabled = true;
+    cancelButton.style.opacity = '0.7';
+    cancelButton.style.cursor = 'not-allowed';
+    
+    checkInButton.disabled = true;
+    checkInButton.style.opacity = '0.7';
+    checkInButton.style.cursor = 'not-allowed';
+    
+    form.submit();
+}
+
+</script>

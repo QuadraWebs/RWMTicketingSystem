@@ -75,9 +75,8 @@
                                         <tr>
                                             <td style="padding: 8px 0;">
                                                 <div style="display: flex; align-items: flex-start;">
-                                                    <span
-                                                        style="flex-shrink: 0; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">1</span>
-                                                    <div style="flex: 1;">Tap the <b>"View Pass"</b> button below.</div>
+                                                   
+                                                    <div style="flex: 1;"><span style="color:#172A91; font-weight:800">Step 1: </span>Tap the <b>"View Pass"</b> button below.</div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -86,9 +85,7 @@
                                         <tr>
                                             <td style="padding: 8px 0;">
                                                 <div style="display: flex; align-items: flex-start;">
-                                                    <span
-                                                        style="flex-shrink: 0; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">2</span>
-                                                    <div style="flex: 1;">Once you're in, tap the <b>"Use Pass"</b>
+                                                   <div style="flex: 1;"><span style="color:#172A91; font-weight:800">Step 2: </span>Once you're in, tap the <b>"Use Pass"</b>
                                                         button below.</div>
                                                 </div>
                                             </td>
@@ -96,9 +93,7 @@
                                         <tr>
                                             <td style="padding: 8px 0;">
                                                 <div style="display: flex; align-items: flex-start;">
-                                                    <span
-                                                        style="flex-shrink: 0; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">3</span>
-                                                    <div style="flex: 1;"> When you're ready to check-in, select the
+                                                    <div style="flex: 1;"> <span style="color:#172A91; font-weight:800">Step 3: </span>When you're ready to check-in, select the
                                                         WorkSpace and tap <b>"Confirm Check-In"</b>.</div>
                                                 </div>
                                             </td>
@@ -106,9 +101,7 @@
                                         <tr>
                                             <td style="padding: 8px 0;">
                                                 <div style="display: flex; align-items: flex-start;">
-                                                    <span
-                                                        style="flex-shrink: 0; background-color: #172A91; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px;">4</span>
-                                                    <div style="flex: 1;">A QR Code will appear - let the crew scan your
+                                                     <div style="flex: 1;"><span style="color:#172A91; font-weight:800">Step 4: </span>A QR Code will appear - let the crew scan your
                                                         QR Code within <b>2 minutes</b> to complete your check-in.</div>
                                                 </div>
                                             </td>

@@ -305,10 +305,53 @@
     .delete-confirm-button:hover {
         background: #b91c1c;
     }
-
-    /* Pagination */
+    /* Pagination Styles */
     .pagination {
         margin-top: 1.5rem;
+    }
+
+    .pagination nav {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pagination span.relative {
+        display: inline-flex;
+        padding: 0.5rem;
+    }
+
+    .pagination a {
+        padding: 0.5rem 1rem;
+        margin: 0 0.25rem;
+        border-radius: 0.375rem;
+        color: #6b7280;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .pagination a:hover {
+        background-color: #f3f4f6;
+        color: #111827;
+    }
+
+    .pagination span[aria-current="page"] span {
+        background-color: #172A91;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+    }
+
+    .pagination svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .pagination span.text-gray-500 {
+        color: #9ca3af;
+    }
+
+    .pagination span.font-semibold {
+        font-weight: 600;
     }
 
     /* Animation Delays for Table Rows */
@@ -396,6 +439,7 @@
                         <th>Actions</th>
                         <th>Name</th>
                         <th>Address</th>
+                        <th>Total Entries</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -414,6 +458,8 @@
                             </td>
                             <td>{{ $cafe->name }}</td>
                             <td>{{ $cafe->address }}</td>
+                            <td>{{ $cafe->ticket_audits_count }}</td>
+
                         </tr>
                     @endforeach
                 </tbody>

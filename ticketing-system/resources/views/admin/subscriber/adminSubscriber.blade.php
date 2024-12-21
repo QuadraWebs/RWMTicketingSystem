@@ -4,15 +4,21 @@
 <style>
     /* Animation Keyframes */
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
 
     @keyframes slideUp {
-        from { 
+        from {
             transform: translateY(20px);
             opacity: 0;
         }
+
         to {
             transform: translateY(0);
             opacity: 1;
@@ -31,7 +37,7 @@
         background: white;
         border-radius: 0.75rem;
         border: 1px solid #e5e7eb;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
         animation: slideUp 0.6s ease-out;
     }
@@ -140,12 +146,15 @@
     /* Table Styles */
     .table-container {
         overflow-x: auto;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
     }
-    
+
     .table-container::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
+        display: none;
+        /* Chrome, Safari, Opera */
     }
 
     .table {
@@ -180,23 +189,53 @@
     /* Action Buttons */
     .action-buttons {
         display: flex;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        align-items: center;
     }
 
     .action-button {
-        color: #6b7280;
-        transition: color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        border: none;
         cursor: pointer;
-        font-size: 1rem;
+        min-width: 60px;
     }
 
-    .view-button {
-        color: #059669;
-    }
-
-    .edit-button {
+    .action-button:nth-child(1) {
+        background: rgba(37, 99, 235, 0.1);
         color: #2563eb;
     }
+
+    .action-button:nth-child(2) {
+        background: rgba(220, 38, 38, 0.1);
+        color: #dc2626;
+    }
+
+    .action-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .action-buttons {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .action-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
 
     .delete-button {
         color: #dc2626;
@@ -313,16 +352,45 @@
         animation: slideUp 0.4s ease-out forwards;
     }
 
-    .table tr:nth-child(1) { animation-delay: 0.1s; }
-    .table tr:nth-child(2) { animation-delay: 0.2s; }
-    .table tr:nth-child(3) { animation-delay: 0.3s; }
-    .table tr:nth-child(4) { animation-delay: 0.4s; }
-    .table tr:nth-child(5) { animation-delay: 0.5s; }
-    .table tr:nth-child(6) { animation-delay: 0.6s; }
-    .table tr:nth-child(7) { animation-delay: 0.7s; }
-    .table tr:nth-child(8) { animation-delay: 0.8s; }
-    .table tr:nth-child(9) { animation-delay: 0.9s; }
-    .table tr:nth-child(10) { animation-delay: 1s; }
+    .table tr:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .table tr:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .table tr:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .table tr:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .table tr:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    .table tr:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+
+    .table tr:nth-child(7) {
+        animation-delay: 0.7s;
+    }
+
+    .table tr:nth-child(8) {
+        animation-delay: 0.8s;
+    }
+
+    .table tr:nth-child(9) {
+        animation-delay: 0.9s;
+    }
+
+    .table tr:nth-child(10) {
+        animation-delay: 1s;
+    }
 </style>
 
 <div class="container">
@@ -344,8 +412,7 @@
                 <div class="search-input-wrapper">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="Search subscribers by name or email..."
-                        class="search-input">
+                        placeholder="Search subscribers by name or email..." class="search-input">
                     @if(request('search'))
                         <a href="{{ route('admin.subscribers') }}" class="clear-search">
                             <i class="fas fa-times"></i>
@@ -373,13 +440,13 @@
                         <tr data-subscriber-id="{{ $subscriber->id }}">
                             <td>
                                 <div class="action-buttons">
-                                    <a href="{{ route('subscriber.view', $subscriber->uuid) }}" class="action-button view-button">
-                                        <i class="fas fa-edit"></i>
+                                    <a href="{{ route('subscriber.view', $subscriber->uuid) }}" class="action-button">
+                                        <i class="fas fa-eye"></i>
                                     </a>
                                     @if(!$subscriber->is_admin)
                                         <button
                                             onclick="showDeleteModal('{{ route('admin.subscribers.destroy', $subscriber->id) }}', '{{ $subscriber->id }}')"
-                                            class="action-button delete-button">
+                                            class="action-button">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     @endif

@@ -321,6 +321,16 @@ class TicketController extends Controller
             $cafe = Cafe::find($cafe_id); 
 
             Mail::to($user->email)->send(new CheckedIn($retrieveTicket, $users, $cafe));
+            // Mail::raw("User {$users->name} has checked in at {$cafe->name} at " . now()->format('Y-m-d H:i:s'), function($message) {
+            //     $message->to('wanxin@remotework.com.my')
+            //             ->subject('New Check-in Notification');
+            // });
+
+            Mail::raw("User {$users->name} has checked in at {$cafe->name} at " . now()->format('Y-m-d H:i:s'), function($message) {
+                $message->to('liongsy020601@gmail.com')
+                        ->subject('New Check-in Notification');
+            });
+            
 
 
             return view('accept-ticket', [

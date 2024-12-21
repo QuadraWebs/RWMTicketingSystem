@@ -200,7 +200,7 @@
 
         <div class="packages-grid">
             <div class="package-card">
-                <h2 class="package-title">Trial Coworking Pass</h2>
+                <h2 class="package-title">Coworking Pass - One Pass</h2>
                 <div class="package-price">RM20</div>
                 <ul class="pass-features">
                     <li>1 Coworking Pass</li>
@@ -212,11 +212,11 @@
                 <!-- <div class="reminder-text">
                     Use Promo Code "20OFF"
                 </div> -->
-                <a href="https://buy.stripe.com/8wM6p714M2JN4PS002" class="buy-button">Redeem Now</a>
+                <a href="https://buy.stripe.com/8wM6p714M2JN4PS002" class="buy-button">Buy Now</a>
             </div>
 
             <div class="package-card">
-                <h2 class="package-title">Trial All-in Pass</h2>
+                <h2 class="package-title"> All-in Pass - One Pass</h2>
                 <div class="package-price">RM35</div>
                 <ul class="pass-features">
                     <li>1 Coworking Pass</li>
@@ -229,7 +229,7 @@
                 <!-- <div class="reminder-text">
                     Use Promo Code "20OFF"
                 </div> -->
-                <a href="https://buy.stripe.com/fZebJr8xe8471DG5kp" class="buy-button">Redeem Now</a>
+                <a href="https://buy.stripe.com/fZebJr8xe8471DG5kp" class="buy-button">Buy Now</a>
             </div>
         </div>
 

@@ -25,6 +25,52 @@
         }
     }
 
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 500px;
+        width: 90%;
+    }
+
+    .modal-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        justify-content: flex-end;
+    }
+
+    .cancel-button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background: #f3f4f6;
+        border: none;
+        cursor: pointer;
+    }
+
+    .confirm-button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background: #172A91;
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+    }
+
     /* Base Styles */
     .container {
         max-width: 90rem;
@@ -218,64 +264,69 @@
     .status-checked-out {
         color: #dc2626;
     }
-    
+
     /* Action Buttons */
     .action-buttons {
         display: flex;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        align-items: center;
     }
 
     .action-button {
-        color: #6b7280;
-        transition: color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        border: none;
         cursor: pointer;
-        font-size: 1rem;
+        min-width: 60px;
     }
 
-    .view-button {
-        color: #059669;
-    }
-
-    .edit-button {
+    .action-button:nth-child(1) {
+        background: rgba(37, 99, 235, 0.1);
         color: #2563eb;
     }
 
-    .delete-button {
-        color: #dc2626;
-        border: none;
-    }
-
-    .view-button:hover {
-        color: #047857;
-    }
-
-    .edit-button:hover {
-        color: #1d4ed8;
-    }
-
-    .delete-button:hover {
-        color: #b91c1c;
-    }
-    
     .edit-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background: #172A91;
-        color: white;
-        border-radius: 0.5rem;
+        background: rgba(37, 99, 235, 0.1);
+        color: #2563eb;
+        padding: 8px;
+        border-radius: 10px;
         text-decoration: none;
-        font-size: 0.875rem;
-        font-weight: 500;
-        transition: all 0.2s;
     }
 
-    .edit-button:hover {
-        background: #131f69;
-        transform: translateY(-1px);
+    .action-button:nth-child(2) {
+        background: rgba(220, 38, 38, 0.1);
+        color: #dc2626;
     }
 
+    .action-button:nth-child(3) {
+        background: rgba(23, 42, 145, 0.1);
+        color: #172A91;
+    }
+
+    .action-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .action-buttons {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .action-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
 </style>
 
 <div class="container">
@@ -335,16 +386,25 @@
                         @foreach($tickets as $ticket)
                             <tr>
                                 <td>
+                                    <!-- In the action buttons div -->
                                     <div class="action-buttons">
-                                        <a href="{{ route('admin.subscribers.edit_user_ticket', ['uuid' => $subscriber->uuid, 'ticket' => $ticket->id]) }}" 
-                                            class="action-button edit-button">
+                                        <a href="{{ route('admin.subscribers.edit_user_ticket', ['uuid' => $subscriber->uuid, 'ticket' => $ticket->id]) }}"
+                                            class="action-button">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button onclick="showDeleteTicketModal('{{ route('admin.subscribers.destroy_user_ticket', ['uuid' => $subscriber->uuid, 'ticket' => $ticket->id]) }}')"
-                                            class="action-button delete-button">
+                                        <button
+                                            onclick="showDeleteTicketModal('{{ route('admin.subscribers.destroy_user_ticket', ['uuid' => $subscriber->uuid, 'ticket' => $ticket->id]) }}')"
+                                            class="action-button">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
+                                        <a href="#"
+                                            onclick="event.preventDefault(); showResendEmailModal('{{ route('admin.subscribers.resend-welcome', ['uuid' => $subscriber->uuid, 'ticket' => $ticket->id]) }}', '{{ $subscriber->name }}','{{ $ticket->package->title }}-{{$ticket->package->name}}')"
+                                            class="action-button">
+                                            <i class="fas fa-envelope"></i>
+                                        </a>
+
                                     </div>
+
                                 </td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 0.25rem;">
@@ -357,7 +417,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="status-badge {{ $ticket->status == 'active' ? 'status-active' : 'status-in-use' }}">
+                                    <span
+                                        class="status-badge {{ $ticket->status == 'active' ? 'status-active' : 'status-in-use' }}">
                                         {{ ucfirst($ticket->status) }}
                                     </span>
                                 </td>
@@ -400,10 +461,10 @@
                                 </div>
                             </div>
                             <span class="activity-status" style="color: 
-                                @if($activity->status == 'Accepted') #059669 
-                                @elseif($activity->status == 'Rejected') #dc2626
-                                @else #111827 
-                                @endif">
+                                                                        @if($activity->status == 'Accepted') #059669 
+                                                                        @elseif($activity->status == 'Rejected') #dc2626
+                                                                        @else #111827 
+                                                                        @endif">
                                 {{ $activity->status }}
                             </span>
                         </div>
@@ -418,32 +479,66 @@
         </div>
     </div>
 </div>
+<div id="resendEmailModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Confirm Email Resend</h2>
+        <p>Are you sure you want to resend this welcome email with this package (<span id="packageName"></span>) to
+            <span id="userName"></span>?
+        </p>
+        <div class="modal-buttons">
+            <button onclick="closeResendEmailModal()" class="cancel-button">Cancel</button>
+            <a href="#" id="confirmResend" class="confirm-button"
+                onclick="event.preventDefault(); handleResendConfirm(this);">
+                Resend
+            </a>
+        </div>
+    </div>
+</div>
 <script>
-function showDeleteTicketModal(deleteUrl) {
-    if (confirm('Are you sure you want to delete this ticket?')) {
-        // Create and submit a form to handle the DELETE request
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = deleteUrl;
-        
-        // Add CSRF token
-        const csrfToken = document.createElement('input');
-        csrfToken.type = 'hidden';
-        csrfToken.name = '_token';
-        csrfToken.value = '{{ csrf_token() }}';
-        form.appendChild(csrfToken);
-        
-        // Add method spoofing for DELETE
-        const methodField = document.createElement('input');
-        methodField.type = 'hidden';
-        methodField.name = '_method';
-        methodField.value = 'DELETE';
-        form.appendChild(methodField);
-        
-        document.body.appendChild(form);
-        form.submit();
+    function showDeleteTicketModal(deleteUrl) {
+        if (confirm('Are you sure you want to delete this ticket?')) {
+            // Create and submit a form to handle the DELETE request
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = deleteUrl;
+
+            // Add CSRF token
+            const csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = '_token';
+            csrfToken.value = '{{ csrf_token() }}';
+            form.appendChild(csrfToken);
+
+            // Add method spoofing for DELETE
+            const methodField = document.createElement('input');
+            methodField.type = 'hidden';
+            methodField.name = '_method';
+            methodField.value = 'DELETE';
+            form.appendChild(methodField);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
     }
-}
+
+    function showResendEmailModal(route, name, packagename) {
+        document.getElementById('resendEmailModal').style.display = 'flex';
+        document.getElementById('userName').textContent = name;
+        document.getElementById('packageName').textContent = packagename;
+        document.getElementById('confirmResend').href = route;
+    }
+
+    function closeResendEmailModal() {
+        document.getElementById('resendEmailModal').style.display = 'none';
+    }
+
+    function handleResendConfirm(button) {
+        button.textContent = 'Sending...';
+        button.style.opacity = '0.7';
+        button.style.cursor = 'not-allowed';
+        button.disabled = true;
+        window.location.href = button.href;
+    }
 </script>
 
 
